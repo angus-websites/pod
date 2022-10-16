@@ -1,8 +1,8 @@
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3';
 import Banner from '@/Components/Banner.vue';
-import GuestNavbar from "@/Components/Includes/GuestNavbar.vue";
-import GuestFooter from "@/Components/Includes/GuestFooter.vue";
+import GuestNavbar from "@/Components/_Includes/GuestNavbar.vue";
+import GuestFooter from "@/Components/_Includes/GuestFooter.vue";
 
 defineProps({
     title: String,
