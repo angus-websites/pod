@@ -12,13 +12,15 @@
                     <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
                 </a>
             </div>
-            <p class="mt-8 text-center text-base text-gray-400">&copy; 2020 Your Company, Inc. All rights reserved.</p>
+            <p class="mt-8 text-center text-base text-gray-400">&copy; {{ currentYear }} POD. All rights reserved.</p>
         </div>
     </footer>
 </template>
 
 <script setup>
 import { defineComponent, h } from 'vue'
+
+const currentYear = new Date().getFullYear()
 
 const navigation = {
     main: [
