@@ -8,14 +8,14 @@
                 </a>
             </div>
             <div class="-my-2 -mr-2 md:hidden">
-                <PopoverButton class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lime-500">
+                <PopoverButton class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
                     <span class="sr-only">Open menu</span>
                     <Bars3Icon class="h-6 w-6" aria-hidden="true" />
                 </PopoverButton>
             </div>
             <PopoverGroup as="nav" class="hidden space-x-10 md:flex">
                 <Popover class="relative" v-slot="{ open }">
-                    <PopoverButton :class="[open ? 'text-gray-900' : 'text-gray-500', 'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2']">
+                    <PopoverButton :class="[open ? 'text-gray-900' : 'text-gray-500', 'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2']">
                         <span>Solutions</span>
                         <ChevronDownIcon :class="[open ? 'text-gray-600' : 'text-gray-400', 'ml-2 h-5 w-5 group-hover:text-gray-500']" aria-hidden="true" />
                     </PopoverButton>
@@ -26,7 +26,7 @@
                             <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                                 <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
                                     <a v-for="solution in solutions" :key="solution.name" :href="solution.href" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
-                                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-lime-500 text-white sm:h-12 sm:w-12">
+                                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-emerald-500 text-white sm:h-12 sm:w-12">
                                             <component :is="solution.icon" class="h-6 w-6" aria-hidden="true" />
                                         </div>
                                         <div class="ml-4">
@@ -39,7 +39,7 @@
                                     <a href="#" class="-m-3 flow-root rounded-md p-3 hover:bg-gray-100">
                                         <div class="flex items-center">
                                             <div class="text-base font-medium text-gray-900">Enterprise</div>
-                                            <span class="ml-3 inline-flex items-center rounded-full bg-lime-100 px-3 py-0.5 text-xs font-medium leading-5 text-lime-800">New</span>
+                                            <span class="ml-3 inline-flex items-center rounded-full bg-emerald-100 px-3 py-0.5 text-xs font-medium leading-5 text-emerald-800">New</span>
                                         </div>
                                         <p class="mt-1 text-sm text-gray-500">Empower your entire team with even more advanced tools.</p>
                                     </a>
@@ -53,7 +53,7 @@
                 <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">Docs</a>
 
                 <Popover class="relative" v-slot="{ open }">
-                    <PopoverButton :class="[open ? 'text-gray-900' : 'text-gray-500', 'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2']">
+                    <PopoverButton :class="[open ? 'text-gray-900' : 'text-gray-500', 'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2']">
                         <span>More</span>
                         <ChevronDownIcon :class="[open ? 'text-gray-600' : 'text-gray-400', 'ml-2 h-5 w-5 group-hover:text-gray-500']" aria-hidden="true" />
                     </PopoverButton>
@@ -73,12 +73,12 @@
                 </Popover>
             </PopoverGroup>
             <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-                <SecondaryLinkButton :href="route('login')">
-                    Sign in
-                </SecondaryLinkButton>
-                <PrimaryLinkButton class="ml-8" :href="route('register')">
+                <SecondaryButton :isLink="true" :href="route('login')">
+                    Log in
+                </SecondaryButton>
+                <PrimaryButton class="ml-4" :href="route('register')" :isLink="true">
                     Sign up
-                </PrimaryLinkButton>
+                </PrimaryButton>
             </div>
         </div>
 
@@ -91,7 +91,7 @@
                                 <TextLogo />
                             </div>
                             <div class="-mr-2">
-                                <PopoverButton class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lime-500">
+                                <PopoverButton class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
                                     <span class="sr-only">Close menu</span>
                                     <XMarkIcon class="h-6 w-6" aria-hidden="true" />
                                 </PopoverButton>
@@ -100,7 +100,7 @@
                         <div class="mt-6">
                             <nav class="grid grid-cols-1 gap-7">
                                 <a v-for="solution in solutions" :key="solution.name" :href="solution.href" class="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50">
-                                    <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-lime-500 text-white">
+                                    <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-emerald-500 text-white">
                                         <component :is="solution.icon" class="h-6 w-6" aria-hidden="true" />
                                     </div>
                                     <div class="ml-4 text-base font-medium text-gray-900">{{ solution.name }}</div>
@@ -118,11 +118,11 @@
                             <a v-for="resource in resources" :key="resource.name" :href="resource.href" class="text-base font-medium text-gray-900 hover:text-gray-700">{{ resource.name }}</a>
                         </div>
                         <div class="mt-6">
-                            <a href="#" class="flex w-full items-center justify-center rounded-md border border-transparent bg-lime-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-lime-700">Sign up</a>
+                            <a href="#" class="flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-emerald-700">Sign up</a>
                             <p class="mt-6 text-center text-base font-medium text-gray-500">
                                 Existing customer?
                                 {{ ' ' }}
-                                <a href="#" class="text-lime-600 hover:text-lime-500">Sign in</a>
+                                <a href="#" class="text-emerald-600 hover:text-emerald-500">Sign in</a>
                             </p>
                         </div>
                     </div>
@@ -146,8 +146,8 @@ import {
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import TextLogo from "./TextLogo.vue";
-import PrimaryLinkButton from "@/Components/Buttons/PrimaryLinkButton.vue";
-import SecondaryLinkButton from "@/Components/Buttons/SecondaryLinkButton.vue";
+import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
 
 const solutions = [
     {

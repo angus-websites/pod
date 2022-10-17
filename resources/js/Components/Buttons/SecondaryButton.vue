@@ -31,7 +31,7 @@ export default {
         },
 
         baseClasses(){
-            return "inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-primary text-base font-medium text-white shadow-sm hover:bg-primary-600";
+            return "inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-[#F1F1F2] text-base font-medium text-[#676767] shadow-sm hover:bg-[#E7E7E7]";
         }
 
     }
