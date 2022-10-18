@@ -20,7 +20,6 @@ class EntryFactory extends Factory
             'title'=>$this->faker->city,
             'content'=>$this->faker->text,
             'date'=>$this->faker->date,
-            'user_id'=>1
         ];
     }
 }
