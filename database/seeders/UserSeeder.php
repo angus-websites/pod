@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Entry;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-class EntrySeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +17,12 @@ class EntrySeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        DB::table('entries')->truncate();
+        DB::table('users')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        Entry::factory(10)->create();
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
     }
 }
