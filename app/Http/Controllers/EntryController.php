@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EntryResource;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 
@@ -14,7 +15,7 @@ class EntryController extends Controller
      */
     public function index()
     {
-        return Entry::all();
+        return EntryResource::collection(Entry::all());
     }
 
     /**

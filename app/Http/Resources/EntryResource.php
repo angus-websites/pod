@@ -14,6 +14,10 @@ class EntryResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'title' => $this->title,
+            'content' => $this->content,
+            'user_id' => $this->user_id,
+        ];
     }
 }
