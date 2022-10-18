@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\EntryResource;
+use App\Http\Resources\EntryCollection;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 
@@ -11,11 +12,11 @@ class EntryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return EntryCollection
      */
     public function index()
     {
-        return EntryResource::collection(Entry::all());
+        return new EntryCollection(Entry::all());
     }
 
     /**
@@ -43,11 +44,11 @@ class EntryController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return EntryResource
      */
     public function show($id)
     {
-        //
+        return new EntryResource(Entry::findOrFail($id));
     }
 
     /**
@@ -77,10 +78,13 @@ class EntryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        //
+        $entry = Entry::findOrFail($id);
+        $entry->delete();
+
+        return response()->json(null, 204);
     }
 }
