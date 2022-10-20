@@ -18,8 +18,11 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    public function entries()
-    {
+    /**
+     * Fetch all the entries that
+     * belong to this user
+     */
+    public function entries(){
         return $this->hasMany(Entry::class);
     }
 

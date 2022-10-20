@@ -107,7 +107,7 @@
                         <!-- Start main area-->
                         <div class="relative h-full" style="min-height: 36rem">
                             <div class="">
-                                <ul role="list" class="divide-y divide-gray-200">
+                                <ul v-if="entries" role="list" class="divide-y divide-gray-200">
                                     <li v-for="entry in entries" :key="entry.id" class="relative bg-white py-5 px-4 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 hover:bg-gray-50">
                                         <div class="flex justify-between space-x-3">
                                             <div class="min-w-0 flex-1">
@@ -149,7 +149,19 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
-const entries = [
+
+import {onMounted} from "vue";
+
+const props = defineProps({
+    entries: Object
+})
+
+onMounted(() => {
+    console.log(this.entries)
+})
+
+
+const turtle = [
     {
         id: 1,
         title: 'My First Diary entry',

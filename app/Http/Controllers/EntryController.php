@@ -9,6 +9,13 @@ use App\Models\Entry;
 
 class EntryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->authorizeResource(Entry::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
