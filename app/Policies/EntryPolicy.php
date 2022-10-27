@@ -18,7 +18,7 @@ class EntryPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**

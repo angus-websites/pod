@@ -150,14 +150,8 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { Bars3CenterLeftIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 
-import {onMounted} from "vue";
-
 const props = defineProps({
     entries: Object
-})
-
-onMounted(() => {
-    console.log(this.entries)
 })
 
 
