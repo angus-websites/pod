@@ -1,5 +1,5 @@
 <template>
-    <svg  height="100%" viewBox="0 0 1143 342" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <svg height="100%" viewBox="0 0 1143 342" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <g transform="matrix(1,0,0,1,0,-1284.5)">
         <g id="world-logo-text" serif:id="world logo text" transform="matrix(0.464521,0,0,0.882975,-5365.73,1038.99)">
             <rect x="11551.1" y="278.049" width="2459.01" height="386.592" style="fill:none;"/>
@@ -22,7 +22,7 @@
                     <circle cx="274.346" cy="737.311" r="40.744" style="fill:rgb(71,96,193);"/>
                 </g>
                 <g transform="matrix(2.18877,0,0,1.34368,11418.3,-435.359)">
-                    <circle cx="274.346" cy="737.311" r="40.744" style="fill:rgb(49,179,128);"/>
+                    <circle cx="274.346" cy="737.311" r="40.744" style="fill:rgb(39,196,115);"/>
                 </g>
             </g>
         </g>

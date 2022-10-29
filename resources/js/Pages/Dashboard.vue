@@ -4,13 +4,13 @@
     <div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50" aria-hidden="true" />
     <div class="relative flex min-h-screen flex-col">
         <!-- Navbar -->
-        <Disclosure as="nav" class="flex-shrink-0 bg-indigo-600" v-slot="{ open }">
+        <Disclosure as="nav" class="flex-shrink-0 bg-primary" v-slot="{ open }">
             <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
                 <div class="relative flex h-16 items-center justify-between">
                     <!-- Logo section -->
                     <div class="flex items-center px-2 lg:px-0 xl:w-64">
                         <div class="flex-shrink-0">
-                            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300" alt="Your Company" />
+                            <TextLogoWhite class="h-8" />
                         </div>
                     </div>
 
@@ -18,11 +18,11 @@
                     <div class="flex flex-1 justify-center lg:justify-end">
                         <div class="w-full px-2 lg:px-6">
                             <label for="search" class="sr-only">Search projects</label>
-                            <div class="relative text-indigo-200 focus-within:text-gray-400">
+                            <div class="relative text-primary-600">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                     <MagnifyingGlassIcon class="h-5 w-5" aria-hidden="true" />
                                 </div>
-                                <input id="search" name="search" class="block w-full rounded-md border border-transparent bg-indigo-400 bg-opacity-25 py-2 pl-10 pr-3 leading-5 text-indigo-100 placeholder-indigo-200 focus:bg-white focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm" placeholder="Search projects" type="search" />
+                                <input id="search" name="search" class="block w-full rounded-md border border-transparent bg-white bg-opacity-60 py-2 pl-10 pr-3 leading-5 text-primary-600 placeholder-primary-600 focus:bg-white focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm" placeholder="Search projects" type="search" />
                             </div>
                         </div>
                     </div>
@@ -38,8 +38,8 @@
                     <div class="hidden lg:block lg:w-80">
                         <div class="flex items-center justify-end">
                             <div class="flex">
-                                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white">Documentation</a>
-                                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-indigo-200 hover:text-white">Support</a>
+                                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:text-white">Documentation</a>
+                                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-100 hover:text-white">Support</a>
                             </div>
                             <!-- Profile dropdown -->
                             <Menu as="div" class="relative ml-4 flex-shrink-0">
@@ -57,9 +57,11 @@
                                         <MenuItem v-slot="{ active }">
                                             <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
                                         </MenuItem>
-                                        <MenuItem v-slot="{ active }">
-                                            <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Logout</a>
-                                        </MenuItem>
+                                        <form @submit.prevent="logout">
+                                            <MenuItem v-slot="{ active }">
+                                                <button  :class="[active ? 'bg-gray-100' : '', 'w-full text-left block px-4 py-2 text-sm text-gray-700']">Logout</button>
+                                            </MenuItem>
+                                        </form>
                                     </MenuItems>
                                 </transition>
                             </Menu>
@@ -188,6 +190,8 @@ import {
     InboxIcon,
     UsersIcon,
 } from '@heroicons/vue/24/outline'
+import TextLogoWhite from "@/Components/_includes/TextLogoWhite.vue";
+import {Inertia} from "@inertiajs/inertia";
 
 const navigation = [
     { name: 'Home', href: '#', icon: HomeIcon, current: true },
@@ -197,5 +201,9 @@ const navigation = [
     { name: 'Documents', href: '#', icon: InboxIcon, current: false },
     { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
 ]
+
+const logout = () => {
+    Inertia.post(route('logout'));
+};
 
 </script>
