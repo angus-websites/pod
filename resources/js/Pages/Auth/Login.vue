@@ -38,7 +38,7 @@ const submit = () => {
     <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-md space-y-8">
             <div>
-                <LogoOnly class="h-16 mx-auto" />
+                <a href="/"><LogoOnly class="h-16 mx-auto" /></a>
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
             </div>
             <form class="mt-8 space-y-6" @submit.prevent="submit">
