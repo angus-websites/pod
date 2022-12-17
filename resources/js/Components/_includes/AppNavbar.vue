@@ -8,17 +8,6 @@
                         <TextLogo class="h-8" />
                     </div>
                 </div>
-                <div class="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0">
-                    <div class="w-full sm:max-w-xs">
-                        <label for="search" class="sr-only">Search</label>
-                        <div class="relative">
-                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <MagnifyingGlassIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                            </div>
-                            <input id="search" name="search" class="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" placeholder="Search" type="search" />
-                        </div>
-                    </div>
-                </div>
                 <div class="relative z-10 flex items-center lg:hidden">
                     <!-- Mobile menu button -->
                     <DisclosureButton class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -105,13 +94,12 @@ const user = computed(() => usePage().props.value.auth.user)
 
 const navigation = [
     { name: 'Dashboard', href: 'dashboard', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    { name: 'Tab 2', href: '#', current: false },
 ]
 const userNavigation = [
     { name: 'Your Profile', href: 'user/profile' },
 ]
+
 
 const logout = () => {
     Inertia.post(route('logout'));

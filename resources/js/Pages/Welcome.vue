@@ -23,7 +23,7 @@
 
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
-import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
+import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
+import SecondaryButton from "@/Components/buttons/SecondaryButton.vue";
 
 </script>

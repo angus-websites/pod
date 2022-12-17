@@ -6,7 +6,7 @@ import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 // import InputError from '@/Components/InputError.vue';
 // import InputLabel from '@/Components/InputLabel.vue';
 // import TextInput from '@/Components/TextInput.vue';
-import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
+import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import LogoOnly from "@/Components/_includes/LogoOnly.vue";
 import { XCircleIcon } from '@heroicons/vue/20/solid'
 

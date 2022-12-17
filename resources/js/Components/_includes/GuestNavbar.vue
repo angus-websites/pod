@@ -146,8 +146,8 @@ import {
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import TextLogo from "./TextLogo.vue";
-import PrimaryButton from "@/Components/Buttons/PrimaryButton.vue";
-import SecondaryButton from "@/Components/Buttons/SecondaryButton.vue";
+import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
+import SecondaryButton from "@/Components/buttons/SecondaryButton.vue";
 
 const solutions = [
     {
