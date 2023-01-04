@@ -6,6 +6,8 @@ use App\Http\Resources\EntryResource;
 use App\Http\Resources\EntryCollection;
 use Illuminate\Http\Request;
 use App\Models\Entry;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class EntryController extends Controller
 {
@@ -19,11 +21,11 @@ class EntryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return EntryCollection
      */
     public function index()
     {
-        return new EntryCollection(Entry::all());
+        $entries =  new EntryCollection(Entry::all());
+        return Inertia::render('Entry/Index', ['entries' => $entries]);
     }
 
     /**
@@ -50,12 +52,13 @@ class EntryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  entry  $entry
      * @return EntryResource
      */
-    public function show($id)
-    {
-        return new EntryResource(Entry::findOrFail($id));
+    public function show(Entry $entry){
+
+        $ent = new EntryResource($entry);
+        return Inertia::render('Entry/View', ['entry' => $ent]);
     }
 
     /**

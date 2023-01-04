@@ -5,20 +5,22 @@ namespace App\Policies;
 use App\Models\Entry;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class EntryPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view ANY models.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user)
     {
-        return $user->isAdmin();
+        // TODO admins
+        return false;
     }
 
     /**
@@ -30,7 +32,9 @@ class EntryPolicy
      */
     public function view(User $user, Entry $entry)
     {
-        //
+        return $user->id === $entry->user()->id
+            ? Response::allow()
+            : Response::deny('You cannot view this entry');
     }
 
     /**

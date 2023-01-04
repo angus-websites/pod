@@ -13,7 +13,6 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-        $user = Auth::user();
         return Inertia::render('Dashboard', ["entries" => Auth::user()->entries()->get()]);
     }
 }

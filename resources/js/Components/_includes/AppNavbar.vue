@@ -93,7 +93,7 @@ import { usePage } from '@inertiajs/inertia-vue3'
 const user = computed(() => usePage().props.value.auth.user)
 
 const navigation = [
-    { name: 'Dashboard', href: 'dashboard', current: true },
+    { name: 'Dashboard', href: '/dashboard', current: true },
     { name: 'Tab 2', href: '#', current: false },
 ]
 const userNavigation = [
