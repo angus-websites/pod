@@ -1,9 +1,7 @@
 
 <template>
 
-    <AppNavbar />
     <p v-if="entry">{{ entry.data.title }}</p>
-
 
     <PageContainer>
         Content
@@ -11,11 +9,18 @@
 
 </template>
 
-<script setup>
-import AppNavbar from "@/Components/_includes/AppNavbar.vue"
-import PageContainer from "@/Components/_util/PageContainer.vue";
 
-const props = defineProps({
-    entry: Object
-})
+<script>
+import AppLayout from "@/Layouts/AppLayout.vue";
+import PageContainer from "@/Components/_util/PageContainer.vue";
+export default {
+    layout: AppLayout,
+    components: {
+        PageContainer
+    },
+    props: {
+        entry: Object
+    }
+
+}
 </script>

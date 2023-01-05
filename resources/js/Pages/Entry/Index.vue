@@ -1,7 +1,6 @@
 
 <template>
 
-    <AppNavbar />
     <p>All Entry page bro</p>
 
     <PageContainer>
@@ -10,12 +9,21 @@
 
 </template>
 
-<script setup>
-import AppNavbar from "@/Components/_includes/AppNavbar.vue"
+<script>
+import AppLayout from "@/Layouts/AppLayout.vue";
 import PageContainer from "@/Components/_util/PageContainer.vue";
 import EntryTable from "@/Components/dashboard/EntryTable.vue";
+export default {
+    layout: AppLayout,
+    components: {
+        PageContainer,
+        EntryTable
+    },
+    props: {
+        entries: Object
+    }
 
-const props = defineProps({
-    entries: Object
-})
+}
 </script>
+
+

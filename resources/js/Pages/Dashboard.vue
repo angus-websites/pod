@@ -1,12 +1,8 @@
 
 <template>
-
-    <AppNavbar />
-
     <PageContainer>
         <EntryTable :entries="entries" />
     </PageContainer>
-
 </template>
 
 <script setup>
@@ -17,4 +13,15 @@ import EntryTable from "@/Components/dashboard/EntryTable.vue";
 const props = defineProps({
     entries: Object
 })
+
+</script>
+
+<!-- Second script to define layout -->
+<script>
+import AppLayout from "@/Layouts/AppLayout.vue";
+
+export default {
+    layout: AppLayout
+
+}
 </script>
