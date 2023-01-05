@@ -2,9 +2,8 @@
 <template>
 
     <PageContainer>
-        <Breadcrumbs :pages="[{ name: 'Entries', href: route('entries.index'), current: false },{ name: entry.data.title, href: '#', current: true }]" />
-        <p>Title: {{ entry.data.title }}</p>
-        <p>Content</p>
+        <EntryHeader :title="entry.data.title" :date="entry.data.date" />
+        <hr class="my-5">
         <textarea>
             {{ entry.data.content }}
         </textarea>
@@ -17,12 +16,14 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PageContainer from "@/Components/_util/PageContainer.vue";
 import Breadcrumbs from "@/Components/_util/Breadcrumbs.vue";
+import EntryHeader from "@/Components/entry/EntryHeader.vue";
 
 export default {
     layout: AppLayout,
     components: {
         PageContainer,
-        Breadcrumbs
+        Breadcrumbs,
+        EntryHeader,
     },
     props: {
         entry: Object
