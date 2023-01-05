@@ -19,8 +19,7 @@ class EntryPolicy
      */
     public function viewAny(User $user)
     {
-        // TODO admins
-        return false;
+        return true;
     }
 
     /**
