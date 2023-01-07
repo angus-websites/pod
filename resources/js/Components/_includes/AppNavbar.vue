@@ -88,17 +88,22 @@ import {Inertia} from "@inertiajs/inertia";
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
+import { onMounted } from 'vue'
 
 // Fetch user
 const user = computed(() => usePage().props.value.auth.user)
 
 const navigation = [
-    { name: 'Dashboard', href: '/dashboard', current: true },
-    { name: 'Tab 2', href: '#', current: false },
+    { name: 'Dashboard', href: route('dashboard'), current: route().current('dashboard') },
+    { name: 'Entries', href: '/entries', current: route().current('entries.*') },
 ]
 const userNavigation = [
     { name: 'Your Profile', href: 'user/profile' },
 ]
+
+onMounted(() => {
+  console.log(route().current(route('dashboard')))
+})
 
 
 const logout = () => {
