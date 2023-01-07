@@ -14,6 +14,8 @@ const props = defineProps({
     entries: Object
 })
 
+
+
 </script>
 
 <!-- Second script to define layout -->
@@ -21,7 +23,10 @@ const props = defineProps({
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 export default {
-    layout: AppLayout
+    layout: AppLayout,
+    mounted() {
+        console.log(this.entries)
+    }
 
 }
 </script>

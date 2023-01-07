@@ -1,8 +1,6 @@
 
 <template>
 
-    <p>All Entry page bro</p>
-
     <PageContainer>
         <EntryTable :entries="entries['data']" />
     </PageContainer>
@@ -19,10 +17,10 @@ export default {
         PageContainer,
         EntryTable
     },
-    props: {
-        entries: Object
+    props: ["entries"],
+    mounted() {
+        console.log(this.entries["data"])
     }
-
 }
 </script>
 
