@@ -88,7 +88,6 @@ import {Inertia} from "@inertiajs/inertia";
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
-import { onMounted } from 'vue'
 
 // Fetch user
 const user = computed(() => usePage().props.value.auth.user)
@@ -100,11 +99,6 @@ const navigation = [
 const userNavigation = [
     { name: 'Your Profile', href: 'user/profile' },
 ]
-
-onMounted(() => {
-  console.log(route().current(route('dashboard')))
-})
-
 
 const logout = () => {
     Inertia.post(route('logout'));

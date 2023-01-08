@@ -1,11 +1,5 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-// import AuthenticationCard from '@/Components/AuthenticationCard.vue';
-// import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
-// import Checkbox from '@/Components/Checkbox.vue';
-// import InputError from '@/Components/InputError.vue';
-// import InputLabel from '@/Components/InputLabel.vue';
-// import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import LogoOnly from "@/Components/_includes/LogoOnly.vue";
 import { XCircleIcon } from '@heroicons/vue/20/solid'
@@ -75,12 +69,17 @@ const submit = () => {
                     <div class="text-sm" v-if="canResetPassword">
                         <a :href="route('password.request')" class="font-medium text-secondary hover:text-secondary-600">Forgot your password?</a>
                     </div>
+
                 </div>
 
                 <div>
                     <PrimaryButton class="w-full">
                         Log in
                     </PrimaryButton>
+                </div>
+
+                <div class="text-sm mt-10">
+                    <a :href="route('register')" class="font-medium text-secondary hover:text-secondary-600">Create for an account instead?</a>
                 </div>
             </form>
         </div>
