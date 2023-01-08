@@ -4,10 +4,8 @@
     <PageContainer>
         <EntryHeader :title="entry.data.title" :date="entry.data.date" />
         <hr class="my-5">
-        <textarea>
-            {{ entry.data.content }}
-
-        </textarea>
+        <article class="prose prose-zinc" v-html="entry.data.content">
+        </article>
         <tiptap />
 
     </PageContainer>

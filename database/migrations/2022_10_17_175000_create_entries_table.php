@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->text('title');
-            $table->text('date');
-            $table->string('content');
+            $table->string('title');
+            $table->string('date');
+            $table->text('content');
             $table->bigInteger('user_id')->unsigned();
 
             //Foreign keys
