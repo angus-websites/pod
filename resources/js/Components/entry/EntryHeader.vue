@@ -27,11 +27,11 @@
       </div>
     </div>
     <div class="mt-5 flex lg:mt-0 lg:ml-4">
-      <SecondaryButton v-if="showEditButton">
+      <SecondaryButton v-if="showEditButton" @click="$emit('showEditButton', false)">
           <PencilIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
           Edit
       </SecondaryButton>
-      <PrimaryButton v-else>
+      <PrimaryButton v-else @click="$emit('showEditButton', true)">
           <CheckIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
           Save
       </PrimaryButton>
