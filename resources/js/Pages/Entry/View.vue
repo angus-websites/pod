@@ -6,7 +6,6 @@
         <hr class="my-5">
         <!-- Dynamic view for edit or view -->
         <component :is="currentView" v-bind="currentProperties"></component>
-        <tiptap />
 
     </PageContainer>
 
@@ -18,9 +17,9 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import PageContainer from "@/Components/_util/PageContainer.vue";
 import Breadcrumbs from "@/Components/_util/Breadcrumbs.vue";
 import EntryHeader from "@/Components/entry/EntryHeader.vue";
-import Tiptap from '@/Components/Tiptap.vue';
 import EntryView from '@/Components/entry/EntryView.vue';
 import EntryEdit from '@/Components/entry/EntryEdit.vue';
+import { markRaw } from "vue";
 
 export default {
     layout: AppLayout,
@@ -28,15 +27,18 @@ export default {
         PageContainer,
         Breadcrumbs,
         EntryHeader,
-        Tiptap
     },
     props: {
         entry: Object
     },
     data() {
+        let readView = markRaw(EntryView);
         return {
             showEditButton: true,
-            currentView: EntryView
+            editView: markRaw(EntryEdit),
+            readView: readView,
+            currentView: readView,
+
         }
     },
     computed: {
@@ -54,12 +56,13 @@ export default {
 
             // Change the view depending on the button
             if (s === false){
-                this.currentView = EntryEdit;
+                this.currentView = this.editView;
             }else{
-                this.currentView = EntryView;
+                this.currentView = this.readView;
             }
         }
     }
 
 }
+
 </script>
