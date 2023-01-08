@@ -2,7 +2,7 @@
 <template>
 
     <PageContainer>
-        <EntryHeader :title="entry.data.title" :date="entry.data.date" />
+    <EntryHeader :title="entry.data.title" :date="entry.data.date" :showEditButton="showEditButton" />
         <hr class="my-5">
         <article class="prose prose-zinc" v-html="entry.data.content">
         </article>
@@ -30,6 +30,11 @@ export default {
     },
     props: {
         entry: Object
+    },
+    data() {
+        return {
+            showEditButton: false
+        }
     }
 
 }

@@ -27,10 +27,14 @@
       </div>
     </div>
     <div class="mt-5 flex lg:mt-0 lg:ml-4">
-        <PrimaryButton>
-            <PencilIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-            Edit
-        </PrimaryButton>
+      <SecondaryButton v-if="showEditButton">
+          <PencilIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+          Edit
+      </SecondaryButton>
+      <PrimaryButton v-else>
+          <CheckIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+          Save
+      </PrimaryButton>
     </div>
   </div>
 </template>
@@ -40,8 +44,10 @@ import {
   CalendarIcon,
   ChevronRightIcon,
   PencilIcon,
+  CheckIcon,
 } from '@heroicons/vue/20/solid'
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
+import SecondaryButton from "@/Components/buttons/SecondaryButton.vue";
 
 const props = defineProps({
     title: {
@@ -50,9 +56,9 @@ const props = defineProps({
     date: {
       type: String,
     },
-    edit: {
+    showEditButton: {
         type: Boolean,
-        default: false
+        default: true
     },
 })
 
