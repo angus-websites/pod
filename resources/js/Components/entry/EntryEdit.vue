@@ -1,19 +1,16 @@
 
 <template>
-    <textarea>
-        {{ content }}
-    </textarea>
-    <tiptap />
-
+    <Editor />
 </template>
 
 
 <script>
-import Tiptap from '@/Components/Tiptap.vue';
+//import Tiptap from '@/Components/Tiptap.vue';
+import Editor from '@/Components/Editor.vue';
 
 export default {
     components: {
-        Tiptap
+        Editor
     },
     props: {
         content: String
