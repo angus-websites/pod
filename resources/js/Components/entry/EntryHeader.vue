@@ -27,14 +27,14 @@
       </div>
     </div>
     <div class="mt-5 flex lg:mt-0 lg:ml-4">
-      <AccentButton v-if="showEditButton" @click="$emit('showEditButton', false)">
+      <SecondaryButton v-if="showEditButton" @click="$emit('showEditButton', false)">
           <PencilIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
           Edit
-      </AccentButton>
+      </SecondaryButton>
       <template v-else>
-        <SecondaryButton class="mr-2" @click="$emit('showEditButton', true)">
+        <NeutralButton class="mr-2" @click="$emit('showEditButton', true)">
             Cancel
-        </SecondaryButton>
+        </NeutralButton>
         <PrimaryButton @click="$emit('showEditButton', true)">
             <CheckIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
             Save
@@ -53,8 +53,8 @@ import {
   CheckIcon,
 } from '@heroicons/vue/20/solid'
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
+import NeutralButton from "@/Components/buttons/NeutralButton.vue";
 import SecondaryButton from "@/Components/buttons/SecondaryButton.vue";
-import AccentButton from "@/Components/buttons/AccentButton.vue";
 
 const props = defineProps({
     title: {

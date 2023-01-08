@@ -12,9 +12,9 @@
                     <PrimaryButton size="l" href="#" :isLink=true class="w-full">
                         Get Started
                     </PrimaryButton>
-                    <SecondaryButton size="l" href="#" :isLink=true class="w-full mt-4 sm:mt-0 sm:ml-4">
+                    <NeutralButton size="l" href="#" :isLink=true class="w-full mt-4 sm:mt-0 sm:ml-4">
                         Live Demo
-                    </SecondaryButton>
+                    </NeutralButton>
                 </div>
             </div>
         </main>
@@ -24,6 +24,6 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
-import SecondaryButton from "@/Components/buttons/SecondaryButton.vue";
+import NeutralButton from "@/Components/buttons/NeutralButton.vue";
 
 </script>

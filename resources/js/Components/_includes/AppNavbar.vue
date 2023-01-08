@@ -97,7 +97,7 @@ const navigation = [
     { name: 'Entries', href: '/entries', current: route().current('entries.*') },
 ]
 const userNavigation = [
-    { name: 'Your Profile', href: 'user/profile' },
+    { name: 'Your Profile', href: route('profile.show') },
 ]
 
 const logout = () => {

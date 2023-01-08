@@ -73,9 +73,9 @@
                 </Popover>
             </PopoverGroup>
             <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-                <SecondaryButton :isLink="true" :href="route('login')">
+                <NeutralButton :isLink="true" :href="route('login')">
                     Log in
-                </SecondaryButton>
+                </NeutralButton>
                 <PrimaryButton class="ml-4" :href="route('register')" :isLink="true">
                     Sign up
                 </PrimaryButton>
@@ -147,7 +147,7 @@ import {
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import TextLogo from "./TextLogo.vue";
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
-import SecondaryButton from "@/Components/buttons/SecondaryButton.vue";
+import NeutralButton from "@/Components/buttons/NeutralButton.vue";
 
 const solutions = [
     {

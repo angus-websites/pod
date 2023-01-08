@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    name: "PrimaryButton",
+    name: "SecondaryButton",
     props: {
         size: {
             default: "m",
@@ -31,7 +31,7 @@ export default {
         },
 
         baseClasses(){
-            return "inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-[#F1F1F2] text-base font-medium text-[#676767] shadow-sm hover:bg-[#E7E7E7]";
+            return "inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-secondary text-secondary-text font-medium shadow-sm hover:bg-secondary-600";
         }
 
     }

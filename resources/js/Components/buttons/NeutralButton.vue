@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    name: "AccentButton",
+    name: "PrimaryButton",
     props: {
         size: {
             default: "m",
@@ -31,7 +31,7 @@ export default {
         },
 
         baseClasses(){
-            return "inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-accent text-base font-medium text-accent-text shadow-sm hover:bg-acccent-600";
+            return "inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-[#F1F1F2] text-base font-medium text-[#676767] shadow-sm hover:bg-[#E7E7E7]";
         }
 
     }
