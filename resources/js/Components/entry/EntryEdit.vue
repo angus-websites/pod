@@ -1,16 +1,17 @@
 
 <template>
-    <Editor />
+    <Tiny />
 </template>
 
 
 <script>
 //import Tiptap from '@/Components/Tiptap.vue';
-import Editor from '@/Components/Editor.vue';
+//import Editor from '@/Components/Editor.vue';
+import Tiny from '@/Components/Tiny.vue';
 
 export default {
     components: {
-        Editor
+        Tiny
     },
     props: {
         content: String
