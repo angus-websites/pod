@@ -1,6 +1,6 @@
 
 <template>
-    <article class="prose prose-zinc" v-html="content">
+    <article class="prose prose-zinc" v-html="entry.content">
     </article>
 </template>
 
@@ -8,7 +8,7 @@
 <script>
 export default {
     props: {
-        content: String
+        entry: Object
     }
 }
 </script>

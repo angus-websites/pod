@@ -43,7 +43,7 @@ export default {
     },
     computed: {
       currentProperties: function() {
-        return { "content":  this.entry.data.content}
+        return { "entry":  this.entry.data}
       }
     },
     methods: {
