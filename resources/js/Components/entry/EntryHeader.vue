@@ -35,7 +35,7 @@
         <NeutralButton class="mr-2" @click="$emit('showEditButton', true)">
             Cancel
         </NeutralButton>
-        <PrimaryButton @click="$emit('showEditButton', true)">
+        <PrimaryButton @click="$emit('saveEntry')">
             <CheckIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
             Save
         </PrimaryButton>
