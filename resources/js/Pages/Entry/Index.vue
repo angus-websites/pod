@@ -1,10 +1,10 @@
 
 <template>
-
-    <PageContainer>
-        <EntryTable :entries="entries['data']" />
-    </PageContainer>
-
+    <AppLayout>
+        <PageContainer>
+            <EntryTable :entries="entries['data']" />
+        </PageContainer>
+    </AppLayout>
 </template>
 
 <script>
@@ -12,10 +12,10 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import PageContainer from "@/Components/_util/PageContainer.vue";
 import EntryTable from "@/Components/dashboard/EntryTable.vue";
 export default {
-    layout: AppLayout,
     components: {
         PageContainer,
-        EntryTable
+        EntryTable,
+        AppLayout
     },
     props: ["entries"],
     mounted() {

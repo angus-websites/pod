@@ -1,7 +1,7 @@
 <template>
-    <a v-if="isLink" :class="[sizeClass, baseClasses]">
+    <Link v-if="isLink" :class="[sizeClass, baseClasses]">
         <slot/>
-    </a>
+    </Link>
     <button v-else :class="[sizeClass, baseClasses]">
         <slot />
     </button>

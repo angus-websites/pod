@@ -5,13 +5,13 @@
         <ol role="list" class="flex items-center space-x-4">
           <li>
             <div class="flex">
-              <a :href="route('entries.index')" class="text-sm font-medium text-gray-500 hover:text-gray-700">Entries</a>
+              <Link :href="route('entries.index')" class="text-sm font-medium text-gray-500 hover:text-gray-700">Entries</Link>
             </div>
           </li>
           <li>
             <div class="flex items-center">
               <ChevronRightIcon class="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              <a class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ title}}</a>
+              <Link class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ title}}</Link>
             </div>
           </li>
         </ol>

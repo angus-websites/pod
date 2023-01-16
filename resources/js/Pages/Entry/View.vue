@@ -1,6 +1,6 @@
 
 <template>
-
+  <AppLayout>
     <PageContainer>
         <EntryHeader :title="entry.data.title" :date="entry.data.date"/>
         <!-- Tabs -->
@@ -22,7 +22,7 @@
         <component :is="currentView" v-bind="currentProperties"></component>
 
     </PageContainer>
-
+  </AppLayout>
 </template>
 
 <script setup>
@@ -35,6 +35,7 @@ import PageContainer from "@/Components/_util/PageContainer.vue";
 import Breadcrumbs from "@/Components/_util/Breadcrumbs.vue";
 import EntryHeader from "@/Components/entry/EntryHeader.vue";
 import { useEntryStore } from '@/Stores/EntryStore.js';
+import AppLayout from "@/Layouts/AppLayout.vue";
 
 const props = defineProps(['entry'])
 
@@ -67,14 +68,5 @@ const currentProperties = computed(() => {
   return {"entry":  props.entry.data}
 })
 
-
-</script>
-
-<script>
-import AppLayout from "@/Layouts/AppLayout.vue";
-
-export default {
-    layout: AppLayout
-}
 
 </script>

@@ -24,7 +24,7 @@
                             <template v-if="entries">
                                 <tr v-for="entry in entries" :key="entry.id" class="divide-x divide-gray-200">
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
-                                        <a class="underline" :href="route('entries.show', entry.id)">{{ entry.title }}</a>
+                                        <Link class="underline" :href="route('entries.show', entry.id)">{{ entry.title }}</Link>
                                     </td>
                                     <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ entry.date }}</td>
                                 </tr>
