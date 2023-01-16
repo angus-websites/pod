@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Entry;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class EntryController extends Controller
 {
@@ -24,7 +25,7 @@ class EntryController extends Controller
      */
     public function index()
     {
-        $entries =  new EntryCollection(Entry::all());
+        $entries =  new EntryCollection(Auth::user()->entries()->get());
         return Inertia::render('Entry/Index', ['entries' => $entries]);
     }
 
