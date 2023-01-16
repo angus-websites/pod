@@ -35,7 +35,6 @@
 import {
   CalendarIcon,
   ChevronRightIcon,
-  PencilIcon,
   CheckIcon,
 } from '@heroicons/vue/20/solid'
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
