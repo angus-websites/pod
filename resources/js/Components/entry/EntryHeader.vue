@@ -27,20 +27,6 @@
       </div>
     </div>
     <div class="mt-5 flex lg:mt-0 lg:ml-4">
-      <SecondaryButton v-if="showEditButton" @click="$emit('showEditButton', false)">
-          <PencilIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-          Edit
-      </SecondaryButton>
-      <template v-else>
-        <NeutralButton class="mr-2" @click="$emit('showEditButton', true)">
-            Cancel
-        </NeutralButton>
-        <PrimaryButton @click="$emit('saveEntry')">
-            <CheckIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-            Save
-        </PrimaryButton>
-      </template>
-      
     </div>
   </div>
 </template>
@@ -62,11 +48,7 @@ const props = defineProps({
     },
     date: {
       type: String,
-    },
-    showEditButton: {
-        type: Boolean,
-        default: true
-    },
+    }
 })
 
 </script>
