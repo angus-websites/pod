@@ -45,7 +45,7 @@ let editView = markRaw(EntryEdit);
 // Reactive data
 let currentView = ref(readView);
 let tabs = reactive([
-  { name: 'Preview', view: readView, current: true },
+  { name: 'View', view: readView, current: true },
   { name: 'Edit', view: editView, current: false },
 ]);
 

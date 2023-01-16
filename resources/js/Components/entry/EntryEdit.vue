@@ -30,12 +30,22 @@
               </textarea>
             </div>
         </div>
+
+        <!-- Save button -->
+        <div class="mt-5">
+            <PrimaryButton>Save</PrimaryButton>
+        </div>
     </div>
 </template>
 
 
 <script>
+
+import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 export default {
+    components: {
+        PrimaryButton,
+    },
     props: {
         entry: Object
     },
