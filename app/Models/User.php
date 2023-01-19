@@ -19,6 +19,15 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
 
     /**
+     * Fetch all the entries that
+     * belong to this user
+     */
+    public function entries(){
+        return $this->hasMany(Entry::class);
+    }
+
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var string[]

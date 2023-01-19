@@ -1,22 +1,20 @@
-<script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
-</script>
 
 <template>
-    <AppLayout title="Dashboard">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
-            </h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
-                </div>
-            </div>
-        </div>
+    <AppLayout>
+        <PageContainer>
+            <EntryTable :entries="entries" />
+        </PageContainer>
     </AppLayout>
 </template>
+
+<script setup>
+import AppNavbar from "@/Components/_includes/AppNavbar.vue";
+import AppLayout from "@/Layouts/AppLayout.vue";
+import PageContainer from "@/Components/_util/PageContainer.vue";
+import EntryTable from "@/Components/dashboard/EntryTable.vue";
+
+const props = defineProps({
+    entries: Object
+})
+
+</script>
