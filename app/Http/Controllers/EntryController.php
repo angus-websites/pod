@@ -7,6 +7,7 @@ use App\Http\Resources\EntryCollection;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,9 +81,18 @@ class EntryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Entry $entry)
     {
-        //
+
+        $entry->update(
+            $request->validate([
+                'title' => ['required', 'max:100'],
+                'date' => ['required', 'date'],
+                'content' => ['required', 'max:3000'],
+            ])
+        );
+        return Redirect::back()->with('success', 'Entry updated');
+        //Log::info("Entry updated");
     }
 
     /**

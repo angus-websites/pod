@@ -56,7 +56,9 @@ class EntryPolicy
      */
     public function update(User $user, Entry $entry)
     {
-        //
+        return $user->id === $entry->user()->id
+            ? Response::allow()
+            : Response::deny('You cannot update this entry');
     }
 
     /**
