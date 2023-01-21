@@ -33,7 +33,7 @@
 
             <!-- Save button -->
             <div class="mt-5">
-                <PrimaryButton>Save</PrimaryButton>
+                <PrimaryButton type="submit" :disabled="form.processing">Save</PrimaryButton>
             </div>
 
         </form>
@@ -51,9 +51,9 @@ const props = defineProps({
 });
 
 const form = useForm({
-  title: props.entry.title,
-  date: props.entry.date,
-  content: props.entry.content,
+    title: props.entry.title,
+    date: props.entry.date,
+    content: props.entry.content,
 })
 
 function submitForm(){
