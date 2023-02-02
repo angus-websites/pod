@@ -37,7 +37,8 @@ class EntryController extends Controller
      */
     public function create()
     {
-        //
+        $new_entry = new Entry();
+        return Inertia::render('Entry/Create', ["new_entry" => $new_entry]);
     }
 
     /**
@@ -48,7 +49,13 @@ class EntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate
+        $request->validate([
+                'title' => ['required', 'max:100'],
+                'date' => ['required', 'date'],
+                'content' => ['required', 'max:3000'],
+        ]);
+        Log::info($request);
     }
 
     /**

@@ -1,6 +1,6 @@
 
 <template>
-  <AppLayout>
+  <AppLayout :title="entry.data.title">
     <PageContainer>
         <EntryHeader :title="entry.data.title" :date="entry.data.date"/>
         <!-- Tabs -->
@@ -36,9 +36,6 @@ import Breadcrumbs from "@/Components/_util/Breadcrumbs.vue";
 import EntryHeader from "@/Components/entry/EntryHeader.vue";
 import { useEntryStore } from '@/Stores/EntryStore.js';
 import AppLayout from "@/Layouts/AppLayout.vue";
-import {
-  PencilIcon,
-} from '@heroicons/vue/20/solid'
 const props = defineProps(['entry'])
 
 // Data

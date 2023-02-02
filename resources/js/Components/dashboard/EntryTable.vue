@@ -5,7 +5,7 @@
                 <h1 class="text-xl font-semibold text-gray-900">Entries</h1>
                 <p class="mt-2 text-sm text-gray-700">A list of your entries</p>
             </div>
-            <PrimaryButton>
+            <PrimaryButton isLink="true" :href="route('entries.create')">
                 <span>New Entry</span>
             </PrimaryButton>
         </div>
