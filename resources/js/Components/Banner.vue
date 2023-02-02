@@ -12,6 +12,7 @@ watch(message, async () => {
 </script>
 
 <template>
+    <!-- Banner -->
     <div>
         <div v-if="show && message" :class="{ 'bg-indigo-500': style == 'success', 'bg-red-700': style == 'danger' }">
             <div class="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8">

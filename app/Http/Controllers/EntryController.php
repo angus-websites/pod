@@ -7,6 +7,7 @@ use App\Http\Resources\EntryCollection;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,8 @@ class EntryController extends Controller
      */
     public function create()
     {
-        //
+        $new_entry = new Entry();
+        return Inertia::render('Entry/Create', ["new_entry" => $new_entry]);
     }
 
     /**
@@ -47,7 +49,22 @@ class EntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate
+        $request->validate([
+                'title' => ['required', 'max:100'],
+                'date' => ['required', 'date'],
+                'content' => ['required', 'max:3000'],
+        ]);
+
+        // Create the new Entry
+        $new_entry = new Entry;
+        $new_entry->fill($request->all());
+        $new_entry->user_id = Auth::user()->id;
+        $new_entry->save();
+
+        // Redirect
+        return Redirect::route('entries.index')->with('success', 'Entry created');
+
     }
 
     /**
@@ -80,9 +97,18 @@ class EntryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Entry $entry)
     {
-        //
+
+        $entry->update(
+            $request->validate([
+                'title' => ['required', 'max:100'],
+                'date' => ['required', 'date'],
+                'content' => ['required', 'max:3000'],
+            ])
+        );
+        return Redirect::back()->with('success', 'Entry updated');
+        //Log::info("Entry updated");
     }
 
     /**

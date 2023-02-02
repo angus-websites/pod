@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Entry extends Model
 {
     use HasFactory;
+    protected $fillable = ['title','date','content'];
 
     /**
      * Fetch the user
