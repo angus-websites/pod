@@ -55,7 +55,16 @@ class EntryController extends Controller
                 'date' => ['required', 'date'],
                 'content' => ['required', 'max:3000'],
         ]);
-        Log::info($request);
+
+        // Create the new Entry
+        $new_entry = new Entry;
+        $new_entry->fill($request->all());
+        $new_entry->user_id = Auth::user()->id;
+        $new_entry->save();
+
+        // Redirect
+        return Redirect::route('entries.index')->with('success', 'Entry created');
+
     }
 
     /**
