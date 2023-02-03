@@ -32,7 +32,7 @@ const submit = () => {
     <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-md space-y-8">
             <div>
-                <a href="/"><LogoOnly class="h-16 mx-auto" /></a>
+                <Link href="/"><LogoOnly class="h-16 mx-auto" /></Link>
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
             </div>
             <form class="mt-8 space-y-6" @submit.prevent="submit">
@@ -67,7 +67,7 @@ const submit = () => {
                     </div>
 
                     <div class="text-sm" v-if="canResetPassword">
-                        <a :href="route('password.request')" class="font-medium text-secondary hover:text-secondary-600">Forgot your password?</a>
+                        <Link :href="route('password.request')" class="font-medium text-secondary hover:text-secondary-600">Forgot your password?</Link>
                     </div>
 
                 </div>
@@ -79,7 +79,7 @@ const submit = () => {
                 </div>
 
                 <div class="text-sm mt-10">
-                    <a :href="route('register')" class="font-medium text-secondary hover:text-secondary-600">Create for an account instead?</a>
+                    <Link :href="route('register')" class="font-medium text-secondary hover:text-secondary-600">Create for an account instead?</Link>
                 </div>
             </form>
         </div>
