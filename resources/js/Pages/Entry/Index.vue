@@ -1,6 +1,6 @@
 
 <template>
-    <AppLayout>
+    <AppLayout title="Entries">
         <PageContainer>
             <EntryTable :entries="entries['data']" />
         </PageContainer>

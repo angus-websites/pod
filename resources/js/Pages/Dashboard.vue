@@ -1,6 +1,6 @@
 
 <template>
-    <AppLayout>
+    <AppLayout title="Dashboard">
         <PageContainer>
             <EntryTable :entries="entries" />
         </PageContainer>

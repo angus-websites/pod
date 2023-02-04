@@ -72,7 +72,12 @@
                     </transition>
                 </Popover>
             </PopoverGroup>
-            <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+            <div v-if="$page.props.auth.user" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+                <NeutralButton :isLink="true" :href="route('dashboard')">
+                    Dashboard
+                </NeutralButton>
+            </div>
+            <div v-else class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
                 <NeutralButton :isLink="true" :href="route('login')">
                     Log in
                 </NeutralButton>
@@ -118,12 +123,18 @@
                             <a v-for="resource in resources" :key="resource.name" :href="resource.href" class="text-base font-medium text-gray-900 hover:text-gray-700">{{ resource.name }}</a>
                         </div>
                         <div class="mt-6">
-                            <a href="#" class="flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-emerald-700">Sign up</a>
-                            <p class="mt-6 text-center text-base font-medium text-gray-500">
-                                Existing customer?
-                                {{ ' ' }}
-                                <a href="#" class="text-emerald-600 hover:text-emerald-500">Sign in</a>
-                            </p>
+                            <div v-if="$page.props.auth.user">
+                                <Link :href="route('dashboard')" class="flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-emerald-700">Dashboard</Link>
+                            </div>
+                            <div v-else>
+
+                                <Link :href="route('register')" class="flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-emerald-700">Sign up</Link>
+                                <p class="mt-6 text-center text-base font-medium text-gray-500">
+                                    Existing customer?
+                                    {{ ' ' }}
+                                    <Link :href="route('login')" class="text-emerald-600 hover:text-emerald-500">Sign in</Link>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
