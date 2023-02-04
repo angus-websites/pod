@@ -2,7 +2,7 @@
 <template>
     <AppLayout title="Entries">
         <PageContainer>
-            <EntryTable :entries="entries['data']" :links="entries['links']" />
+            <EntryTable :entries="entries" />
         </PageContainer>
     </AppLayout>
 </template>
