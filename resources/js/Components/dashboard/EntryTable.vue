@@ -40,6 +40,30 @@
             <NoEntries />
         </div>
     </div>
+    <nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
+        <div class="hidden sm:block">
+          <p class="text-sm text-gray-700">
+            Showing
+            {{ ' ' }}
+            <span class="font-medium">1</span>
+            {{ ' ' }}
+            to
+            {{ ' ' }}
+            <span class="font-medium">10</span>
+            {{ ' ' }}
+            of
+            {{ ' ' }}
+            <span class="font-medium">20</span>
+            {{ ' ' }}
+            results
+          </p>
+        </div>
+        <div class="flex flex-1 justify-between sm:justify-end">
+          <Link v-if="links.prev" :href="links.prev" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</Link>
+          <Link v-if="links.next"  :href="links.next" class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</Link>
+        </div>
+      </nav>
+
 </template>
 
 <script setup>
@@ -47,7 +71,9 @@ import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import NoEntries from "@/Components/_util/NoEntries.vue";
 
 defineProps({
-    entries: Object
+    entries: Array,
+    links: Object
+
 });
 
 
