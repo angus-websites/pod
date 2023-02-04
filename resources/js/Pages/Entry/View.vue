@@ -3,20 +3,14 @@
   <AppLayout :title="entry.data.title">
     <PageContainer>
         <EntryHeader :title="entry.data.title" :date="entry.data.date"/>
-        <!-- Tabs -->
+        <!-- Buttons -->
         <div class="my-8">
-            <div class="sm:hidden">
-              <label for="tabs" class="sr-only">Select a tab</label>
-              <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
-              <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
-                <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">{{ tab.name }}</option>
-              </select>
-            </div>
-            <div class="hidden sm:block">
-              <nav class="flex space-x-4" aria-label="Tabs">
-                <button v-for="tab in tabs" @click="switchTab(tab)"  :key="tab.name" :class="[tab.current ? 'bg-indigo-100 text-indigo-700' : 'text-gray-500 hover:text-gray-700', 'px-3 py-2 font-medium text-sm rounded-md']" :aria-current="tab.current ? 'page' : undefined">{{ tab.name }}</button>
-              </nav>
-            </div>
+            <!-- Cancel button -->
+            <button v-if="currentView == editView" @click="switchTab(tabs[0])" class="bg-red-100 text-red-700 hover:bg-red-200 px-3 py-2 font-medium text-sm rounded-md">Cancel</button>
+
+            <!-- Edit button -->
+            <button v-else @click="switchTab(tabs[1])" class="text-gray-500 bg-gray-100 hover:text-gray-700 hover:bg-gray-200 px-3 py-2 font-medium text-sm rounded-md">Edit</button>
+
           </div>
         <!-- Dynamic view for edit or view -->
         <component :is="currentView" v-bind="currentProperties"></component>
@@ -53,7 +47,6 @@ function switchTab(tab){
 
     // Set the current view for this tab
     currentView.value = tab.view;
-    console.log(currentView.value)
 
     // Reset all tabs
     tabs.forEach(element => element.current = false);

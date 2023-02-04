@@ -51,9 +51,31 @@
 
                 </div>
             </div>
-            <nav class="hidden lg:flex lg:space-x-8 lg:py-2" aria-label="Global">
-                <Link v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900', 'rounded-md py-2 px-3 inline-flex items-center text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</Link>
-            </nav>
+            
+            <!-- Navbar -->
+            <div class="w-full py-3 lg:border-t lg:border-white lg:border-opacity-20">
+              <div class="lg:grid lg:grid-cols-3 lg:items-center lg:gap-8">
+
+                <!-- Left nav -->
+                <div class="hidden lg:col-span-2 lg:block">
+                  <nav class="flex space-x-4">
+                    <Link v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900', 'rounded-md py-2 px-3 inline-flex items-center text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</Link>
+                  </nav>
+                </div>
+                <div class="px-12 lg:px-0">
+                  <!-- Search -->
+                  <div class="mx-auto w-full max-w-xs lg:max-w-md">
+                    <label for="search" class="sr-only">Search</label>
+                    <div class="relative rounded-md">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3" aria-hidden="true">
+                          <MagnifyingGlassIcon class="mr-3 h-4 w-4 text-gray-400" aria-hidden="true" />
+                        </div>
+                        <input type="text" name="search" id="search" class="block w-full rounded-md border-none pl-9 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Search" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
 
         <DisclosurePanel as="nav" class="lg:hidden" aria-label="Global">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Http\Resources\EntryCollection;
 
 class HomeController extends Controller
 {
@@ -13,6 +14,7 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-        return Inertia::render('Dashboard', ["entries" => Auth::user()->entries()->get()]);
+        $entries =  new EntryCollection(Auth::user()->entries()->paginate(15));
+        return Inertia::render('Dashboard', ["entries" => $entries]);
     }
 }

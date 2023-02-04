@@ -26,7 +26,7 @@ class EntryController extends Controller
      */
     public function index()
     {
-        $entries =  new EntryCollection(Auth::user()->entries()->get());
+        $entries =  new EntryCollection(Auth::user()->entries()->paginate(15));
         return Inertia::render('Entry/Index', ['entries' => $entries]);
     }
 
