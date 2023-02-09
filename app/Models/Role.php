@@ -9,12 +9,12 @@ class Role extends Model
 {
     use HasFactory;
 
-    public function is_super_admin()
+    public function isSuperAdmin()
     {
         return $this->name == "Super Admin";
     }
 
-    public function is_admin()
+    public function isAdmin()
     {
         return $this->name == "Admin";
     }

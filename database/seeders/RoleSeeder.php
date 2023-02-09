@@ -25,28 +25,36 @@ class RoleSeeder extends Seeder
       Role::truncate();
       DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
+      // User
+      Role::create([
+        'id' => 1,
+        'name' => "User",
+        'code' => "Usr",
+        'description' => "A normal user of the application",
+      ]);
+
+      // Admin
+      Role::create([
+        'id' => 2,
+        'name' => "Admin",
+        'code' => "Am",
+        'description' => "As an admin you have full control of the application",
+      ]);
+
+
       // Super Admin
       Role::create([
+        'id' => 3,
         'name' => "Super Admin",
         'code' => "Sam",
         'description' => "The Goat",
         'changeable' => 0,
       ]);
 
-      // User
-      Role::create([
-        'name' => "User",
-        'code' => "Usr",
-        'description' => "A normal user of the application",
-      ]);
+
       
       
-      // Admin
-      Role::create([
-        'name' => "Admin",
-        'code' => "Am",
-        'description' => "As an admin you have full control of the application",
-      ]);
+      
 
 
     }
