@@ -14,7 +14,16 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-        $entries =  new EntryCollection(Auth::user()->entries()->paginate(15));
-        return Inertia::render('Dashboard', ["entries" => $entries]);
+        // Render the admin dashboard
+        if (Auth::user()->isAdmin()){
+            return Inertia::render('Admin/Dashboard');
+        }
+        // Render the normal user dashboard
+        else{
+            $entries =  new EntryCollection(Auth::user()->entries()->paginate(15));
+            return Inertia::render('Dashboard', ["entries" => $entries]);
+        }
+
+        
     }
 }
