@@ -99,6 +99,20 @@
             </div>
         </DisclosurePanel>
     </Disclosure>
+    <div v-if="$page.props.isSuperAdmin" class="flex justify-center bg-blue-600 py-2.5 px-6 sm:px-3.5">
+        <div>
+            <p class="text-sm text-white font-medium">
+          <b>Super Admin</b>
+            </p>
+        </div>
+    </div>
+    <div v-else-if="$page.props.isAdmin" class="flex justify-center bg-red-600 py-2.5 px-6 sm:px-3.5">
+        <div>
+            <p class="text-sm text-white font-medium">
+          <b>Admin</b>
+            </p>
+        </div>
+    </div>
 </template>
 
 <script setup>
