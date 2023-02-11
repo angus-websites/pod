@@ -40,7 +40,7 @@
             <NoEntries />
         </div>
     </div>
-    <nav class="flex items-center justify-between bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
+    <nav v-if="entries.data.length > 0" class="flex items-center justify-between bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
         <div class="hidden sm:block">
           <p class="text-sm text-gray-700">
             Page
