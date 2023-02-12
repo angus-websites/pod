@@ -6,6 +6,7 @@ use App\Http\Resources\EntryResource;
 use App\Http\Resources\EntryCollection;
 use Illuminate\Http\Request;
 use App\Models\Entry;
+use App\Models\Template;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
@@ -38,7 +39,8 @@ class EntryController extends Controller
     public function create()
     {
         $new_entry = new Entry();
-        return Inertia::render('Entry/Create', ["new_entry" => $new_entry]);
+        $templates = Template::all();
+        return Inertia::render('Entry/Create', ["new_entry" => $new_entry, "templates" =>  $templates]);
     }
 
     /**
