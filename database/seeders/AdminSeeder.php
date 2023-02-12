@@ -22,11 +22,8 @@ class AdminSeeder extends Seeder
     public function run()
     {
       //Clear data
-      DB::statement('SET FOREIGN_KEY_CHECKS=0');
       User::truncate();
-      DB::statement('SET FOREIGN_KEY_CHECKS=1');
-
-
+      
       $superAdminRole=Role::where('name', '=', 'Super Admin')->firstOrFail();
 
       if(config('admin.admin_name')) {
