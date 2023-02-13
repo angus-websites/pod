@@ -16,22 +16,58 @@ class EntryFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
-    {
+    {        
 
-        $paragraphs = $this->faker->paragraphs(rand(2, 6));
-        $title = $this->faker->realText(25);
-        $content = "<h1>{$this->faker->realText(20)}</h1>";
-        foreach ($paragraphs as $para) {
-            $content .= "<p>{$para}</p>";
+        // Generate a random template
+        $rand = rand(0, 1);
+
+        switch ($rand) {
+
+            // Training template
+            case 0:
+
+                $training_template = Template::where('name', '=', 'Training template')->firstOrFail();
+
+                $name_of_training = $this->faker->realText(10);
+                $start = $this->faker->dateTimeThisMonth();
+                $end = $this->faker->dateTimeThisMonth();
+
+                $paragraphs = $this->faker->paragraphs(rand(2, 6));
+                $what_i_learned = "";
+                foreach ($paragraphs as $para) {
+                    $what_i_learned .= $para;
+                }
+
+                $entry_content = [
+                    'name_of_training'=>$name_of_training,
+                    'date_started'=>$start,
+                    'date_completed'=>$end,
+                    'what_i_learned'=>$what_i_learned,
+                    'template_id' => $training_template
+                ];
+                break;
+            
+            // General template
+            default:
+
+                $general_template = Template::where('name', '=', 'General template')->firstOrFail();
+
+                $paragraphs = $this->faker->paragraphs(rand(2, 6));
+                $title = $this->faker->realText(25);
+                $content = "<h1>{$this->faker->realText(20)}</h1>";
+                foreach ($paragraphs as $para) {
+                    $content .= "<p>{$para}</p>";
+                }
+
+                $entry_content = [
+                    'title'=>$title,
+                    'content'=>$content,
+                    'date'=>$this->faker->date,
+                    'template_id'=>$general_template,
+                ];
+                break;
         }
 
-        $general_template = Template::where('name', '=', 'General template')->firstOrFail();
-
-        return [
-            'title'=>$title,
-            'content'=>$content,
-            'date'=>$this->faker->date,
-            'template_id'=>$general_template,
-        ];
+        return $entry_content;
     }
 }
