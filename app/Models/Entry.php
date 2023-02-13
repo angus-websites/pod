@@ -16,7 +16,8 @@ class Entry extends Model
 {
     use HasFactory;
     protected $connection = 'mongodb';
-    protected $fillable = ['title','date','content'];
+    protected $fillable = ['title','data'];
+
 
     /**
      * Fetch the user

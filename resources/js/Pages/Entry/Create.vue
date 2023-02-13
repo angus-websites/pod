@@ -15,7 +15,7 @@
               <p class="mt-2 text-sm text-gray-500" id="email-description">Select a template for this new entry</p>
             </div>
 
-            <EntryEdit :entry="entry" :create="true" />
+            <EntryEdit :entry="getEntry()" :create="true" />
 
 
         </div>
@@ -41,13 +41,14 @@ const props = defineProps(['new_entry', 'templates'])
 const selected_template = ref(props.templates[0]);
 
 // Modify a new entry object based on the selected template
-const entry = computed(() => {
+function getEntry(){
 
+  let entry = props.new_entry;
   let current_template = selected_template.value
-  props.new_entry.template = current_template
+
+  entry.template = current_template
 
   let data = [];
-  console.log(selected_template.value)
 
   // Populate the data with nulls
   for (var i = 0; i < current_template.fields.length; i++) {
@@ -55,10 +56,10 @@ const entry = computed(() => {
   }
 
   // Attatch data
-  props.new_entry['data'] = data;
+  entry['data'] = data;
 
-  return props.new_entry
-})
+  return entry
+}
 
 
 </script>
