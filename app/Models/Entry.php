@@ -18,11 +18,16 @@ class Entry extends Model
      * to
      */
     public function user(){
-        return $this->belongsTo(User::class)->first();
+        return $this->belongsTo(User::class)->firstOrFail();
     }
 
+    /**
+     * Fetch the template for this
+     * entry
+     * @return [type] [description]
+     */
     public function template(){
-        return $this->belongsTo(Template::class)->first();
+        return $this->belongsTo(Template::class)->firstOrFail();
     }
 
 }

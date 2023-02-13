@@ -2,11 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\TemplateResource;
-
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EntryResource extends JsonResource
+class TemplateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,14 +14,11 @@ class EntryResource extends JsonResource
      */
     public function toArray($request)
     {
-        $template = new TemplateResource($this->template());
-
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'content' => $this->content,
-            'date' => $this->date,
-            'template' => $template,
+            'name' => $this->name,
+            'description' => $this->description,
+            'fields' => $this->fields,
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Template;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Entry>
@@ -24,10 +25,13 @@ class EntryFactory extends Factory
             $content .= "<p>{$para}</p>";
         }
 
+        $general_template = Template::where('name', '=', 'General template')->firstOrFail();
+
         return [
             'title'=>$title,
             'content'=>$content,
             'date'=>$this->faker->date,
+            'template_id'=>$general_template,
         ];
     }
 }

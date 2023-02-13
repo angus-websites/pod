@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\EntryResource;
 use App\Http\Resources\EntryCollection;
+
+use App\Http\Resources\TemplateResource;
+
 use Illuminate\Http\Request;
 use App\Models\Entry;
 use App\Models\Template;
