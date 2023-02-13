@@ -3,39 +3,21 @@
     <form @submit.prevent="submitForm">
         <div class="flex flex-col space-y-5">
 
-                <div class="flex flex-col md:flex-row md:space-x-8 space-y-5 md:space-y-0">
+            <!-- Fields in template -->
+            <div v-for="field in props.entry.template.fields">
+                <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
+                <div class="mt-1">
+                  <input v-if="field.type == 'text'" v-model.lazy="entry[field.id]" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
+                  <input v-else-if="field.type == 'date'" v-model.lazy="entry[field.id]" type="date" :name="field.id" :id="field.id" :class="getInputClass('text')">
+                  <textarea v-else-if="field.type == 'textarea'" v-model.lazy="entry[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')"></textarea>
 
-
-                    <!-- Title input -->
-                    <div class="flex-1">
-                        <label for="email" class="block text-sm font-medium text-gray-700">Title</label>
-                        <div class="mt-1">
-                          <input v-model.lazy="form.title" type="text" required name="title" id="title" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Just a normal day" />
-                        </div>
-                    </div>
-
-                    <!-- Date -->
-                    <div class="flex-1">
-                        <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-                        <div class="mt-1">
-                          <input v-model.lazy="form.date" required type="date" name="date" id="date" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="01/01/2023" />
-                        </div>
-                    </div>
                 </div>
+            </div>
 
-                <!-- Entry content -->
-                <div>
-                    <label for="content" class="block text-sm font-medium text-gray-700">Entry content</label>
-                    <div class="mt-1">
-                      <textarea v-model.lazy="form.content" required rows="4" name="content" id="content" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                      </textarea>
-                    </div>
-                </div>
-
-                <!-- Save button -->
-                <div class="mt-5">
-                    <PrimaryButton type="submit" :disabled="form.processing">Save</PrimaryButton>
-                </div>
+            <!-- Save button -->
+            <div class="mt-5">
+                <PrimaryButton type="submit" :disabled="form.processing">Save</PrimaryButton>
+            </div>
         </div>
     </form>
 
@@ -62,6 +44,14 @@ const form = useForm({
     content: props.entry.content,
 })
 
+function getInputClass(type){
+    if (type == "text"){
+        return "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+    }else if(type == "textarea"){
+        return "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+    }
+}
+
 function submitForm(){
     /**
      * Submit the form
@@ -69,9 +59,10 @@ function submitForm(){
      */
     if (props.create){
         console.log("Storing new entry")
-        form.post(route('entries.store'))
+        //form.post(route('entries.store'))
     }else{
-        form.put(route('entries.update', props.entry.id))
+        console.log("Updating new entry")
+        //form.put(route('entries.update', props.entry.id))
     }
 
 
