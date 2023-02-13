@@ -8,8 +8,8 @@ use Jenssegers\Mongodb\Eloquent\Model;
 
 class Entry extends Model
 {
-    protected $connection = 'mongodb';
     use HasFactory;
+    protected $connection = 'mongodb';
     protected $fillable = ['title','date','content'];
 
     /**
