@@ -9,11 +9,11 @@
                 <div class="mt-1">
 
                     <!-- Title-->
-                    <input v-if="field.id == 'title'" v-model.lazy="entry.title" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
+                    <input v-if="field.id == 'title'" v-model.lazy="form.title" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
 
-                    <input v-else-if="field.type == 'text'" v-model.lazy="entry.data[field.id]" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
-                    <input v-else-if="field.type == 'date'" v-model.lazy="entry.data[field.id]" type="date" :name="field.id" :id="field.id" :class="getInputClass('text')">
-                    <textarea v-else-if="field.type == 'textarea'" v-model.lazy="entry.data[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')"></textarea>
+                    <input v-else-if="field.type == 'text'" v-model.lazy="form.content[field.id]" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
+                    <input v-else-if="field.type == 'date'" v-model.lazy="form.content[field.id]" type="date" :name="field.id" :id="field.id" :class="getInputClass('text')">
+                    <textarea v-else-if="field.type == 'textarea'" v-model.lazy="form.content[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')"></textarea>
 
                 </div>
             </div>
@@ -42,11 +42,11 @@ const props = defineProps({
     }
 });
 
-// const form = useForm({
-//     title: props.entry.title,
-//     date: props.entry.date,
-//     content: props.entry.content,
-// })
+// We use content instead of 'data' as it seems to be a keyword
+const form = useForm({
+    title: props.entry.title,
+    content: props.entry.data
+})
 
 function getInputClass(type){
     if (type == "text"){
@@ -63,10 +63,10 @@ function submitForm(){
      */
     if (props.create){
         console.log("Storing new entry")
-        //form.post(route('entries.store'))
+        form.post(route('entries.store'))
     }else{
         console.log("Updating new entry")
-        //form.put(route('entries.update', props.entry.id))
+        form.put(route('entries.update', props.entry.id))
     }
 
 
