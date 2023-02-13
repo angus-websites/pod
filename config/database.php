@@ -95,8 +95,11 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => env('MONGO_DSN'),
+            'host' => env('MONGO_HOST', 'localhost'),
+            'port' => env('MONGO_PORT', 27017),
             'database' => env('MONGO_DB', 'pod'),
+            //'username' => env('DB_USERNAME', 'forge'),
+            //'password' => env('DB_PASSWORD', ''),
         ],
 
     ],

@@ -23,11 +23,20 @@ services:
         networks:
             - sail
         depends_on:
+            - mongodb
             - mysql
             - redis
             - meilisearch
             - mailhog
             - selenium
+    mongodb:
+        image: mongo:latest
+        ports:
+          - '${FORWARD_DB_PORT:-27017}:27017'
+        volumes:
+          - 'sailmongodb:/data/db'
+        networks:
+          - sail
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -37,7 +46,7 @@ services:
             MYSQL_ROOT_HOST: "%"
             MYSQL_DATABASE: '${DB_DATABASE}'
             MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            en: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
             - 'sail-mysql:/var/lib/mysql'
@@ -91,6 +100,8 @@ networks:
     sail:
         driver: bridge
 volumes:
+    sailmongodb:
+        driver: local
     sail-mysql:
         driver: local
     sail-redis:
