@@ -21,10 +21,13 @@ return new class extends Migration
             $table->string('date');
             $table->text('content');
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('template_id')->unsigned();
 
             //Foreign keys
             $table->foreign('user_id')
                 ->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('template_id')
+                ->references('id')->on('templates')->onDelete('cascade');
 
 
         });

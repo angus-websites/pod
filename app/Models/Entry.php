@@ -21,4 +21,8 @@ class Entry extends Model
         return $this->belongsTo(User::class)->first();
     }
 
+    public function template(){
+        return $this->belongsTo(Template::class)->first();
+    }
+
 }
