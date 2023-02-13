@@ -8,5 +8,6 @@ use Jenssegers\Mongodb\Eloquent\Model;
 
 class Template extends Model
 {
+    protected $connection = 'mongodb';
     use HasFactory;
 }
