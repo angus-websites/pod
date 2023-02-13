@@ -1,10 +1,10 @@
 
 <template>
-  <AppLayout :title="entry.data.title">
+  <AppLayout :title="entry.title">
     <PageContainer>
-        <EntryHeader :title="entry.data.title" :date="entry.data.date"/>
+        <EntryHeader :title="entry.title"/>
         <!-- Buttons -->
-        <div class="my-8">
+        <div class="mb-8 mt-5">
             <!-- Cancel button -->
             <button v-if="currentView == editView" @click="switchTab(tabs[0])" class="bg-red-100 text-red-700 hover:bg-red-200 px-3 py-2 font-medium text-sm rounded-md">Cancel</button>
 
@@ -57,7 +57,7 @@ function switchTab(tab){
 
 // Computed
 const currentProperties = computed(() => {
-  return {"entry":  props.entry.data}
+  return {"entry":  props.entry}
 })
 
 

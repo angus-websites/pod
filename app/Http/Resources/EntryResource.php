@@ -20,10 +20,9 @@ class EntryResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'content' => $this->content,
-            'date' => $this->date,
             'template' => $template,
+            'title' => $this->title,
+            'data' => $this->data,
         ];
     }
 }

@@ -7,16 +7,20 @@
             <div v-for="field in props.entry.template.fields">
                 <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
                 <div class="mt-1">
-                  <input v-if="field.type == 'text'" v-model.lazy="entry[field.id]" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
-                  <input v-else-if="field.type == 'date'" v-model.lazy="entry[field.id]" type="date" :name="field.id" :id="field.id" :class="getInputClass('text')">
-                  <textarea v-else-if="field.type == 'textarea'" v-model.lazy="entry[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')"></textarea>
+
+                    <!-- Title-->
+                    <input v-if="field.id == 'title'" v-model.lazy="entry.title" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
+
+                    <input v-else-if="field.type == 'text'" v-model.lazy="entry.data[field.id]" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
+                    <input v-else-if="field.type == 'date'" v-model.lazy="entry.data[field.id]" type="date" :name="field.id" :id="field.id" :class="getInputClass('text')">
+                    <textarea v-else-if="field.type == 'textarea'" v-model.lazy="entry.data[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')"></textarea>
 
                 </div>
             </div>
 
             <!-- Save button -->
             <div class="mt-5">
-                <PrimaryButton type="submit" :disabled="form.processing">Save</PrimaryButton>
+                <PrimaryButton type="submit">Save</PrimaryButton>
             </div>
         </div>
     </form>
@@ -38,11 +42,11 @@ const props = defineProps({
     }
 });
 
-const form = useForm({
-    title: props.entry.title,
-    date: props.entry.date,
-    content: props.entry.content,
-})
+// const form = useForm({
+//     title: props.entry.title,
+//     date: props.entry.date,
+//     content: props.entry.content,
+// })
 
 function getInputClass(type){
     if (type == "text"){

@@ -29,9 +29,8 @@ class EntryFactory extends Factory
                 $training_template = Template::where('name', '=', 'Training template')->firstOrFail();
 
                 $name_of_training = $this->faker->realText(10);
-                $start = $this->faker->dateTimeThisMonth();
-                $end = $this->faker->dateTimeThisMonth();
-
+                $start = $this->faker->date;
+                $end = $this->faker->date;
                 $paragraphs = $this->faker->paragraphs(rand(2, 6));
                 $what_i_learned = "";
                 foreach ($paragraphs as $para) {
@@ -39,11 +38,13 @@ class EntryFactory extends Factory
                 }
 
                 $entry_content = [
+                    'template_id' => $training_template,
                     'title'=>$name_of_training,
-                    'date_started'=>$start,
-                    'date_completed'=>$end,
-                    'what_i_learned'=>$what_i_learned,
-                    'template_id' => $training_template
+                    'data' => [
+                        "date_started" => $start,
+                        'date_completed'=>$end,
+                        'what_i_learned'=>$what_i_learned
+                    ]
                 ];
                 break;
             
@@ -60,10 +61,12 @@ class EntryFactory extends Factory
                 }
 
                 $entry_content = [
-                    'title'=>$title,
-                    'content'=>$content,
-                    'date'=>$this->faker->date,
                     'template_id'=>$general_template,
+                    'title'=>$title,
+                    'data' => [
+                        'content'=>$content,
+                        'date'=>$this->faker->date
+                    ]
                 ];
                 break;
         }

@@ -52,7 +52,7 @@ class TemplateSeeder extends Seeder
           'description' => "For when you have completed some training",
           'fields' => [
             [
-                'id' => 'name_of_training',
+                'id' => 'title',
                 'label' => 'Name of training',
                 'type' => 'text',
                 'required' => true,
