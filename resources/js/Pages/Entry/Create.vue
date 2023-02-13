@@ -24,6 +24,12 @@
                 <input v-if="field.type == 'date'" type="date" :name="field.id" :id="field.id">
                 <textarea v-else-if="field.type == 'textarea'" :name="field.id" :id="field.id"></textarea>
               </div>
+
+              <!-- Save button -->
+              <div class="mt-5">
+                  <PrimaryButton type="submit">Save</PrimaryButton>
+              </div>
+
             </form>
 
 
@@ -40,6 +46,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import PageContainer from "@/Components/_util/PageContainer.vue";
 import EntryEdit from "@/Components/entry/EntryEdit.vue";
 import EntryHeaderCreate from "@/Components/entry/EntryHeaderCreate.vue";
+import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 
 const props = defineProps(['new_entry', 'templates'])
 
