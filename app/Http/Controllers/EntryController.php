@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\EntryResource;
-use App\Http\Resources\EntryCollection;
 
 use App\Http\Resources\TemplateResource;
 
@@ -30,7 +29,7 @@ class EntryController extends Controller
      */
     public function index()
     {
-        $entries =  new EntryCollection(Auth::user()->entries()->paginate(15));
+        $entries =  EntryResource::collection(Auth::user()->entries()->paginate(15));
         return Inertia::render('Entry/Index', ['entries' => $entries]);
     }
 
