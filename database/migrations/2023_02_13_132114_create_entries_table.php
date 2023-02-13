@@ -18,8 +18,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('title');
-            $table->string('date');
-            $table->text('content');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('template_id')->unsigned();
 

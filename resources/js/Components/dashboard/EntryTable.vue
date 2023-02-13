@@ -17,7 +17,7 @@
                             <thead class="bg-gray-50">
                             <tr class="divide-x divide-gray-200">
                                 <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">Title</th>
-                                <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Date created</th>
+                                <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Type</th>
                             </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
@@ -26,7 +26,7 @@
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
                                         <Link class="underline" :href="route('entries.show', entry.id)">{{ entry.title }}</Link>
                                     </td>
-                                    <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ entry.date }}</td>
+                                    <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ entry.template.name }}</td>
                                 </tr>
                             </template>
                             </tbody>

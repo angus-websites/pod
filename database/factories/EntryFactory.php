@@ -39,7 +39,7 @@ class EntryFactory extends Factory
                 }
 
                 $entry_content = [
-                    'name_of_training'=>$name_of_training,
+                    'title'=>$name_of_training,
                     'date_started'=>$start,
                     'date_completed'=>$end,
                     'what_i_learned'=>$what_i_learned,
