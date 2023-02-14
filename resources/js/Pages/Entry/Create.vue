@@ -15,7 +15,7 @@
               <p class="mt-2 text-sm text-gray-500" id="email-description">Select a template for this new entry</p>
             </div>
 
-            <EntryEdit :entry="getEntry()" :create="true" />
+            <EntryEdit :entry="getEntry()" :create="true" :template="selected_template" />
 
 
         </div>

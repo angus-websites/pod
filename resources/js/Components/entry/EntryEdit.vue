@@ -31,6 +31,7 @@
 <script setup>
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import {useForm} from '@inertiajs/inertia-vue3';
+import { toRef } from 'vue'
 
 const props = defineProps({
     entry: {
@@ -39,13 +40,20 @@ const props = defineProps({
     create: {
         type: Boolean,
         default: false
+    },
+    template: {
+        type: Object
     }
 });
+
+// Define our template as a reactive prop
+const template = toRef(props, 'template')
 
 // We use content instead of 'data' as it seems to be a keyword
 const form = useForm({
     title: props.entry.title,
-    content: props.entry.data
+    content: props.entry.data,
+    template: template,
 })
 
 function getInputClass(type){
@@ -61,6 +69,11 @@ function submitForm(){
      * Submit the form
      * and update the entry
      */
+    
+    // Update the form and attatch the template
+
+    console.log("Submitting with template: "+form.template)
+    
     if (props.create){
         console.log("Storing new entry")
         form.post(route('entries.store'))

@@ -57,7 +57,10 @@ function switchTab(tab){
 
 // Computed
 const currentProperties = computed(() => {
-  return {"entry":  props.entry}
+  if (currentView.value == readView){
+    return {"entry":  props.entry}
+  }
+  return {"entry":  props.entry, "template": props.entry.template}
 })
 
 
