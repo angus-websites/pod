@@ -30,20 +30,23 @@ class TemplateSeeder extends Seeder
                 'label' => 'Entry title',
                 'type' => 'text',
                 'required' => true,
+                'validation' => ['required', 'max:100'],
             ],
             [
                 'id' => 'date',
                 'label' => 'Date',
                 'type' => 'date',
                 'required' => true,
+                'validation' => ['required', 'date'],
             ],
             [
                 'id' => 'content',
                 'label' => 'Entry content',
                 'type' => 'textarea',
                 'required' => true,
+                'validation' => ['required', 'max:3000'],
             ],
-          ],
+          ]
         ]);
 
         // Training template
@@ -56,24 +59,28 @@ class TemplateSeeder extends Seeder
                 'label' => 'Name of training',
                 'type' => 'text',
                 'required' => true,
+                'validation' => ['required', 'max:100'],
             ],
             [
                 'id' => 'date_started',
                 'label' => 'Training start date',
                 'type' => 'date',
                 'required' => false,
+                'validation' => ['date'],
             ],
             [
                 'id' => 'date_completed',
                 'label' => 'Training completion date',
                 'type' => 'date',
                 'required' => false,
+                'validation' => ['date'],
             ],
             [
                 'id' => 'what_i_learned',
                 'label' => 'What did I learn?',
                 'type' => 'textarea',
                 'required' => true,
+                'validation' => ['required', 'max:3000'],
             ],
 
           ],
