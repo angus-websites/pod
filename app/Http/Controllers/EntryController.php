@@ -58,43 +58,10 @@ class EntryController extends Controller
         // Fetch the template to avoid using client side details
         $template = Template::findOrFail($request->template['_id']);
 
-        // TODO put this in the model
-
         // Extract the validation rules
-        $rules = [];
-        foreach ($template->fields as $field) {
-            //dd($field);
-          $id = $field['id'];
-          $rules[$id] = $field['validation'];
-        }
+        $template->getValidator($request->all())->validate();
 
-        // Run the validation
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->passes()) {
-            return Redirect::route('entries.index')->with('success', 'Entry created');
-        } else {
-            return Redirect::back()->withErrors($validator);
-        }
-
-
-
-        return $template;
-
-        // Validate
-        // $request->validate([
-        //         'title' => ['required', 'max:100'],
-        //         'date' => ['required', 'date'],
-        //         'content' => ['required', 'max:3000'],
-        // ]);
-
-        // // Create the new Entry
-        // $new_entry = new Entry;
-        // $new_entry->fill($request->all());
-        // $new_entry->user_id = Auth::user()->id;
-        // $new_entry->save();
-
-        // Redirect
+        // If we pass validation
         return Redirect::route('entries.index')->with('success', 'Entry created');
 
     }
