@@ -13,6 +13,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class EntryController extends Controller
 {
@@ -52,19 +53,46 @@ class EntryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // Validate
-        $request->validate([
-                'title' => ['required', 'max:100'],
-                'date' => ['required', 'date'],
-                'content' => ['required', 'max:3000'],
-        ]);
+    {  
 
-        // Create the new Entry
-        $new_entry = new Entry;
-        $new_entry->fill($request->all());
-        $new_entry->user_id = Auth::user()->id;
-        $new_entry->save();
+        // Fetch the template to avoid using client side details
+        $template = Template::findOrFail($request->template['_id']);
+
+        // TODO put this in the model
+
+        // Extract the validation rules
+        $rules = [];
+        foreach ($template->fields as $field) {
+            //dd($field);
+          $id = $field['id'];
+          $rules[$id] = $field['validation'];
+        }
+
+        // Run the validation
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->passes()) {
+            return Redirect::route('entries.index')->with('success', 'Entry created');
+        } else {
+            return Redirect::back()->withErrors($validator);
+        }
+
+
+
+        return $template;
+
+        // Validate
+        // $request->validate([
+        //         'title' => ['required', 'max:100'],
+        //         'date' => ['required', 'date'],
+        //         'content' => ['required', 'max:3000'],
+        // ]);
+
+        // // Create the new Entry
+        // $new_entry = new Entry;
+        // $new_entry->fill($request->all());
+        // $new_entry->user_id = Auth::user()->id;
+        // $new_entry->save();
 
         // Redirect
         return Redirect::route('entries.index')->with('success', 'Entry created');

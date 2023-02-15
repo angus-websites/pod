@@ -4,16 +4,16 @@
         <div class="flex flex-col space-y-5">
 
             <!-- Fields in template -->
-            <div v-for="field in props.entry.template.fields">
+            <div v-for="field in template.fields">
                 <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
                 <div class="mt-1">
 
                     <!-- Title-->
-                    <input v-if="field.id == 'title'" v-model.lazy="form.title" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')" required>
+                    <input v-if="field.id == 'title'" v-model.lazy="form.title" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
 
-                    <input v-else-if="field.type == 'text'" v-model.lazy="form.content[field.id]" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')" :required="field.required">
-                    <input v-else-if="field.type == 'date'" v-model.lazy="form.content[field.id]" type="date" :name="field.id" :id="field.id" :class="getInputClass('text')" :required="field.required">
-                    <textarea v-else-if="field.type == 'textarea'" v-model.lazy="form.content[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')" :required="field.required"></textarea>
+                    <input v-else-if="field.type == 'text'" v-model.lazy="form.content[field.id]" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
+                    <input v-else-if="field.type == 'date'" v-model.lazy="form.content[field.id]" type="date" :name="field.id" :id="field.id" :class="getInputClass('text')">
+                    <textarea v-else-if="field.type == 'textarea'" v-model.lazy="form.content[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')"></textarea>
 
                 </div>
             </div>
@@ -25,13 +25,15 @@
         </div>
     </form>
 
+    {{ form.template }}
+
 </template>
 
 
 <script setup>
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import {useForm} from '@inertiajs/inertia-vue3';
-import { toRef } from 'vue'
+import { toRef, toRefs } from 'vue'
 
 const props = defineProps({
     entry: {
@@ -73,7 +75,7 @@ function submitForm(){
     // Update the form and attatch the template
 
     console.log("Submitting with template: "+form.template)
-    
+
     if (props.create){
         console.log("Storing new entry")
         form.post(route('entries.store'))
