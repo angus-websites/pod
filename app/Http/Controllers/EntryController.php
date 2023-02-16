@@ -99,15 +99,24 @@ class EntryController extends Controller
     public function update(Request $request, Entry $entry)
     {
 
-        $entry->update(
-            $request->validate([
-                'title' => ['required', 'max:100'],
-                'date' => ['required', 'date'],
-                'content' => ['required', 'max:3000'],
-            ])
-        );
+        // Fetch the template
+        $template = $entry->template();
+
+        // Extract the validation rules
+        $template->getValidator(array_merge($request->content, ["title" => $request->title]))->validate();
+
+        // If we pass validation
         return Redirect::back()->with('success', 'Entry updated');
         //Log::info("Entry updated");
+
+
+        // $entry->update(
+        //     $request->validate([
+        //         'title' => ['required', 'max:100'],
+        //         'date' => ['required', 'date'],
+        //         'content' => ['required', 'max:3000'],
+        //     ])
+        // );
     }
 
     /**

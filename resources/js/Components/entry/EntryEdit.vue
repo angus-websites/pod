@@ -4,7 +4,7 @@
         <div class="flex flex-col space-y-5">
 
             <!-- Fields in template -->
-            <div v-for="field in template.fields">
+            <div v-for="field in entry.template.fields">
                 <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
                 <div class="mt-1">
 
@@ -25,8 +25,6 @@
         </div>
     </form>
 
-    {{ form.template }}
-
 </template>
 
 
@@ -38,24 +36,13 @@ import { toRef, toRefs } from 'vue'
 const props = defineProps({
     entry: {
         type: Object,
-    },
-    create: {
-        type: Boolean,
-        default: false
-    },
-    template: {
-        type: Object
     }
 });
-
-// Define our template as a reactive prop
-const template = toRef(props, 'template')
 
 // We use content instead of 'data' as it seems to be a keyword
 const form = useForm({
     title: props.entry.title,
     content: props.entry.data,
-    template: template,
 })
 
 function getInputClass(type){
@@ -72,18 +59,8 @@ function submitForm(){
      * and update the entry
      */
     
-    // Update the form and attatch the template
-
-    console.log("Submitting with template: "+form.template)
-
-    if (props.create){
-        console.log("Storing new entry")
-        form.post(route('entries.store'))
-    }else{
-        console.log("Updating new entry")
-        form.put(route('entries.update', props.entry.id))
-    }
-
+    // Update
+    form.put(route('entries.update', props.entry.id))
 
 }
 </script>
