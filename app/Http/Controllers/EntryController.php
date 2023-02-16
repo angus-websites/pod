@@ -56,10 +56,10 @@ class EntryController extends Controller
     {  
 
         // Fetch the template to avoid using client side details
-        $template = Template::findOrFail($request->template['_id']);
+        $template = Template::findOrFail($request->template);
 
         // Extract the validation rules
-        $template->getValidator($request->all())->validate();
+        $template->getValidator($request->content)->validate();
 
         // If we pass validation
         return Redirect::route('entries.index')->with('success', 'Entry created');

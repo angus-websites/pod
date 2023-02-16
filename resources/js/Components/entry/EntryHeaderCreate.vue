@@ -5,7 +5,7 @@
       <Heading1>New Entry</Heading1>
       <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
         <div class="mt-2 flex items-center text-sm text-gray-500">
-            Enter the details for this new entry
+            Select a template and enter the details for this new entry
         </div>
       </div>
     </div>
