@@ -16,6 +16,9 @@
                     <textarea v-else-if="field.type == 'textarea'" v-model.lazy="form.content[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')"></textarea>
 
                 </div>
+                <template v-if="$page.props.errors">
+                    <p v-if="$page.props.errors[field.id]" class="mt-2 text-sm text-red-600" id="email-error">{{ $page.props.errors[field.id] }}</p>
+                </template>
             </div>
 
             <!-- Save button -->
@@ -24,15 +27,12 @@
             </div>
         </div>
     </form>
-
-    {{ form.content }}
-
 </template>
 
 
 <script setup>
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
-import {useForm} from '@inertiajs/inertia-vue3';
+import {useForm, usePage} from '@inertiajs/inertia-vue3';
 import { toRef, toRefs, computed } from 'vue'
 
 const props = defineProps({
