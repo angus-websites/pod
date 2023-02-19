@@ -55,11 +55,23 @@ class EntryController extends Controller
     public function store(Request $request)
     {  
 
+        
+
         // Fetch the template to avoid using client side details
         $template = Template::findOrFail($request->template);
 
         // Extract the validation rules
         $template->getValidator($request->content)->validate();
+
+        // Convert content into data
+        $request->merge(['data' => $request->content, 'title' => $request->content['title']]);
+
+        // Create the new Entry
+        $new_entry = new Entry();
+        $new_entry->fill($request->all());
+        $new_entry->user_id = Auth::user()->id;
+        $new_entry->template_id = $template->id;
+        $new_entry->save();
 
         // If we pass validation
         return Redirect::route('entries.index')->with('success', 'Entry created');
