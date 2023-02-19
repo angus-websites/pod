@@ -7,15 +7,7 @@
             <div v-for="field in entry.template.fields">
                 <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
                 <div class="mt-1">
-
-                    <!-- Title-->
-                    <input v-if="field.id == 'title'" v-model.lazy="form.title" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
-
-                    <input v-else-if="field.type == 'text'" v-model.lazy="form.content[field.id]" type="text" :name="field.id" :id="field.id" :class="getInputClass('text')">
-                    <input v-else-if="field.type == 'date'" v-model.lazy="form.content[field.id]" type="date" :name="field.id" :id="field.id" :class="getInputClass('text')">
-                    <textarea v-else-if="field.type == 'textarea'" v-model.lazy="form.content[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')"></textarea>
-
-
+                    <component :is="TemplateInputs[field.type]" :key="field.id" :field_id="field.id" v-model.lazy="form.content[field.id]"></component>
                 </div>
             </div>
 
@@ -34,6 +26,14 @@ import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import {useForm} from '@inertiajs/inertia-vue3';
 import { toRef, toRefs } from 'vue'
 
+import TemplateText from "@/Components/template/TemplateText.vue";
+import TemplateDate from "@/Components/template/TemplateDate.vue";
+import TemplateTextarea from "@/Components/template/TemplateTextarea.vue";
+
+
+// Components
+const TemplateInputs = {"text": TemplateText, "date": TemplateDate, "textarea": TemplateTextarea};
+
 const props = defineProps({
     entry: {
         type: Object,
@@ -48,15 +48,6 @@ const form = useForm({
     title: props.entry.title,
     content: props.entry.data,
 })
-
-function getInputClass(type){
-    if (type == "text"){
-        return "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-    }else if(type == "textarea"){
-        return "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-    }
-}
-
 
 function submitForm(){
     /**

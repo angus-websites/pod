@@ -7,16 +7,7 @@
             <div v-for="field in template.fields">
                 <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
                 <div class="mt-1">
-
-                    <!-- Title-->
-<!--                     <TemplateText v-if="field.type == 'text'" :field_id="field.id"  v-model.lazy="form.content[field.id]" />
-                    <TemplateDate v-else-if="field.type == 'date'" :field_id="field.id"  v-model.lazy="form.content[field.id]" />
-                    <TemplateTextarea v-else-if="field.type == 'textarea'" :field_id="field.id"  v-model.lazy="form.content[field.id]" /> -->
-
-                    <component :is="getInput(field.type)" :key="field.id" :field_id="field.id" v-model.lazy="form.content[field.id]"></component>
-
-
-
+                    <component :is="TemplateInputs[field.type]" :key="field.id" :field_id="field.id" v-model.lazy="form.content[field.id]"></component>
                 </div>
                 <template v-if="$page.props.errors">
                     <p v-if="$page.props.errors[field.id]" class="mt-2 text-sm text-red-600" id="email-error">{{ $page.props.errors[field.id] }}</p>
@@ -66,15 +57,6 @@ const form = useForm({
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function getInput(field_type){
-    /**
-     * Return the right input
-     * type based on the field type
-     */
-    return TemplateInputs[field_type];
-    
 }
 
 function submitForm(){
