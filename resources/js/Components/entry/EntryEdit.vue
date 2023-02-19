@@ -27,11 +27,13 @@ import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import DangerButton from "@/Components/buttons/DangerButton.vue";
 
 import {useForm} from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia'
 import { toRef, toRefs } from 'vue'
 
 import TemplateText from "@/Components/template/TemplateText.vue";
 import TemplateDate from "@/Components/template/TemplateDate.vue";
 import TemplateTextarea from "@/Components/template/TemplateTextarea.vue";
+
 
 
 // Components
@@ -61,6 +63,10 @@ function deleteEntry(event){
      */
     event.preventDefault();
     console.log("Deleted entry")
+
+    if (confirm('Are you sure you want to delete this entry?')) {
+      Inertia.delete(route("entries.destroy", props.entry.id))
+    }
 }
 
 function submitForm(){

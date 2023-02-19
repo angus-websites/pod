@@ -135,11 +135,11 @@ class EntryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Entry $entry)
     {
-        $entry = Entry::findOrFail($id);
         $entry->delete();
 
-        return response()->json(null, 204);
+        return Redirect::route('entries.index')->with('info', 'Entry deleted');
+
     }
 }
