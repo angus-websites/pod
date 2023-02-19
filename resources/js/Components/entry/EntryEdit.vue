@@ -15,6 +15,7 @@
                     <input v-else-if="field.type == 'date'" v-model.lazy="form.content[field.id]" type="date" :name="field.id" :id="field.id" :class="getInputClass('text')">
                     <textarea v-else-if="field.type == 'textarea'" v-model.lazy="form.content[field.id]" :name="field.id" :id="field.id" :class="getInputClass('textarea')"></textarea>
 
+
                 </div>
             </div>
 
@@ -55,6 +56,7 @@ function getInputClass(type){
         return "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
     }
 }
+
 
 function submitForm(){
     /**
