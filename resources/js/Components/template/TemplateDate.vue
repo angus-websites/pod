@@ -2,13 +2,13 @@
     <input 
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
-    type="date" :name="field_id" :id="field_id" :class="baseClasses">
+    type="date" :name="field.id" :id="field.id" :class="baseClasses" :required="field.required">
 </template>
 
 <script>
 export default {
     name: "TemplateDate",
-    props: ['field_id', 'modelValue'],
+    props: ['field', 'modelValue'],
     emits: ['update:modelValue'],
     computed: {
         baseClasses(){

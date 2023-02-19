@@ -2,13 +2,13 @@
     <input 
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
-    type="text" :name="field_id" :id="field_id" :class="baseClasses">
+    type="text" :name="field.id" :id="field.id" :class="baseClasses" :required="field.required">
 </template>
 
 <script>
 export default {
     name: "TemplateText",
-    props: ['field_id', 'modelValue'],
+    props: ['field', 'modelValue'],
     emits: ['update:modelValue'],
     computed: {
         baseClasses(){

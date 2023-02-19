@@ -2,14 +2,14 @@
     <textarea
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        :name="field_id" :id="field_id" :class="baseClasses"></textarea>
+        :name="field.id" :id="field.id" :class="baseClasses" :required="field.required"></textarea>
 
 </template>
 
 <script>
 export default {
     name: "TemplateTextarea",
-    props: ['field_id', 'modelValue'],
+    props: ['field', 'modelValue'],
     emits: ['update:modelValue'],
     computed: {
         baseClasses(){

@@ -7,7 +7,7 @@
             <div v-for="field in template.fields">
                 <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
                 <div class="mt-1">
-                    <component :is="TemplateInputs[field.type]" :key="field.id" :field_id="field.id" v-model.lazy="form.content[field.id]"></component>
+                    <component :is="TemplateInputs[field.type]" :key="field.id" :field="field" v-model.lazy="form.content[field.id]"></component>
                 </div>
                 <template v-if="$page.props.errors">
                     <p v-if="$page.props.errors[field.id]" class="mt-2 text-sm text-red-600" id="email-error">{{ $page.props.errors[field.id] }}</p>
