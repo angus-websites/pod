@@ -39,6 +39,9 @@ const props = defineProps({
     }
 });
 
+// Define emits so we can switch tabs after save
+const emit = defineEmits(['tabToggle'])
+
 // We use content instead of 'data' as it seems to be a keyword
 const form = useForm({
     title: props.entry.title,
@@ -61,6 +64,9 @@ function submitForm(){
     
     // Update
     form.put(route('entries.update', props.entry.id))
+
+    // Switch tabs
+    emit('tabToggle')
 
 }
 </script>

@@ -13,7 +13,7 @@
 
           </div>
         <!-- Dynamic view for edit or view -->
-        <component :is="currentView" v-bind="currentProperties"></component>
+        <component :is="currentView" v-bind="currentProperties" @tab-toggle="tabToggle()"></component>
 
     </PageContainer>
   </AppLayout>
@@ -43,6 +43,7 @@ let tabs = reactive([
   { name: 'Edit', view: editView, current: false },
 ]);
 
+
 function switchTab(tab){
 
     // Set the current view for this tab
@@ -53,6 +54,17 @@ function switchTab(tab){
 
     // Update current
     tab.current = true;
+}
+
+function tabToggle(){
+  console.log("Hello world")
+
+  if (currentView.value == tabs[0].view){
+    switchTab(tabs[1])
+  }
+  else{
+    switchTab(tabs[0])
+  }
 }
 
 // Computed
