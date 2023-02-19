@@ -55,8 +55,6 @@ class EntryController extends Controller
     public function store(Request $request)
     {  
 
-        
-
         // Fetch the template to avoid using client side details
         $template = Template::findOrFail($request->template);
 
@@ -87,7 +85,11 @@ class EntryController extends Controller
     public function show(Entry $entry){
 
         $ent = new EntryResource($entry);
-        return Inertia::render('Entry/View', ['entry' => $ent]);
+
+        return Inertia::render('Entry/View', [
+            'entry' => $ent,
+            'can' => ['deleteEntry' => Auth::user()->can('delete', $entry)],
+        ]);
     }
 
     /**

@@ -70,7 +70,9 @@ class EntryPolicy
      */
     public function delete(User $user, Entry $entry)
     {
-        //
+        return $user->id === $entry->user()->id
+            ? Response::allow()
+            : Response::deny('You cannot delete this entry');
     }
 
     /**

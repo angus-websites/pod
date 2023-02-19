@@ -12,8 +12,9 @@
             </div>
 
             <!-- Save button -->
-            <div class="mt-5">
+            <div class="flex justify-between mt-5">
                 <PrimaryButton type="submit">Save</PrimaryButton>
+                <DangerButton v-if="can.deleteEntry" @click="deleteEntry">Delete</DangerButton>
             </div>
         </div>
     </form>
@@ -23,6 +24,8 @@
 
 <script setup>
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
+import DangerButton from "@/Components/buttons/DangerButton.vue";
+
 import {useForm} from '@inertiajs/inertia-vue3';
 import { toRef, toRefs } from 'vue'
 
@@ -37,6 +40,9 @@ const TemplateInputs = {"text": TemplateText, "date": TemplateDate, "textarea": 
 const props = defineProps({
     entry: {
         type: Object,
+    },
+    can: {
+        type:  Object
     }
 });
 
@@ -48,6 +54,14 @@ const form = useForm({
     title: props.entry.title,
     content: props.entry.data,
 })
+
+function deleteEntry(event){
+    /**
+     * Delete the entry
+     */
+    event.preventDefault();
+    console.log("Deleted entry")
+}
 
 function submitForm(){
     /**

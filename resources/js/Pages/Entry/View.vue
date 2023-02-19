@@ -30,7 +30,9 @@ import Breadcrumbs from "@/Components/_util/Breadcrumbs.vue";
 import EntryHeader from "@/Components/entry/EntryHeader.vue";
 import { useEntryStore } from '@/Stores/EntryStore.js';
 import AppLayout from "@/Layouts/AppLayout.vue";
-const props = defineProps(['entry'])
+
+
+const props = defineProps(['entry', 'can'])
 
 // Data
 let readView = markRaw(EntryView); 
@@ -57,8 +59,6 @@ function switchTab(tab){
 }
 
 function tabToggle(){
-  console.log("Hello world")
-
   if (currentView.value == tabs[0].view){
     switchTab(tabs[1])
   }
@@ -72,7 +72,7 @@ const currentProperties = computed(() => {
   if (currentView.value == readView){
     return {"entry":  props.entry}
   }
-  return {"entry":  props.entry, "template": props.entry.template}
+  return {"entry":  props.entry, "template": props.entry.template, "can": props.can}
 })
 
 
