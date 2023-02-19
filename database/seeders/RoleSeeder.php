@@ -21,9 +21,7 @@ class RoleSeeder extends Seeder
     {
 
       //Clear data
-      DB::statement('SET FOREIGN_KEY_CHECKS=0');
       Role::truncate();
-      DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
       // User
       Role::create([
@@ -50,12 +48,6 @@ class RoleSeeder extends Seeder
         'description' => "The Goat",
         'changeable' => 0,
       ]);
-
-
-      
-      
-      
-
 
     }
 }

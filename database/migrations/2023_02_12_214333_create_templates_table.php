@@ -13,20 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('entries', function (Blueprint $table) {
+        Schema::connection('mongodb')->create('templates', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
-            $table->string('title');
-            $table->string('date');
-            $table->text('content');
-            $table->bigInteger('user_id')->unsigned();
-
-            //Foreign keys
-            $table->foreign('user_id')
-                ->references('id')->on('users')->onDelete('cascade');
-
-
+            $table->text("name");
+            $table->text("description");
         });
     }
 
@@ -37,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entries');
+        Schema::connection('mongodb')->dropIfExists('templates');
     }
 };

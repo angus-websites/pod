@@ -4,69 +4,59 @@
         <div class="flex flex-col space-y-5">
 
             <!-- Fields in template -->
-            <div v-for="field in entry.template.fields">
+            <div v-for="field in template.fields">
                 <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
                 <div class="mt-1">
                     <component :is="TemplateInputs[field.type]" :key="field.id" :field="field" v-model.lazy="form.content[field.id]"></component>
                 </div>
+                <template v-if="$page.props.errors">
+                    <p v-if="$page.props.errors[field.id]" class="mt-2 text-sm text-red-600" id="email-error">{{ $page.props.errors[field.id] }}</p>
+                </template>
             </div>
 
             <!-- Save button -->
-            <div class="flex justify-between mt-5">
+            <div class="mt-5">
                 <PrimaryButton type="submit">Save</PrimaryButton>
-                <DangerButton v-if="can.deleteEntry" @click="deleteEntry">Delete</DangerButton>
             </div>
+
+            {{ form.content }}
         </div>
     </form>
-
 </template>
-
 
 <script setup>
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
-import DangerButton from "@/Components/buttons/DangerButton.vue";
-
-import {useForm} from '@inertiajs/inertia-vue3';
-import { Inertia } from '@inertiajs/inertia'
-import { toRef, toRefs } from 'vue'
+import {useForm, usePage} from '@inertiajs/inertia-vue3';
+import { toRef, toRefs, computed, resolveComponent, markRaw } from 'vue';
 
 import TemplateText from "@/Components/template/TemplateText.vue";
 import TemplateDate from "@/Components/template/TemplateDate.vue";
 import TemplateTextarea from "@/Components/template/TemplateTextarea.vue";
 
 
-
 // Components
 const TemplateInputs = {"text": TemplateText, "date": TemplateDate, "textarea": TemplateTextarea};
 
 const props = defineProps({
-    entry: {
-        type: Object,
-    },
-    can: {
-        type:  Object
+    template: {
+        type: Object
     }
 });
 
-// Define emits so we can switch tabs after save
-const emit = defineEmits(['tabToggle'])
+// Define our template as a reactive prop
+const template = toRef(props, 'template')
+
+// Store the content for the form
+const form_content = {};
 
 // We use content instead of 'data' as it seems to be a keyword
 const form = useForm({
-    title: props.entry.title,
-    content: props.entry.data,
+    content: form_content,
+    template: template,
 })
 
-function deleteEntry(event){
-    /**
-     * Delete the entry
-     */
-    event.preventDefault();
-    console.log("Deleted entry")
-
-    if (confirm('Are you sure you want to delete this entry?')) {
-      Inertia.delete(route("entries.destroy", props.entry.id))
-    }
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function submitForm(){
@@ -75,11 +65,12 @@ function submitForm(){
      * and update the entry
      */
     
-    // Update
-    form.put(route('entries.update', props.entry.id))
+    // Only send the template id in the request
+    form.transform((data) => ({
+        ...data,
+        template: data.template._id,
+    })).post(route('entries.store'))
 
-    // Switch tabs
-    emit('tabToggle')
 
 }
 </script>

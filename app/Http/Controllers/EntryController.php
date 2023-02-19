@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\EntryResource;
-use App\Http\Resources\EntryCollection;
+
+use App\Http\Resources\TemplateResource;
+
 use Illuminate\Http\Request;
 use App\Models\Entry;
+use App\Models\Template;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class EntryController extends Controller
 {
@@ -26,7 +30,7 @@ class EntryController extends Controller
      */
     public function index()
     {
-        $entries =  new EntryCollection(Auth::user()->entries()->paginate(15));
+        $entries =  EntryResource::collection(Auth::user()->entries()->paginate(15));
         return Inertia::render('Entry/Index', ['entries' => $entries]);
     }
 
@@ -38,7 +42,8 @@ class EntryController extends Controller
     public function create()
     {
         $new_entry = new Entry();
-        return Inertia::render('Entry/Create', ["new_entry" => $new_entry]);
+        $templates = Template::all();
+        return Inertia::render('Entry/Create', ["new_entry" => $new_entry, "templates" =>  $templates]);
     }
 
     /**
@@ -48,21 +53,25 @@ class EntryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // Validate
-        $request->validate([
-                'title' => ['required', 'max:100'],
-                'date' => ['required', 'date'],
-                'content' => ['required', 'max:3000'],
-        ]);
+    {  
+
+        // Fetch the template to avoid using client side details
+        $template = Template::findOrFail($request->template);
+
+        // Extract the validation rules
+        $template->getValidator($request->content)->validate();
+
+        // Convert content into data
+        $request->merge(['data' => $request->content, 'title' => $request->content['title']]);
 
         // Create the new Entry
-        $new_entry = new Entry;
+        $new_entry = new Entry();
         $new_entry->fill($request->all());
         $new_entry->user_id = Auth::user()->id;
+        $new_entry->template_id = $template->id;
         $new_entry->save();
 
-        // Redirect
+        // If we pass validation
         return Redirect::route('entries.index')->with('success', 'Entry created');
 
     }
@@ -76,7 +85,11 @@ class EntryController extends Controller
     public function show(Entry $entry){
 
         $ent = new EntryResource($entry);
-        return Inertia::render('Entry/View', ['entry' => $ent]);
+
+        return Inertia::render('Entry/View', [
+            'entry' => $ent,
+            'can' => ['deleteEntry' => Auth::user()->can('delete', $entry)],
+        ]);
     }
 
     /**
@@ -100,13 +113,18 @@ class EntryController extends Controller
     public function update(Request $request, Entry $entry)
     {
 
-        $entry->update(
-            $request->validate([
-                'title' => ['required', 'max:100'],
-                'date' => ['required', 'date'],
-                'content' => ['required', 'max:3000'],
-            ])
-        );
+        // Fetch the template
+        $template = $entry->template();        
+
+        // Extract the validation rules & run
+        $template->getValidator(array_merge($request->content, ["title" => $request->title]))->validate();
+
+        // Update the model
+        $input = array_merge(["data" => $request->content], ["title" => $request->title]);
+
+        $entry->fill($input)->save();
+
+        // If we pass validation
         return Redirect::back()->with('success', 'Entry updated');
         //Log::info("Entry updated");
     }
@@ -117,11 +135,11 @@ class EntryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Entry $entry)
     {
-        $entry = Entry::findOrFail($id);
         $entry->delete();
 
-        return response()->json(null, 204);
+        return Redirect::route('entries.index')->with('info', 'Entry deleted');
+
     }
 }

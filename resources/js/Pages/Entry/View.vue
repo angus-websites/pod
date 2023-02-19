@@ -1,10 +1,10 @@
 
 <template>
-  <AppLayout :title="entry.data.title">
+  <AppLayout :title="entry.title">
     <PageContainer>
-        <EntryHeader :title="entry.data.title" :date="entry.data.date"/>
+        <EntryHeader :title="entry.title"/>
         <!-- Buttons -->
-        <div class="my-8">
+        <div class="mb-8 mt-5">
             <!-- Cancel button -->
             <button v-if="currentView == editView" @click="switchTab(tabs[0])" class="bg-red-100 text-red-700 hover:bg-red-200 px-3 py-2 font-medium text-sm rounded-md">Cancel</button>
 
@@ -13,7 +13,7 @@
 
           </div>
         <!-- Dynamic view for edit or view -->
-        <component :is="currentView" v-bind="currentProperties"></component>
+        <component :is="currentView" v-bind="currentProperties" @tab-toggle="tabToggle()"></component>
 
     </PageContainer>
   </AppLayout>
@@ -30,7 +30,9 @@ import Breadcrumbs from "@/Components/_util/Breadcrumbs.vue";
 import EntryHeader from "@/Components/entry/EntryHeader.vue";
 import { useEntryStore } from '@/Stores/EntryStore.js';
 import AppLayout from "@/Layouts/AppLayout.vue";
-const props = defineProps(['entry'])
+
+
+const props = defineProps(['entry', 'can'])
 
 // Data
 let readView = markRaw(EntryView); 
@@ -42,6 +44,7 @@ let tabs = reactive([
   { name: 'View', view: readView, current: true },
   { name: 'Edit', view: editView, current: false },
 ]);
+
 
 function switchTab(tab){
 
@@ -55,9 +58,21 @@ function switchTab(tab){
     tab.current = true;
 }
 
+function tabToggle(){
+  if (currentView.value == tabs[0].view){
+    switchTab(tabs[1])
+  }
+  else{
+    switchTab(tabs[0])
+  }
+}
+
 // Computed
 const currentProperties = computed(() => {
-  return {"entry":  props.entry.data}
+  if (currentView.value == readView){
+    return {"entry":  props.entry}
+  }
+  return {"entry":  props.entry, "template": props.entry.template, "can": props.can}
 })
 
 
