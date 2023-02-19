@@ -2,7 +2,7 @@
     <div class="px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
-                <h1 class="text-xl font-semibold text-gray-900">Entries</h1>
+                <Heading1>Entries</Heading1>
                 <p class="mt-2 text-sm text-gray-700">A list of your entries</p>
             </div>
             <PrimaryButton isLink="true" :href="route('entries.create')">
@@ -63,6 +63,7 @@
 <script setup>
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import NoEntries from "@/Components/_util/NoEntries.vue";
+import Heading1 from "@/Components/headings/Heading1.vue";
 
 defineProps({
     entries: Object,
