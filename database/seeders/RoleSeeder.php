@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 
 //Models
 use App\Models\Role;
+use App\Models\User;
 
 //Support
 use Illuminate\Support\Facades\DB;
@@ -20,8 +21,12 @@ class RoleSeeder extends Seeder
     public function run()
     {
 
+      DB::statement('SET FOREIGN_KEY_CHECKS=0;');
       //Clear data
+      User::truncate();
       Role::truncate();
+      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
 
       // User
       Role::create([

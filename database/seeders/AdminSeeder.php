@@ -21,11 +21,8 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-      //Clear data
-      User::truncate();
-      
+  
       $superAdminRole=Role::where('name', '=', 'Super Admin')->firstOrFail();
-
       if(config('admin.admin_name')) {
         $admin=User::create([
           'name' => config('admin.admin_name'),

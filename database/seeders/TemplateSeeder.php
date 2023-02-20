@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 //Models
 use App\Models\Template;
+use App\Models\Entry;
+
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,6 +20,7 @@ class TemplateSeeder extends Seeder
     public function run()
     {
         //Clear data
+        Entry::truncate();
         Template::truncate();
 
         // General template
