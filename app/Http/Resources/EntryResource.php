@@ -21,7 +21,7 @@ class EntryResource extends JsonResource
         return [
             'id' => $this->id,
             'template' => $template,
-            'title' => $this->title,
+            'title' => $this->data['title'],
             'data' => $this->data,
         ];
     }
