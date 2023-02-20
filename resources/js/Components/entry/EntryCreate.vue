@@ -18,8 +18,6 @@
             <div class="mt-5">
                 <PrimaryButton type="submit">Save</PrimaryButton>
             </div>
-
-            {{ form.content }}
         </div>
     </form>
 </template>
