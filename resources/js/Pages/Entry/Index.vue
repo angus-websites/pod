@@ -14,7 +14,7 @@
                     </PrimaryButton>
                 </div>
                 <!-- Entry table-->
-                <EntryTable :entries="entries" />
+                <EntryTable :entries="entries" class="my-8 border" />
             </div>
 
             <!-- Pagination -->

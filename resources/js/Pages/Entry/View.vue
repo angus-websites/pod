@@ -4,14 +4,17 @@
     <PageContainer>
         <EntryHeader :title="entry.title"/>
         <!-- Buttons -->
-        <div class="mb-8 mt-5">
+        <div class="mb-8 mt-5 space-x-5 flex items-center flex-row">
             <!-- Cancel button -->
-            <button v-if="currentView == editView" @click="switchTab(tabs[0])" class="bg-red-100 text-red-700 hover:bg-red-200 px-3 py-2 font-medium text-sm rounded-md">Cancel</button>
+            <div v-if="currentView == editView">
+              <button  @click="switchTab(tabs[0])" class="bg-red-100 text-red-700 hover:bg-red-200 px-3 py-2 font-medium text-sm rounded-md">Cancel</button>
+            </div>
 
+            <div v-else>
             <!-- Edit button -->
-            <button v-else @click="switchTab(tabs[1])" class="text-gray-500 bg-gray-100 hover:text-gray-700 hover:bg-gray-200 px-3 py-2 font-medium text-sm rounded-md">Edit</button>
-
-          </div>
+              <button  @click="switchTab(tabs[1])" class="text-gray-500 bg-blue-100 hover:text-blue-700 hover:bg-blue-200 px-3 py-2 font-medium text-sm rounded-md">Edit</button>
+            </div>
+        </div>
         <!-- Dynamic view for edit or view -->
         <component :is="currentView" v-bind="currentProperties" @tab-toggle="tabToggle()"></component>
 
@@ -30,6 +33,7 @@ import Breadcrumbs from "@/Components/_util/Breadcrumbs.vue";
 import EntryHeader from "@/Components/entry/EntryHeader.vue";
 import { useEntryStore } from '@/Stores/EntryStore.js';
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { ChevronLeftIcon } from '@heroicons/vue/20/solid'
 
 
 const props = defineProps(['entry', 'can'])

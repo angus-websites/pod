@@ -4,8 +4,6 @@
     <PageContainer>
         <div class="flex flex-col space-y-10">
             <EntryHeaderCreate />
-            
-
             <!-- Template selection -->
             <div>
               <label for="template" class="block text-sm font-medium text-gray-700">Template</label>
