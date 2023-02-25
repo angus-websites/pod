@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden bg-white shadow sm:rounded-md">
+  <div v-if="entries.data.length > 0" class="overflow-hidden bg-white shadow sm:rounded-md border">
     <ul role="list" class="divide-y divide-gray-200">
       <li v-for="entry in entries.data" :key="entry.id">
         <Link :href="route('entries.show', entry.id)" class="block hover:bg-gray-50">
@@ -25,6 +25,10 @@
         </Link>
       </li>
     </ul>
+  </div>
+  <div v-else class="p-5 text-center">
+    <h3 class="mt-2 text-sm font-semibold text-gray-900">No Entries found</h3>
+    <p class="mt-1 text-sm text-gray-500">Get started by creating a new one.</p>
   </div>
 </template>
 

@@ -24,7 +24,7 @@
                   </div>
                 </div>
                 <!-- Entry table-->
-                <EntryTable :entries="entries" class="my-8 border" />
+                <EntryTable :entries="entries"/>
             </div>
 
             <!-- Pagination -->
