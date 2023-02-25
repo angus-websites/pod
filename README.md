@@ -5,6 +5,15 @@
 POD (placement online diary) is an application to allow students to keep track of their placement year.
 
 
+## Tech Stack
+
+**Client:** Vue.js, InertiaJS, TailwindCSS
+
+**Server:** PHP (Laravel framework)
+
+**Database:** MYSQL, MongoDB
+
+
 ## Run Locally
 
 Clone the project
