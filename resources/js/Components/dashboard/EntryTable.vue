@@ -16,13 +16,6 @@
                     <span class="truncate">{{ entry.template.name }}</span>
                   </p>
                 </div>
-                <div class="hidden md:block">
-                  <div>
-                    <p class="text-sm text-gray-900">
-                      <time :datetime="entry.data.date_started">{{ entry.data.date_started }}</time>
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
             <div>
