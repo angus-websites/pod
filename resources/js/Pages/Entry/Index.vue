@@ -56,6 +56,7 @@ import EntryTable from "@/Components/dashboard/EntryTable.vue";
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import Heading1 from "@/Components/headings/Heading1.vue";
 import {MagnifyingGlassIcon} from '@heroicons/vue/20/solid';
+import throttle from 'lodash/throttle'
 
 export default {
     components: {
@@ -76,13 +77,11 @@ export default {
         console.log(this.entries["data"])
     },
     watch: {
-      searchQuery(query, old){
-        // Get a request from the server, the options...
-        // PreserveState: will ensure the state of the page is not changed
-        // replace: ensure the back history in the browser does not fill up
-        this.$inertia.get('/entries',{ search: this.searchQuery}, {preserveState: true, replace: true })
-        console.log(query)
-      }
+        searchQuery: {
+            handler: throttle(function (value) {
+              this.$inertia.get('/entries',{ search: value}, {preserveState: true, replace: true })
+            }, 150),
+        }
     },
 
 }
