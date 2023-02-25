@@ -13,15 +13,31 @@
                         <span>New Entry</span>
                     </PrimaryButton>
                 </div>
-                <!-- Search section -->
-                <div class="w-full max-w-lg lg:max-w-xs my-5">
-                  <label for="search" class="sr-only">Search</label>
-                  <div class="relative text-gray-400 focus-within:text-gray-500">
-                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <MagnifyingGlassIcon class="h-5 w-5" aria-hidden="true" />
+
+                <!-- Search & Filter bar -->
+                <div class="flex flex-col md:flex-row my-5 md:items-end md:space-x-5 space-y-5">
+                    <div>
+                        <!-- Filter bar -->
+                        <label for="templateType" class="block text-sm font-medium text-gray-700">Template</label>
+                        <div class="mt-1">
+                          <select v-model="form.template" id="templateType" name="templateType" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                            <option :value="null" label="All">All</option>
+                            <option v-for="template in templates" :value="template._id" :key="template._id" :label="template.name">{{template.name}}</option>
+                          </select>
+                        </div>
                     </div>
-                    <input v-model="searchQuery" id="search" class="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm" placeholder="Search" type="search" name="search" />
-                  </div>
+                    <div class="flex-1">
+                        <!-- Search section -->
+                        <div class="w-full">
+                          <label for="search" class="sr-only">Search</label>
+                          <div class="relative text-gray-400 focus-within:text-gray-500">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                              <MagnifyingGlassIcon class="h-5 w-5" aria-hidden="true" />
+                            </div>
+                            <input v-model="form.search" id="search" class="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm" placeholder="Search" type="search" name="search" />
+                          </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Entry table-->
                 <EntryTable :entries="entries"/>
@@ -57,6 +73,7 @@ import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import Heading1 from "@/Components/headings/Heading1.vue";
 import {MagnifyingGlassIcon} from '@heroicons/vue/20/solid';
 import throttle from 'lodash/throttle'
+import pickBy from 'lodash/pickBy'
 
 export default {
     components: {
@@ -67,19 +84,25 @@ export default {
         PrimaryButton,
         MagnifyingGlassIcon,
     },
-    props: ["entries", "filters"],
+    props: ["entries", "templates", "filters"],
     data() {
       return {
-        searchQuery: this.filters.search,
+        form: {
+          search: this.filters.search,
+          template: this.filters.template ?? null,
+        },
       };
     },
     mounted() {
         console.log(this.entries["data"])
     },
     watch: {
-        searchQuery: {
+        form: {
+            deep: true,
             handler: throttle(function (value) {
-              this.$inertia.get('/entries',{ search: value}, {preserveState: true, replace: true })
+              this.$inertia.get('/entries',
+                pickBy(this.form),
+                {preserveState: true, replace: true })
             }, 150),
         }
     },

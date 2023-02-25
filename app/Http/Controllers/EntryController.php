@@ -31,13 +31,18 @@ class EntryController extends Controller
     public function index(Request $request)
     {
 
-        $filters = $request->only(['search']);
+        $filters = $request->only(['search', 'template']);
         $entries =  EntryResource::collection(
-            Auth::user()->entries()->when($request->input('search'), function($query, $search){
+            Auth::user()->entries()
+            ->when($request->input('search'), function($query, $search){
                 return $query->where('data.title', 'like', "%${search}%");
-            })->paginate(15)->withQueryString()
-        );
-        return Inertia::render('Entry/Index', ['entries' => $entries, 'filters' => $filters]);
+            })->when($request->input('template'), function($query, $template){
+                return $query->where('template_id', '=', $template);
+            })->paginate(15)->withQueryString());
+
+        $templates = Template::get(['id', 'name'])->toArray();
+
+        return Inertia::render('Entry/Index', ['entries' => $entries, 'filters' => $filters, "templates" => $templates]);
     }
 
     /**
