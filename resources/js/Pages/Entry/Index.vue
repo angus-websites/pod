@@ -66,18 +66,21 @@ export default {
         PrimaryButton,
         MagnifyingGlassIcon,
     },
+    props: ["entries", "filters"],
     data() {
       return {
-        searchQuery: 'Am I truly an alligator?'  
+        searchQuery: this.filters.search,
       };
     },
-    props: ["entries"],
     mounted() {
         console.log(this.entries["data"])
     },
     watch: {
       searchQuery(query, old){
-        this.$inertia.get('/entries', pickBy(query), { preserveState: true })
+        // Get a request from the server, the options...
+        // PreserveState: will ensure the state of the page is not changed
+        // replace: ensure the back history in the browser does not fill up
+        this.$inertia.get('/entries',{ search: this.searchQuery}, {preserveState: true, replace: true })
         console.log(query)
       }
     },
