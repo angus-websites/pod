@@ -75,10 +75,10 @@ function submitForm(){
      */
     
     // Update
-    form.put(route('entries.update', props.entry.id))
-
-    // Switch tabs
-    emit('tabToggle')
+    form.put(route('entries.update', props.entry.id), {
+        // If we succeed, switch tabs
+        onSuccess: () => emit('tabToggle'),
+    })
 
 }
 </script>

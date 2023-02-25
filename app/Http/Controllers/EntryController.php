@@ -67,12 +67,12 @@ class EntryController extends Controller
         // Extract the validation rules
         $template->getValidator($request->content)->validate();
 
-        // Convert content into data
-        $request->merge(['data' => $request->content, 'title' => $request->content['title']]);
+        // Convert the array content into "data"
+        $input = ["data" => $request->content];
 
         // Create the new Entry
         $new_entry = new Entry();
-        $new_entry->fill($request->all());
+        $new_entry->fill($input);
         $new_entry->user_id = Auth::user()->id;
         $new_entry->template_id = $template->id;
         $new_entry->save();
@@ -123,10 +123,10 @@ class EntryController extends Controller
         $template = $entry->template();        
 
         // Extract the validation rules & run
-        $template->getValidator(array_merge($request->content, ["title" => $request->title]))->validate();
+        $template->getValidator($request->content)->validate();
 
-        // Update the model
-        $input = array_merge(["data" => $request->content], ["title" => $request->title]);
+        // Convert the array content into "data"
+        $input = ["data" => $request->content];
 
         $entry->fill($input)->save();
 
