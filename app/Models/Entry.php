@@ -18,7 +18,6 @@ class Entry extends Model
     protected $connection = 'mongodb';
     protected $fillable = ['title','data'];
 
-
     /**
      * Fetch the user
      * that this Entry belongs

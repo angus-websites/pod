@@ -25,7 +25,7 @@ class TemplateSeeder extends Seeder
 
         // General template
         Template::create([
-          'name' => "General template",
+          'name' => "General",
           'description' => "A normal diary entry",
           'fields' => [
             [
@@ -54,7 +54,7 @@ class TemplateSeeder extends Seeder
 
         // Training template
         Template::create([
-          'name' => "Training template",
+          'name' => "Training",
           'description' => "For when you have completed some training",
           'fields' => [
             [

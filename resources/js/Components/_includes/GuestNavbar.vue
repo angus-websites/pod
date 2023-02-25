@@ -13,65 +13,6 @@
                     <Bars3Icon class="h-6 w-6" aria-hidden="true" />
                 </PopoverButton>
             </div>
-            <PopoverGroup as="nav" class="hidden space-x-10 md:flex">
-                <Popover class="relative" v-slot="{ open }">
-                    <PopoverButton :class="[open ? 'text-gray-900' : 'text-gray-500', 'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2']">
-                        <span>Solutions</span>
-                        <ChevronDownIcon :class="[open ? 'text-gray-600' : 'text-gray-400', 'ml-2 h-5 w-5 group-hover:text-gray-500']" aria-hidden="true" />
-                    </PopoverButton>
-
-
-                    <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">
-                        <PopoverPanel class="absolute z-10 -ml-4 mt-3 w-screen max-w-md transform lg:left-1/2 lg:ml-0 lg:max-w-2xl lg:-translate-x-1/2">
-                            <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                                <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
-                                    <a v-for="solution in solutions" :key="solution.name" :href="solution.href" class="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
-                                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-emerald-500 text-white sm:h-12 sm:w-12">
-                                            <component :is="solution.icon" class="h-6 w-6" aria-hidden="true" />
-                                        </div>
-                                        <div class="ml-4">
-                                            <p class="text-base font-medium text-gray-900">{{ solution.name }}</p>
-                                            <p class="mt-1 text-sm text-gray-500">{{ solution.description }}</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="bg-gray-50 p-5 sm:p-8">
-                                    <a href="#" class="-m-3 flow-root rounded-md p-3 hover:bg-gray-100">
-                                        <div class="flex items-center">
-                                            <div class="text-base font-medium text-gray-900">Enterprise</div>
-                                            <span class="ml-3 inline-flex items-center rounded-full bg-emerald-100 px-3 py-0.5 text-xs font-medium leading-5 text-emerald-800">New</span>
-                                        </div>
-                                        <p class="mt-1 text-sm text-gray-500">Empower your entire team with even more advanced tools.</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </PopoverPanel>
-                    </transition>
-                </Popover>
-
-                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">Pricing</a>
-                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">Docs</a>
-
-                <Popover class="relative" v-slot="{ open }">
-                    <PopoverButton :class="[open ? 'text-gray-900' : 'text-gray-500', 'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2']">
-                        <span>More</span>
-                        <ChevronDownIcon :class="[open ? 'text-gray-600' : 'text-gray-400', 'ml-2 h-5 w-5 group-hover:text-gray-500']" aria-hidden="true" />
-                    </PopoverButton>
-
-                    <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">
-                        <PopoverPanel class="absolute left-1/2 z-10 mt-3 w-screen max-w-xs -translate-x-1/2 transform px-2 sm:px-0">
-                            <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                                <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                                    <a v-for="resource in resources" :key="resource.name" :href="resource.href" class="-m-3 block rounded-md p-3 hover:bg-gray-50">
-                                        <p class="text-base font-medium text-gray-900">{{ resource.name }}</p>
-                                        <p class="mt-1 text-sm text-gray-500">{{ resource.description }}</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </PopoverPanel>
-                    </transition>
-                </Popover>
-            </PopoverGroup>
             <div v-if="$page.props.auth.user" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
                 <NeutralButton :isLink="true" :href="route('dashboard')">
                     Dashboard
@@ -90,49 +31,18 @@
         <transition enter-active-class="duration-200 ease-out" enter-from-class="opacity-0 scale-95" enter-to-class="opacity-100 scale-100" leave-active-class="duration-100 ease-in" leave-from-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-95">
             <PopoverPanel focus class="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden">
                 <div class="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-                    <div class="px-5 pt-5 pb-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <TextLogo />
-                            </div>
-                            <div class="-mr-2">
-                                <PopoverButton class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
-                                    <span class="sr-only">Close menu</span>
-                                    <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-                                </PopoverButton>
-                            </div>
-                        </div>
-                        <div class="mt-6">
-                            <nav class="grid grid-cols-1 gap-7">
-                                <a v-for="solution in solutions" :key="solution.name" :href="solution.href" class="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50">
-                                    <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-emerald-500 text-white">
-                                        <component :is="solution.icon" class="h-6 w-6" aria-hidden="true" />
-                                    </div>
-                                    <div class="ml-4 text-base font-medium text-gray-900">{{ solution.name }}</div>
-                                </a>
-                            </nav>
-                        </div>
-                    </div>
                     <div class="py-6 px-5">
-                        <div class="grid grid-cols-2 gap-4">
-                            <a href="#" class="text-base font-medium text-gray-900 hover:text-gray-700">Pricing</a>
-
-                            <a href="#" class="text-base font-medium text-gray-900 hover:text-gray-700">Docs</a>
-
-                            <a href="#" class="text-base font-medium text-gray-900 hover:text-gray-700">Enterprise</a>
-                            <a v-for="resource in resources" :key="resource.name" :href="resource.href" class="text-base font-medium text-gray-900 hover:text-gray-700">{{ resource.name }}</a>
-                        </div>
                         <div class="mt-6">
                             <div v-if="$page.props.auth.user">
-                                <Link :href="route('dashboard')" class="flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-emerald-700">Dashboard</Link>
+                                <Link :href="route('dashboard')" class="flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-600">Dashboard</Link>
                             </div>
                             <div v-else>
 
-                                <Link :href="route('register')" class="flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-emerald-700">Sign up</Link>
+                                <Link :href="route('register')" class="flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-primary-600">Sign up</Link>
                                 <p class="mt-6 text-center text-base font-medium text-gray-500">
                                     Existing customer?
                                     {{ ' ' }}
-                                    <Link :href="route('login')" class="text-emerald-600 hover:text-emerald-500">Sign in</Link>
+                                    <Link :href="route('login')" class="text-primary hover:text-primary-600">Sign in</Link>
                                 </p>
                             </div>
                         </div>

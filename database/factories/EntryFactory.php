@@ -39,8 +39,8 @@ class EntryFactory extends Factory
 
                 $entry_content = [
                     'template_id' => $training_template,
-                    'title'=>$name_of_training,
                     'data' => [
+                        'title'=>$name_of_training,
                         "date_started" => $start,
                         'date_completed'=>$end,
                         'what_i_learned'=>$what_i_learned
@@ -62,8 +62,8 @@ class EntryFactory extends Factory
 
                 $entry_content = [
                     'template_id'=>$general_template,
-                    'title'=>$title,
                     'data' => [
+                        'title'=>$title,
                         'content'=>$content,
                         'date'=>$this->faker->date
                     ]

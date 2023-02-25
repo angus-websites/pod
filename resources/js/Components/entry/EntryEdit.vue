@@ -53,7 +53,6 @@ const emit = defineEmits(['tabToggle'])
 
 // We use content instead of 'data' as it seems to be a keyword
 const form = useForm({
-    title: props.entry.title,
     content: props.entry.data,
 })
 

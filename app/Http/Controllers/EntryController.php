@@ -28,10 +28,16 @@ class EntryController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function index()
+    public function index(Request $request)
     {
-        $entries =  EntryResource::collection(Auth::user()->entries()->paginate(15));
-        return Inertia::render('Entry/Index', ['entries' => $entries]);
+
+        $filters = $request->only(['search']);
+        $entries =  EntryResource::collection(
+            Auth::user()->entries()->when($request->input('search'), function($query, $search){
+                return $query->where('data.title', 'like', "%${search}%");
+            })->paginate(15)->withQueryString()
+        );
+        return Inertia::render('Entry/Index', ['entries' => $entries, 'filters' => $filters]);
     }
 
     /**

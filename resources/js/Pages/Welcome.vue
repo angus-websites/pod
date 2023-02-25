@@ -9,7 +9,7 @@
                 </h1>
                 <p class="mx-auto mt-3 max-w-md text-sm text-gray-500 sm:text-md md:mt-5 md:max-w-3xl md:text-xl">Make sure you don't forget anything you did on your placement year, record skills, training or anything you want</p>
                 <div class="mx-auto mt-5 max-w-md sm:flex sm:justify-center md:mt-8">
-                    <PrimaryButton size="l" href="#" :isLink=true class="w-full">
+                    <PrimaryButton size="l" :href="route('register')" :isLink=true class="w-full">
                         Get Started
                     </PrimaryButton>
                     <NeutralButton size="l" href="#" :isLink=true class="w-full mt-4 sm:mt-0 sm:ml-4">
