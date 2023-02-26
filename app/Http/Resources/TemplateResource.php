@@ -20,7 +20,7 @@ class TemplateResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'icon' => $this->icon,
+            'icon' => $this->getIconPath(),
             'fields' => $this->fields,
         ];
     }

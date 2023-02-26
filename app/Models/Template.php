@@ -35,4 +35,8 @@ class Template extends Model
         // Run the validation
         return Validator::make($request_data, $rules);
     }
+
+    public function getIconPath(){
+        return "/assets/images/templates/$this->icon";
+    }
 }
