@@ -14,7 +14,6 @@
                 </template>
             </div>
 
-            {{ form }}
             <!-- Save button -->
             <div class="mt-5">
                 <PrimaryButton type="submit">Save</PrimaryButton>
