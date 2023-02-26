@@ -10,8 +10,8 @@
               <button  @click="switchTab(tabs[0])" class="bg-red-100 text-red-700 hover:bg-red-200 px-3 py-2 font-medium text-sm rounded-md">Cancel</button>
             </div>
 
-            <div v-else>
-            <!-- Edit button -->
+            <div v-else-if="props.can.editEntry">
+              <!-- Edit button -->
               <button  @click="switchTab(tabs[1])" class="text-gray-500 bg-blue-100 hover:text-blue-700 hover:bg-blue-200 px-3 py-2 font-medium text-sm rounded-md">Edit</button>
             </div>
         </div>
@@ -36,7 +36,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { ChevronLeftIcon } from '@heroicons/vue/20/solid'
 
 
-const props = defineProps(['entry', 'can'])
+const props = defineProps(['entry', 'can', 'template'])
 
 // Data
 let readView = markRaw(EntryView); 
@@ -74,9 +74,9 @@ function tabToggle(){
 // Computed
 const currentProperties = computed(() => {
   if (currentView.value == readView){
-    return {"entry":  props.entry}
+    return {"entry":  props.entry, "template": props.template}
   }
-  return {"entry":  props.entry, "template": props.entry.template, "can": props.can}
+  return {"entry":  props.entry, "template": props.template, "can": props.can}
 })
 
 

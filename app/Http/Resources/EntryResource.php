@@ -16,11 +16,9 @@ class EntryResource extends JsonResource
      */
     public function toArray($request)
     {
-        $template = new TemplateResource($this->template());
-
         return [
             'id' => $this->id,
-            'template' => $template,
+            'template' => $this->template_id,
             'title' => $this->data['title'],
             'data' => $this->data,
         ];

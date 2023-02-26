@@ -6,6 +6,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TemplateResource extends JsonResource
 {
+    // Remove the "data" top level wrap
+    public static $wrap = null;
     /**
      * Transform the resource into an array.
      *
@@ -18,6 +20,7 @@ class TemplateResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'icon' => $this->getIconPath(),
             'fields' => $this->fields,
         ];
     }

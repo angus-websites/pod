@@ -31,13 +31,18 @@ class EntryController extends Controller
     public function index(Request $request)
     {
 
-        $filters = $request->only(['search']);
+        $filters = $request->only(['search', 'template']);
         $entries =  EntryResource::collection(
-            Auth::user()->entries()->when($request->input('search'), function($query, $search){
+            Auth::user()->entries()
+            ->when($request->input('search'), function($query, $search){
                 return $query->where('data.title', 'like', "%${search}%");
-            })->paginate(15)->withQueryString()
-        );
-        return Inertia::render('Entry/Index', ['entries' => $entries, 'filters' => $filters]);
+            })->when($request->input('template'), function($query, $template){
+                return $query->where('template_id', '=', $template);
+            })->paginate(15)->withQueryString());
+
+        // Fetch the templates (->all() removes the 'data' key)
+        $templates = TemplateResource::collection(Template::all())->all();
+        return Inertia::render('Entry/Index', ['entries' => $entries, 'filters' => $filters, "templates" => $templates]);
     }
 
     /**
@@ -48,7 +53,7 @@ class EntryController extends Controller
     public function create()
     {
         $new_entry = new Entry();
-        $templates = Template::all();
+        $templates = TemplateResource::collection(Template::all())->all();
         return Inertia::render('Entry/Create', ["new_entry" => $new_entry, "templates" =>  $templates]);
     }
 
@@ -67,12 +72,12 @@ class EntryController extends Controller
         // Extract the validation rules
         $template->getValidator($request->content)->validate();
 
-        // Convert content into data
-        $request->merge(['data' => $request->content, 'title' => $request->content['title']]);
+        // Convert the array content into "data"
+        $input = ["data" => $request->content];
 
         // Create the new Entry
         $new_entry = new Entry();
-        $new_entry->fill($request->all());
+        $new_entry->fill($input);
         $new_entry->user_id = Auth::user()->id;
         $new_entry->template_id = $template->id;
         $new_entry->save();
@@ -91,10 +96,15 @@ class EntryController extends Controller
     public function show(Entry $entry){
 
         $ent = new EntryResource($entry);
+        $template = new TemplateResource($entry->template());
 
         return Inertia::render('Entry/View', [
             'entry' => $ent,
-            'can' => ['deleteEntry' => Auth::user()->can('delete', $entry)],
+            'can' => [
+                'deleteEntry' => Auth::user()->can('delete', $entry),
+                'editEntry' => Auth::user()->can('update', $entry),
+            ],
+            'template' => $template,
         ]);
     }
 
@@ -123,10 +133,10 @@ class EntryController extends Controller
         $template = $entry->template();        
 
         // Extract the validation rules & run
-        $template->getValidator(array_merge($request->content, ["title" => $request->title]))->validate();
+        $template->getValidator($request->content)->validate();
 
-        // Update the model
-        $input = array_merge(["data" => $request->content], ["title" => $request->title]);
+        // Convert the array content into "data"
+        $input = ["data" => $request->content];
 
         $entry->fill($input)->save();
 

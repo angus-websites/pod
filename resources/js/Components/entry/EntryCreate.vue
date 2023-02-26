@@ -14,6 +14,7 @@
                 </template>
             </div>
 
+            {{ form }}
             <!-- Save button -->
             <div class="mt-5">
                 <PrimaryButton type="submit">Save</PrimaryButton>
@@ -66,7 +67,7 @@ function submitForm(){
     // Only send the template id in the request
     form.transform((data) => ({
         ...data,
-        template: data.template._id,
+        template: data.template.id,
     })).post(route('entries.store'))
 
 

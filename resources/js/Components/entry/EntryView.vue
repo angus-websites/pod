@@ -2,7 +2,7 @@
 <template>
 
     <div class="flex flex-col space-y-5">
-      <div v-for="item in entry.template.fields">
+      <div v-for="item in template.fields">
         <p v-if="entry.data[item.id]"><u>{{item.label}}:</u> {{entry.data[item.id]}}</p>
         <br>
       </div>
@@ -18,6 +18,9 @@ import {
 const props = defineProps({
     entry: {
         type: Object,
+    },
+    template: {
+      type: Object
     }
 })
 </script>

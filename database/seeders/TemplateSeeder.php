@@ -27,6 +27,7 @@ class TemplateSeeder extends Seeder
         Template::create([
           'name' => "General",
           'description' => "A normal diary entry",
+          'icon' => 'general.svg',
           'fields' => [
             [
                 'id' => 'title',
@@ -56,6 +57,7 @@ class TemplateSeeder extends Seeder
         Template::create([
           'name' => "Training",
           'description' => "For when you have completed some training",
+          'icon' => 'training.svg',
           'fields' => [
             [
                 'id' => 'title',
@@ -80,10 +82,41 @@ class TemplateSeeder extends Seeder
             ],
             [
                 'id' => 'what_i_learned',
-                'label' => 'What did I learn?',
+                'label' => 'What did you learn?',
                 'type' => 'textarea',
                 'required' => true,
-                'validation' => ['required', 'max:3000'],
+                'validation' => ['required', 'max:5000'],
+            ],
+
+          ],
+        ]);
+
+        // Skill template
+        Template::create([
+          'name' => "New Skill",
+          'description' => "For when you have learned a new skill",
+          'icon' => 'skill.svg',
+          'fields' => [
+            [
+                'id' => 'title',
+                'label' => 'The new skill you learned',
+                'type' => 'text',
+                'required' => true,
+                'validation' => ['required', 'max:100'],
+            ],
+            [
+                'id' => 'date_learned',
+                'label' => 'When did you learn this new skill?',
+                'type' => 'date',
+                'required' => false,
+                'validation' => ['date'],
+            ],
+            [
+                'id' => 'what_i_learned',
+                'label' => 'How did you learn this skill?',
+                'type' => 'textarea',
+                'required' => true,
+                'validation' => ['required', 'max:5000'],
             ],
 
           ],

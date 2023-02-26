@@ -4,7 +4,7 @@
         <div class="flex flex-col space-y-5">
 
             <!-- Fields in template -->
-            <div v-for="field in entry.template.fields">
+            <div v-for="field in template.fields">
                 <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
                 <div class="mt-1">
                     <component :is="TemplateInputs[field.type]" :key="field.id" :field="field" v-model.lazy="form.content[field.id]"></component>
@@ -43,6 +43,9 @@ const props = defineProps({
     entry: {
         type: Object,
     },
+    template: {
+        type: Object
+    },
     can: {
         type:  Object
     }
@@ -75,10 +78,10 @@ function submitForm(){
      */
     
     // Update
-    form.put(route('entries.update', props.entry.id))
-
-    // Switch tabs
-    emit('tabToggle')
+    form.put(route('entries.update', props.entry.id), {
+        // If we succeed, switch tabs
+        onSuccess: () => emit('tabToggle'),
+    })
 
 }
 </script>
