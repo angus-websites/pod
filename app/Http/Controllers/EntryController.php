@@ -40,8 +40,8 @@ class EntryController extends Controller
                 return $query->where('template_id', '=', $template);
             })->paginate(15)->withQueryString());
 
-        $templates = Template::get(['id', 'name'])->toArray();
-
+        // Fetch the templates (->all() removes the 'data' key)
+        $templates = TemplateResource::collection(Template::all())->all();
         return Inertia::render('Entry/Index', ['entries' => $entries, 'filters' => $filters, "templates" => $templates]);
     }
 
@@ -53,7 +53,7 @@ class EntryController extends Controller
     public function create()
     {
         $new_entry = new Entry();
-        $templates = Template::all();
+        $templates = TemplateResource::collection(Template::all())->all();
         return Inertia::render('Entry/Create', ["new_entry" => $new_entry, "templates" =>  $templates]);
     }
 
@@ -96,10 +96,15 @@ class EntryController extends Controller
     public function show(Entry $entry){
 
         $ent = new EntryResource($entry);
+        $template = new TemplateResource($entry->template());
 
         return Inertia::render('Entry/View', [
             'entry' => $ent,
-            'can' => ['deleteEntry' => Auth::user()->can('delete', $entry)],
+            'can' => [
+                'deleteEntry' => Auth::user()->can('delete', $entry),
+                'editEntry' => Auth::user()->can('update', $entry),
+            ],
+            'template' => $template,
         ]);
     }
 

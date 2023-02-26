@@ -22,7 +22,7 @@
                         <div class="mt-1">
                           <select v-model="form.template" id="templateType" name="templateType" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                             <option :value="null" label="All">All</option>
-                            <option v-for="template in templates" :value="template._id" :key="template._id" :label="template.name">{{template.name}}</option>
+                            <option v-for="template in templates" :value="template.id" :key="template.id" :label="template.name">{{template.name}}</option>
                           </select>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <!-- Entry table-->
-                <EntryTable :entries="entries"/>
+                <EntryTable :entries="entries" :templates="templates"/>
             </div>
 
             <!-- Pagination -->
