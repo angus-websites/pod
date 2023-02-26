@@ -16,8 +16,8 @@
 
                 <!-- Search & Filter bar -->
                 <div class="flex flex-col md:flex-row my-5 md:items-end md:space-x-5 space-y-5">
+                    <!-- Filter bar -->
                     <div>
-                        <!-- Filter bar -->
                         <label for="templateType" class="block text-sm font-medium text-gray-700">Template</label>
                         <div class="mt-1">
                           <select v-model="form.template" id="templateType" name="templateType" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
@@ -26,18 +26,26 @@
                           </select>
                         </div>
                     </div>
-                    <div class="flex-1">
-                        <!-- Search section -->
+                    <!-- Search section -->
+                    <div class="flex-1 flex flex-col md:flex-row md:space-x-3 md:space-y-0 space-y-3 items-center">
+                        <!-- Search -->
                         <div class="w-full">
                           <label for="search" class="sr-only">Search</label>
                           <div class="relative text-gray-400 focus-within:text-gray-500">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                               <MagnifyingGlassIcon class="h-5 w-5" aria-hidden="true" />
                             </div>
-                            <input v-model="form.search" id="search" class="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm" placeholder="Search" type="search" name="search" />
+                            <input v-model="form.search" id="search" class="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" placeholder="Search" type="search" name="search" />
                           </div>
                         </div>
+
+                        <!-- Reset button -->
+                        <div class="text-center">
+                          <button @click="reset" type="button" class="font-medium text-sm text-gray-700 hover:underline">Reset</button>
+                        </div>
+
                     </div>
+                    
                 </div>
                 <!-- Entry table-->
                 <EntryTable :entries="entries" :templates="templates"/>
@@ -109,6 +117,16 @@ export default {
             }, 150),
         }
     },
+    methods: {
+      reset: function (event) {
+        /**
+         * Reset the filter & search
+         */
+        this.form.template = null;
+        this.form.search = "";
+        
+      }
+    }
 
 }
 </script>
