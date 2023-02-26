@@ -9,7 +9,7 @@
                 <div>
                   <p class="truncate text-sm font-medium text-indigo-600">{{ entry.title }}</p>
                   <p class="mt-2 flex items-center text-sm text-gray-500">
-                    <img :src="getTemplatIcon(entry.template)" alt="" aria-hidden="true" class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400">
+                    <img v-if="getTemplatIcon(entry.template)" :src="getTemplatIcon(entry.template)" alt="" aria-hidden="true" class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400">
                     <span class="truncate">{{ getTemplateName(entry.template)}}</span>
                   </p>
                 </div>

@@ -37,6 +37,12 @@ class Template extends Model
     }
 
     public function getIconPath(){
-        return "/assets/images/templates/$this->icon";
+        /**
+         * Get the path to where the
+         * icon of this template is located
+         */
+        if ($this->icon){
+            return "/assets/images/templates/$this->icon";
+        }
     }
 }
