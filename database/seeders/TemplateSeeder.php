@@ -27,6 +27,7 @@ class TemplateSeeder extends Seeder
         Template::create([
           'name' => "General",
           'description' => "A normal diary entry",
+          'icon' => 'general.svg',
           'fields' => [
             [
                 'id' => 'title',
@@ -56,6 +57,7 @@ class TemplateSeeder extends Seeder
         Template::create([
           'name' => "Training",
           'description' => "For when you have completed some training",
+          'icon' => 'training.svg',
           'fields' => [
             [
                 'id' => 'title',
@@ -93,6 +95,7 @@ class TemplateSeeder extends Seeder
         Template::create([
           'name' => "New Skill",
           'description' => "For when you have learned a new skill",
+          'icon' => 'skill.svg',
           'fields' => [
             [
                 'id' => 'title',
