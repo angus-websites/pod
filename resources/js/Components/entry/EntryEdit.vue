@@ -33,11 +33,12 @@ import { toRef, toRefs } from 'vue'
 import TemplateText from "@/Components/template/TemplateText.vue";
 import TemplateDate from "@/Components/template/TemplateDate.vue";
 import TemplateTextarea from "@/Components/template/TemplateTextarea.vue";
+import TemplateRaw from "@/Components/template/TemplateRaw.vue";
 
 
 
 // Components
-const TemplateInputs = {"text": TemplateText, "date": TemplateDate, "textarea": TemplateTextarea};
+const TemplateInputs = {"text": TemplateText,"date": TemplateDate, "textarea": TemplateTextarea, "raw": TemplateRaw};
 
 const props = defineProps({
     entry: {

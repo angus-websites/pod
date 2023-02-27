@@ -46,7 +46,7 @@ class TemplateSeeder extends Seeder
             [
                 'id' => 'content',
                 'label' => 'Entry content',
-                'type' => 'textarea',
+                'type' => 'raw',
                 'required' => true,
                 'validation' => ['required', 'max:3000'],
             ],
