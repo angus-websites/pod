@@ -7,7 +7,7 @@
             <div class="flex min-w-0 flex-1 items-center">
               <div class="min-w-0 flex-1 md:grid md:grid-cols-2 md:gap-4">
                 <div>
-                  <p class="truncate text-sm font-medium text-indigo-600">{{ entry.title }}</p>
+                  <p class="truncate text-sm font-medium text-secondary">{{ entry.title }}</p>
                   <p class="mt-2 flex items-center text-sm text-gray-500">
                     <img v-if="getTemplatIcon(entry.template)" :src="getTemplatIcon(entry.template)" alt="" aria-hidden="true" class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400">
                     <span class="truncate">{{ getTemplateName(entry.template)}}</span>

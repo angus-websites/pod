@@ -14,6 +14,7 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
+        
         // Render the admin dashboard
         if (Auth::user()->isAdmin()){
             return Inertia::render('Admin/Dashboard');

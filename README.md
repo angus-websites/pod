@@ -202,6 +202,9 @@ Run Vite
 
 Visit [Localhost](http://localhost/)
 
+## Tips
+
+When updating certain fields in the `.env` file when using Laravel Sail, you may need to restart the Docker container for changes to take affect.
 
 ## Demo
 
