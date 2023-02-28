@@ -7,7 +7,7 @@
                 <div class="sm:flex sm:items-end">
                     <div class="sm:flex-auto">
                         <Heading1>Entries</Heading1>
-                        <p class="mt-1 sm:mt-2 text-sm text-gray-700">A list of your entries</p>
+                        <p class="mt-1 sm:mt-2 text-sm text-gray-700">A list of your entries, you can search and filter by template type</p>
                     </div>
                     <PrimaryButton isLink="true" :href="route('entries.create')" class="my-5 sm:my-0">
                         <span>New Entry</span>
