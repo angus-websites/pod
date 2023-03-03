@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
-class FeatureGroupResource extends JsonResource
+class FeatureResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +18,6 @@ class FeatureGroupResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'features' => FeatureResource::collection($this->belongsToMany(Feature::class)->get()),
         ];
     }
 }
