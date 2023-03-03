@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
+use JustSteveKing\Laravel\FeatureFlags\Concerns\HasFeatures;
 
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -21,6 +22,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasFeatures;
 
     protected $connection = 'mysql';
 

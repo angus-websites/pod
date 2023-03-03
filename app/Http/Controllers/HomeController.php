@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+
+use App\Models\User;
+
 use App\Http\Resources\EntryResource;
+use App\Http\Resources\UserResource;
 
 class HomeController extends Controller
 {
@@ -17,11 +21,12 @@ class HomeController extends Controller
         
         // Render the admin dashboard
         if (Auth::user()->isAdmin()){
-            return Inertia::render('Admin/Dashboard');
+            $users = UserResource::collection(User::all()->except(Auth::id()));
+            return Inertia::render('Admin/Dashboard', ["users" => $users]);
         }
         // Render the normal user dashboard
         else{
-            $entries =  EntryResource::collection(Auth::user()->entries()->paginate(15));
+            $entries = EntryResource::collection(Auth::user()->entries()->paginate(15));
             return Inertia::render('Dashboard', ["entries" => $entries]);
         }
 
