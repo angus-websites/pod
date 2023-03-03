@@ -4,8 +4,6 @@
         <PageContainer>
             <Heading1>Admin Dashboard</Heading1>
             <UserTable :users="users.data" />
-
-            <p v-for="user in users">{{user.name}}</p>
         </PageContainer>
     </AppLayout>
 </template>
@@ -18,7 +16,7 @@ import Heading1 from "@/Components/headings/Heading1.vue";
 import UserTable from "@/Components/dashboard/UserTable.vue";
 
 const props = defineProps({
-    users: Object
+    users: Object,
 })
 
 </script>

@@ -11,6 +11,8 @@ use App\Models\Entry;
 use App\Models\Template;
 
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
+use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
+
 
 
 class DevSeeder extends Seeder
@@ -29,6 +31,8 @@ class DevSeeder extends Seeder
         DB::table('feature_feature_group')->truncate();
         DB::table('feature_group_user')->truncate();
         DB::table('feature_user')->truncate();
+        DB::table('features')->truncate();
+
         
         User::truncate();
         Entry::truncate();
@@ -40,14 +44,20 @@ class DevSeeder extends Seeder
         // Admin seed
         $this->call(AdminSeeder::class);
 
+        $streaks =  Feature::create([
+            'name' => 'Use streaks'
+        ]);
+
+        // Create some feature groups
         $groupA = FeatureGroup::create([
             'name' => 'Group A'
         ]);
 
+        $groupA->addFeature($streaks);
+
         $groupB = FeatureGroup::create([
             'name' => 'Group B'
         ]);
-
 
         $featureGroups = [$groupA, $groupB];
 
