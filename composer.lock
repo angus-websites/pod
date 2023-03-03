@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "934a13071c4969a2eade25a4c16c14c2",
+    "content-hash": "4a88a693816d78961c3e5588a1bfefcb",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1431,6 +1431,75 @@
                 }
             ],
             "time": "2023-02-16T12:20:36+00:00"
+        },
+        {
+            "name": "juststeveking/laravel-feature-flags",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JustSteveKing/laravel-feature-flags.git",
+                "reference": "eb4ecc3fb02fbb7fa94878cee92a00f40939aa42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JustSteveKing/laravel-feature-flags/zipball/eb4ecc3fb02fbb7fa94878cee92a00f40939aa42",
+                "reference": "eb4ecc3fb02fbb7fa94878cee92a00f40939aa42",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^9.0.1",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^3.3",
+                "nunomaduro/collision": "^6.0",
+                "orchestra/testbench": "^7.0.0",
+                "pestphp/pest": "^1.21.1",
+                "pestphp/pest-plugin-laravel": "^1.2",
+                "phpunit/phpunit": "^9.3",
+                "vimeo/psalm": "^4.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JustSteveKing\\Laravel\\FeatureFlags\\FeatureFlagsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JustSteveKing\\Laravel\\FeatureFlags\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Steve McDougall",
+                    "email": "juststevemcd@gmail.com"
+                }
+            ],
+            "description": "A simple to use Feature Flags package for Laravel",
+            "homepage": "https://github.com/JustSteveKing/laravel-feature-flags",
+            "keywords": [
+                "JustSteveKing",
+                "laravel",
+                "laravel-feature-flags"
+            ],
+            "support": {
+                "issues": "https://github.com/JustSteveKing/laravel-feature-flags/issues",
+                "source": "https://github.com/JustSteveKing/laravel-feature-flags/tree/1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/JustSteveKing",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-07-21T13:20:03+00:00"
         },
         {
             "name": "laravel/fortify",
