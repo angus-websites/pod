@@ -2,7 +2,7 @@
   <div class="px-4 sm:px-6 lg:px-8">
 
     <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold leading-6 text-gray-900">Features</h1>
+        <h1 class="text-lg font-semibold leading-6 text-gray-900">Features</h1>
         <p class="mt-2 text-sm text-gray-700">All the features of the application</p>
     </div>
 
