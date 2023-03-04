@@ -21,9 +21,14 @@
             <tbody class="divide-y divide-gray-200">
               <tr v-for="feature in features" :key="feature.id">
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ feature.name }}</td>
-                <td v-for="group in featureGroups" class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                  <span v-if="featureInGroup(feature, group)" class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">True</span>
-                  <span v-else class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800">False</span>
+                <td v-for="group in featureGroups" class="whitespace-nowrap py-4 px-3 text-sm ">
+                  <template v-if="featureInGroup(feature, group)">
+                    <span v-if="feature.active" class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium ">
+                      <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <span v-else class="inline-flex items-center rounded-full bg-cyan-100 px-2.5 py-0.5 text-xs font-medium text-cyan-800"><CheckIcon class="h-5 w-5" aria-hidden="true"/></span>
+                  </template>
+                  <span v-else class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800"><XMarkIcon class="h-5 w-5" aria-hidden="true"/></span>
                 </td>
               </tr>
             </tbody>
@@ -35,6 +40,10 @@
 </template>
 
 <script setup>
+  import { CheckIcon } from '@heroicons/vue/20/solid'
+  import { XMarkIcon } from '@heroicons/vue/20/solid'
+  import { ExclamationTriangleIcon } from '@heroicons/vue/20/solid'
+
   const props = defineProps({
       featureGroups: Object,
       features: Object,

@@ -27,7 +27,7 @@ class FeatureSeeder extends Seeder
 
         $ranked = Feature::create([
             'name' => 'Ranked',
-            'description' => 'Similar to the leaderboard but users can see what position they rank compared to everyone else'
+            'description' => 'Similar to the leaderboard but users can only see what position they rank compared to everyone else'
         ]);
 
         $streaks =  Feature::create([
@@ -46,6 +46,12 @@ class FeatureSeeder extends Seeder
             'description' => 'Users unlock various achievements & digital awards for completing certain tasks in the app'
         ]);
 
+        $feedback =  Feature::create([
+            'name' => 'Feedback',
+            'active' => false,
+            'description' => 'Users can provide feedback on their experience using the app'
+        ]);
+
         // ----- Seed our groups -----
 
         // Group A
@@ -56,6 +62,8 @@ class FeatureSeeder extends Seeder
         ]);
         $groupA->addFeature($streaks);
         $groupA->addFeature($achievements);
+        $groupA->addFeature($feedback);
+
 
         // Group B
         $groupB = FeatureGroup::create([
@@ -65,6 +73,7 @@ class FeatureSeeder extends Seeder
         ]);
         $groupB->addFeature($leaderboard);
         $groupB->addFeature($totalWords);
+        $groupB->addFeature($feedback);
 
         // Group C
         $groupC = FeatureGroup::create([
@@ -75,6 +84,7 @@ class FeatureSeeder extends Seeder
         $groupC->addFeature($leaderboard);
         $groupC->addFeature($totalWords);
         $groupC->addFeature($streaks);
+        $groupC->addFeature($feedback);
 
         // Group D
         $groupD = FeatureGroup::create([
@@ -84,6 +94,7 @@ class FeatureSeeder extends Seeder
         ]);
         $groupD->addFeature($totalWords);
         $groupD->addFeature($achievements);
+        $groupD->addFeature($feedback);
 
         // Group E
         $groupE = FeatureGroup::create([
@@ -94,5 +105,15 @@ class FeatureSeeder extends Seeder
         $groupE->addFeature($ranked);
         $groupE->addFeature($streaks);
         $groupE->addFeature($totalWords);
+        $groupE->addFeature($feedback);
+
+        // Group F
+        $groupF = FeatureGroup::create([
+            'name' => 'Group F',
+            'bg' => '#717171',
+            'fg' => '#FFFFFF',
+        ]);
+        $groupF->addFeature($feedback);
+
     }
 }

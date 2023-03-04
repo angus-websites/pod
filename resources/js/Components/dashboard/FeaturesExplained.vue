@@ -12,12 +12,19 @@
               <tr>
                 <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Name</th>
                 <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Description</th>
+                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Active?</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
               <tr v-for="feature in features" :key="feature.id">
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ feature.name }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ feature.description }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                  <span v-if="isFeatureActive(feature)" class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                    <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span v-else class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800"><XMarkIcon class="h-5 w-5" aria-hidden="true"/></span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -28,7 +35,16 @@
 </template>
 
 <script setup>
+  import { CheckIcon } from '@heroicons/vue/20/solid'
+  import { XMarkIcon } from '@heroicons/vue/20/solid'
+  
   const props = defineProps({
       features: Object
   })
+
+  function isFeatureActive(feature){
+    if (feature.active === true){
+      return true
+    }
+  }
 </script>
