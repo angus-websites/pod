@@ -22,13 +22,18 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-        
+
         // Render the admin dashboard
         if (Auth::user()->isAdmin()){
             $users = UserResource::collection(User::all()->except(Auth::id()));
             $featureGroups = FeatureGroupResource::collection(FeatureGroup::all());
             $features = FeatureResource::collection(Feature::all());
-            return Inertia::render('Admin/Dashboard', ["users" => $users, "featureGroups" => $featureGroups, "features" => $features]);
+
+            return Inertia::render('Admin/Dashboard', [
+                "users" => $users,
+                "featureGroups" => $featureGroups, 
+                "features" => $features,
+            ]);
         }
         // Render the normal user dashboard
         else{
@@ -37,10 +42,10 @@ class HomeController extends Controller
             // Check for feature access
             if (Auth::user()->groupHasFeature('Use streaks')){
                 return Inertia::render('Features/StreaksDashboard', ["entries" => $entries]);
-            } 
+            }
             return Inertia::render('Dashboard', ["entries" => $entries]);
         }
 
-        
+
     }
 }

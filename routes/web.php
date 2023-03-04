@@ -40,7 +40,11 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::resource('entries', EntryController::class);
-    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+
+    // Features
+    Route::middleware(['feature:feedback'])->group(function (){;
+        Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+    });
 
 });
 
