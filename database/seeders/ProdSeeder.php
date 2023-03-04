@@ -25,5 +25,6 @@ class ProdSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(TemplateSeeder::class);
+        
     }
 }

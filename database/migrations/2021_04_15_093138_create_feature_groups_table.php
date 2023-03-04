@@ -12,6 +12,8 @@ class CreateFeatureGroupsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->string('bg')->nullable();
+            $table->string('fg')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

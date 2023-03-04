@@ -2,8 +2,8 @@
   <div class="px-4 sm:px-6 lg:px-8">
 
     <div class="sm:flex-auto">
-        <h1 class="text-lg font-semibold leading-6 text-gray-900">Features</h1>
-        <p class="mt-2 text-sm text-gray-700">All the features of the application</p>
+        <h2 class="text-lg font-semibold leading-6 text-gray-900">Feature matrix</h2>
+        <p class="mt-2 text-sm text-gray-700">All the features and the groups that have them</p>
     </div>
 
     <div class="mt-8 flow-root">
@@ -13,7 +13,9 @@
             <thead>
               <tr>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
-                <th v-for="group in featureGroups" scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">{{group.name}}</th>
+                <th v-for="group in featureGroups" scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">
+                  <span :style="{ backgroundColor: group.bg, color: group.fg}" class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">{{group.name}}</span>
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
@@ -49,5 +51,9 @@
       }
     }
     return false
+  }
+
+  function getGroupStyle(group){
+    return `background-colour: ${group.colour}`
   }
 </script>

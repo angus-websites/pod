@@ -18,6 +18,8 @@ class FeatureGroupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'bg' => $this->bg,
+            'fg' => $this->fg,
             'description' => $this->description,
             'features' => FeatureResource::collection($this->belongsToMany(Feature::class)->get()),
         ];

@@ -11,9 +11,6 @@ use App\Models\Entry;
 use App\Models\Template;
 
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
-use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
-
-
 
 class DevSeeder extends Seeder
 {
@@ -26,14 +23,11 @@ class DevSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Template::truncate();
-
         DB::table('feature_groups')->truncate();
         DB::table('feature_feature_group')->truncate();
         DB::table('feature_group_user')->truncate();
         DB::table('feature_user')->truncate();
         DB::table('features')->truncate();
-
-        
         User::truncate();
         Entry::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
@@ -44,28 +38,15 @@ class DevSeeder extends Seeder
         // Admin seed
         $this->call(AdminSeeder::class);
 
-        $streaks =  Feature::create([
-            'name' => 'Use streaks'
-        ]);
-
-        // Create some feature groups
-        $groupA = FeatureGroup::create([
-            'name' => 'Group A'
-        ]);
-
-        $groupA->addFeature($streaks);
-
-        $groupB = FeatureGroup::create([
-            'name' => 'Group B'
-        ]);
-
-        $featureGroups = [$groupA, $groupB];
-
+        // Call FeatureSeeder
+        $this->call(FeatureSeeder::class);
 
         // Create some users with entries
-        User::factory()->count(5)->hasEntries(12)->create()->each(function ($u) use(&$featureGroups) {
-            $random_group = $featureGroups[array_rand($featureGroups, 1)];
-            $u->addToGroup($random_group->name);
+        User::factory()->count(20)->hasEntries(35)->create()->each(function ($u){
+
+            // Assign a random group to this user
+            $random_group_name = FeatureGroup::all()->random()->name;
+            $u->addToGroup($random_group_name);
         });;
 
     }

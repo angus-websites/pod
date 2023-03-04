@@ -1,7 +1,7 @@
 <template>
   <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex-auto">
-        <h1 class="text-lg font-semibold leading-6 text-gray-900">Users</h1>
+        <h2 class="text-lg font-semibold leading-6 text-gray-900">Users</h2>
         <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
     </div>
     <div class="mt-8 flow-root">
@@ -20,7 +20,7 @@
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ user.name }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ user.email }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                  <span v-for="group in user.groups" class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">{{group.name}}</span>
+                  <span v-for="group in user.groups" :style="{ backgroundColor: group.bg, color: group.fg}" class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">{{group.name}}</span>
                 </td>
               </tr>
             </tbody>
