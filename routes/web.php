@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EntryController;
+use App\Http\Controllers\FeedbackController;
+
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +40,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::resource('entries', EntryController::class);
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+
 });
 
 
