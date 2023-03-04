@@ -20,9 +20,13 @@
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ user.name }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ user.email }}</td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                  <span v-for="group in user.groups" :style="{ backgroundColor: group.bg, color: group.fg}" class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">{{group.name}}</span>
+                  <div class="flex items-center flex-row gap-x-2">
+                    <span v-for="group in user.groups" :style="{ backgroundColor: group.bg, color: group.fg}" class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">{{group.name}}</span>
+                    <p v-if="user.groups.length < 1">NO GROUP</p>
+                  </div>
                 </td>
               </tr>
+
             </tbody>
           </table>
         </div>

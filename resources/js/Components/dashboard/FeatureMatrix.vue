@@ -26,7 +26,7 @@
                     <span v-if="feature.active" class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium ">
                       <CheckIcon class="h-5 w-5" aria-hidden="true" />
                     </span>
-                    <span v-else class="inline-flex items-center rounded-full bg-cyan-100 px-2.5 py-0.5 text-xs font-medium text-cyan-800"><CheckIcon class="h-5 w-5" aria-hidden="true"/></span>
+                    <span v-else class="inline-flex items-center rounded-full bg-yellow-200 px-2.5 py-0.5 text-xs font-medium text-yellow-800"><CheckIcon class="h-5 w-5" aria-hidden="true"/></span>
                   </template>
                   <span v-else class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800"><XMarkIcon class="h-5 w-5" aria-hidden="true"/></span>
                 </td>
