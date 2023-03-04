@@ -30,7 +30,6 @@ class EntryFactory extends Factory
 
                 $name_of_training = $this->faker->realText(10);
                 $start = $this->faker->date;
-                $end = $this->faker->date;
                 $paragraphs = $this->faker->paragraphs(rand(2, 6));
                 $what_i_learned = "";
                 foreach ($paragraphs as $para) {
@@ -41,8 +40,7 @@ class EntryFactory extends Factory
                     'template_id' => $training_template,
                     'data' => [
                         'title'=>$name_of_training,
-                        "date_started" => $start,
-                        'date_completed'=>$end,
+                        "date" => $start,
                         'what_i_learned'=>$what_i_learned
                     ]
                 ];
@@ -65,7 +63,7 @@ class EntryFactory extends Factory
                     'template_id' => $skill_template,
                     'data' => [
                         'title'=>$skill_name,
-                        'date_learned'=>$date,
+                        'date'=>$date,
                         'what_i_learned'=>$what_i_learned
                     ]
                 ];
