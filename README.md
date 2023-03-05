@@ -106,19 +106,39 @@ Fields is an array of the inputs this template will provide for the user. This a
       "required",
       "max:100"
     ]
-  },
-  ...
+  }
 ```
 
 and each field consists of the following options
 
 |   Key |   Description | Type | Options |  Required? |
-|---|---|---|---|
+|---|---|---|---|---|
 | id | A unique identifier for this field | String | | yes |
 | label | What the user sees on the screen when filling in this input | String |  | yes |
 | type | What type of input this is, these must be implemented in the application, currently there are a few built in | String | text, date, textarea | yes |
 | required | Is this input required? (used for front end validation) | Boolean | true, false | no |
 | validation | An array of validation rules used to validate this input on the back-end | Array | A list of Laravel validaion rules can be found [here](https://laravel.com/docs/10.x/validation#available-validation-rules) | yes |
+
+### Features
+
+An important part of the project is measuring the most effective gamification techniques in online diary applications, these gamification techniques are implemented as **features** in the application.
+
+Some examples of features include...
+
+- A *leader-board* to view the status of other students
+- A *streak* of the number of consecutive entries made by the user
+
+These features can then be grouped together to create a series of gamification features for different users.
+
+#### Feature groups
+
+As mentioned above, these features can be grouped together, these are known as **feature-groups** a feature group contains a number of users and a number of features.
+
+Users are then randomly assigned into a feature group when they sign up for the site.
+
+#### Feedback
+
+The results from the experiment are then drawn from the users feedback of their *version* of the application. This will hopefully indicate the most effective forms of gamification.
 
 
 ## Tech Stack
