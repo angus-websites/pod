@@ -39,7 +39,7 @@ const submit = () => {
                     </div>
                 </div>
 
-                <p> Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</p>
+                <p class="max-w-2xl text-sm text-gray-500">Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.</p>
 
                 <div  v-if="status" class="rounded-md bg-green-50 p-4">
                     <div class="flex">
