@@ -39,9 +39,6 @@ class DevSeeder extends Seeder
         // Create the Templates
         $this->call(TemplateSeeder::class);
 
-        // Create the Templates
-        $this->call(TemplateSeeder::class);
-
         // Call FeatureSeeder
         $this->call(FeatureSeeder::class);
 

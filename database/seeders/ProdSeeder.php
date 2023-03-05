@@ -23,6 +23,7 @@ class ProdSeeder extends Seeder
     {
         // Seed essential data
         $this->call(RoleSeeder::class);
+        $this->call(FeatureSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(TemplateSeeder::class);
         
