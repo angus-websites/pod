@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
+    
+use JustSteveKing\Laravel\FeatureFlags\Concerns\HasFeatures;
+use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -21,6 +24,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasFeatures;
 
     protected $connection = 'mysql';
 
@@ -94,5 +98,9 @@ class User extends Authenticatable
             return $super ? $this->role()->name == "Super Admin" :  in_array($this->role()->name, ["Admin", "Super Admin"]);
         }
         return false;
+    }
+
+    public function groups(){
+        return $this->belongsToMany(FeatureGroup::class);
     }
 }

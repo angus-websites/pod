@@ -41,7 +41,7 @@ class TemplateSeeder extends Seeder
                 'label' => 'Date',
                 'type' => 'date',
                 'required' => true,
-                'validation' => ['required', 'date'],
+                'validation' => ['required', 'date', 'before_or_equal:today'],
             ],
             [
                 'id' => 'content',
@@ -67,18 +67,11 @@ class TemplateSeeder extends Seeder
                 'validation' => ['required', 'max:100'],
             ],
             [
-                'id' => 'date_started',
-                'label' => 'Training start date',
+                'id' => 'date',
+                'label' => 'Date',
                 'type' => 'date',
                 'required' => false,
-                'validation' => ['date'],
-            ],
-            [
-                'id' => 'date_completed',
-                'label' => 'Training completion date',
-                'type' => 'date',
-                'required' => false,
-                'validation' => ['date'],
+                'validation' => ['date', 'before_or_equal:today'],
             ],
             [
                 'id' => 'what_i_learned',
@@ -105,11 +98,11 @@ class TemplateSeeder extends Seeder
                 'validation' => ['required', 'max:100'],
             ],
             [
-                'id' => 'date_learned',
+                'id' => 'date',
                 'label' => 'When did you learn this new skill?',
                 'type' => 'date',
                 'required' => false,
-                'validation' => ['date'],
+                'validation' => ['date', 'before_or_equal:today'],
             ],
             [
                 'id' => 'what_i_learned',

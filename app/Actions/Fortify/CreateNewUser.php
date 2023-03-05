@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 
+use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
+
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
@@ -27,10 +29,19 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        // Assign this user to a random feature group
+        $all_feature_groups = FeatureGroup::all();
+
+        if ($all_feature_groups->isNotEmpty()){
+            $user->addToGroup($all_feature_groups->random()->name);
+        }
+
+        return $user;
     }
 }
