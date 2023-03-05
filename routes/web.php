@@ -42,7 +42,7 @@ Route::middleware([
     Route::resource('entries', EntryController::class);
 
     // Features
-    Route::middleware(['feature:feedback'])->group(function (){;
+    Route::middleware(['feature:feedback,admin'])->group(function (){;
         Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
     });
 

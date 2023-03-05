@@ -52,6 +52,11 @@ class FeatureSeeder extends Seeder
             'description' => 'Users can provide feedback on their experience using the app'
         ]);
 
+        Feature::create([
+            'name' => 'Admin',
+            'description' => 'Has access to all features'
+        ]);
+
         // ----- Seed our groups -----
 
         // Group A

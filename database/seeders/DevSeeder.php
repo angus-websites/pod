@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
 use App\Models\Entry;
+use App\Models\Role;
 use App\Models\Template;
 
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
@@ -30,16 +31,22 @@ class DevSeeder extends Seeder
         DB::table('features')->truncate();
         User::truncate();
         Entry::truncate();
+        Role::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+        $this->call(RoleSeeder::class);
 
         // Create the Templates
         $this->call(TemplateSeeder::class);
 
-        // Admin seed
-        $this->call(AdminSeeder::class);
+        // Create the Templates
+        $this->call(TemplateSeeder::class);
 
         // Call FeatureSeeder
         $this->call(FeatureSeeder::class);
+
+        // Admin seed
+        $this->call(AdminSeeder::class);
 
         // Create some users with entries
         User::factory()->count(20)->hasEntries(35)->create()->each(function ($u){

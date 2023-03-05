@@ -11,6 +11,7 @@ use App\Models\Role;
 //Support
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
 class AdminSeeder extends Seeder
 {
@@ -30,6 +31,7 @@ class AdminSeeder extends Seeder
           'role_id' => $superAdminRole->id,
           'password' => Hash::make(config('admin.admin_password')),
         ]);
+        $admin->giveFeature('Admin');
       }
       
     }
