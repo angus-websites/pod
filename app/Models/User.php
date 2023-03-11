@@ -16,6 +16,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+Use \Carbon\Carbon;
+
 class User extends Authenticatable
 {
     use HybridRelations;
@@ -27,15 +29,6 @@ class User extends Authenticatable
     use HasFeatures;
 
     protected $connection = 'mysql';
-
-    /**
-     * Fetch all the entries that
-     * belong to this user
-     */
-    public function entries(){
-        return $this->hasMany(Entry::class);
-    }
-
 
     /**
      * The attributes that are mass assignable.
@@ -78,6 +71,41 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function streak(){
+        /**
+         * Get the current streak of entries for this user
+         */
+        
+        $now = now()->startOfDay();
+
+        // Order the entries by date they were created at
+        $entries = $this->entries()->orderBy('created_at', 'desc')->get();
+
+        // Go through each entry to calculate the streak
+        $counter = 0;
+        foreach($entries as $entry){
+
+            // Get the entry of the first entry in our list
+            $entry_date = Carbon::parse($entry->created_at)->startOfDay();
+
+            // Calculate how many days are between now and that entry
+            $diff = $entry_date->diffInDays($now);
+
+            // If the difference is greater than 1 day, the streak has ended
+            if ($diff > 1){
+                return $counter;
+            }
+            // If the streak is 1 or this is the user's first day of a streak increment by 1
+            elseif($diff == 1 || $counter < 1){
+                $counter += 1;
+            }
+
+            // Update now to be the last entry in our list
+            $now = $entry_date;
+        }
+        return $counter;
+    }
+
     private function role() {
         /**
          * Get the role for this
@@ -86,6 +114,14 @@ class User extends Authenticatable
          * will have a role
          */
         return $this->belongsTo(Role::class)->first();
+    }
+
+    public function entries(){
+        /**
+         * Fetch all the entries that
+         * belong to this user
+         */
+        return $this->hasMany(Entry::class);
     }
 
     public function isAdmin($super=false){

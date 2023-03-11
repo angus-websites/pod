@@ -38,7 +38,7 @@ class EntryController extends Controller
                 return $query->where('data.title', 'like', "%${search}%");
             })->when($request->input('template'), function($query, $template){
                 return $query->where('template_id', '=', $template);
-            })->paginate(15)->withQueryString());
+            })->orderBy("created_at", "desc")->paginate(15)->withQueryString());
 
         // Fetch the templates (->all() removes the 'data' key)
         $templates = TemplateResource::collection(Template::all())->all();

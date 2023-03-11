@@ -1,11 +1,11 @@
 <template>
-    <DashboardLayout>
+    <UserDashboard>
         Hello
-    </DashboardLayout>
+    </UserDashboard>
 </template>
 
 <script setup>
-import DashboardLayout from "@/Layouts/DashboardLayout.vue";
+import UserDashboard from "@/Pages/Dashboard/UserDashboard.vue";
 
 
 const props = defineProps({

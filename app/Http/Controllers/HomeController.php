@@ -22,7 +22,6 @@ class HomeController extends Controller
      */
     public function dashboard()
     {
-
         $user = Auth::user();
 
         // Render the admin dashboard
@@ -47,7 +46,11 @@ class HomeController extends Controller
             // Extract the features into an array
             $features = $user->getAllFeatures();
 
-            return Inertia::render('Dashboard/LeaderboardDashboard', ["features" => $features]);
+            $featureData = [
+                "streak" => $user->streak(),
+            ];
+
+            return Inertia::render('Dashboard/UserDashboard', ["features" => $features, "featureData" => $featureData]);
         }
 
 
