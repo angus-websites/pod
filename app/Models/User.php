@@ -107,11 +107,11 @@ class User extends Authenticatable
          */
         
         // Get the direct features
-        $f = $this->features()->get();
+        $f = $this->features()->active()->get();
 
         // Get all features through the group
         foreach ($this->groups()->get() as $group) {
-            $f = $f->merge($group->features()->get());
+            $f = $f->merge($group->features()->active()->get());
         } 
 
         return $f;
