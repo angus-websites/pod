@@ -23,27 +23,31 @@ class HomeController extends Controller
     public function dashboard()
     {
 
+        $user = Auth::user();
+
         // Render the admin dashboard
-        if (Auth::user()->isAdmin()){
-            $users = UserResource::collection(User::all()->except(Auth::id()));
+        if ($user->isAdmin()){
+
+            // Collect data the admins need
+            $users = UserResource::collection(User::all()->except($user->id));
             $featureGroups = FeatureGroupResource::collection(FeatureGroup::all());
             $features = FeatureResource::collection(Feature::all());
 
+            // Render the admin dashboard with the data
             return Inertia::render('Admin/Dashboard', [
                 "users" => $users,
                 "featureGroups" => $featureGroups, 
                 "features" => $features,
             ]);
         }
-        // Render the normal user dashboard
-        else{
-            $entries = EntryResource::collection(Auth::user()->entries()->paginate(15));
 
-            // Check for feature access
-            if (Auth::user()->groupHasFeature('Use streaks')){
-                return Inertia::render('Features/StreaksDashboard', ["entries" => $entries]);
-            }
-            return Inertia::render('Dashboard', ["entries" => $entries]);
+        // For non admins
+        else{
+
+            // Extract the features into an array
+            $features = $user->getAllFeatures();
+
+            return Inertia::render('Dashboard', ["features" => $features]);
         }
 
 

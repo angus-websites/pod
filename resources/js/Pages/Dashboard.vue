@@ -6,10 +6,15 @@
              <p class="text-sm font-medium text-gray-600">Welcome back,</p>
              <p class="text-xl font-bold text-gray-900 sm:text-2xl">{{ user.name }}</p>
              <hr class="my-5">
+             <div class="my-5">
+                <p>Features...</p>
+                <ul>
+                    <li v-for="feature in features">{{feature.name}}</li>
+                </ul>
+             </div>
              <div class="flex justify-center">
                 <PrimaryButton :isLink="true" :href="route('entries.index')">My Entries</PrimaryButton>
              </div>
-
             </div>
         </PageContainer>
     </AppLayout>
@@ -29,7 +34,7 @@ import { usePage } from '@inertiajs/inertia-vue3'
 const user = computed(() => usePage().props.value.auth.user)
 
 const props = defineProps({
-    entries: Object
+    features: Object
 })
 
 </script>

@@ -100,7 +100,20 @@ class User extends Authenticatable
         return false;
     }
 
-    public function groups(){
-        return $this->belongsToMany(FeatureGroup::class);
+    public function getAllFeatures(){
+        /**
+         * Fetch all the features this user
+         * has access to
+         */
+        
+        // Get the direct features
+        $f = $this->features()->get();
+
+        // Get all features through the group
+        foreach ($this->groups()->get() as $group) {
+            $f = $f->merge($group->features()->get());
+        } 
+
+        return $f;
     }
 }
