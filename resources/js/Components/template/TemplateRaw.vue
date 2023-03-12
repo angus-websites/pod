@@ -5,6 +5,7 @@
         @selectionChange="handlerFunction"
         api-key="ljfuynz3a61fqanmksvqwvil07uc83jbc1ntm6pk31w1n78g" 
         :init="{
+            branding: false,
             height: 500,
             menubar: false,
             plugins: [
