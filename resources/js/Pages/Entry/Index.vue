@@ -68,7 +68,7 @@
                       <p class="text-sm text-gray-700">
                         Page
                         {{ ' ' }}
-                        <span class="font-medium">{{entries.meta.from}}</span>
+                        <span class="font-medium">{{entries.meta.current_page}}</span>
                         {{ ' ' }}
                         of
                         {{ ' ' }}

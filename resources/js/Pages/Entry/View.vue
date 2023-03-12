@@ -22,7 +22,7 @@
           </div>
           <!-- Template type -->
           <div>
-            <span class="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-800">{{template.name}}</span>
+            <span class="inline-flex items-center rounded-md bg-indigo-100 px-2.5 py-0.5 text-sm font-medium text-indigo-800">{{template.name}}</span>
           </div>
         </div>
         <!-- Dynamic view for edit or view -->
