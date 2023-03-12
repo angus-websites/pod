@@ -3,17 +3,27 @@
   <AppLayout :title="entry.title">
     <PageContainer>
         <EntryHeader :title="entry.title"/>
-        <!-- Buttons -->
-        <div class="mb-8 mt-5 space-x-5 flex items-center flex-row">
-            <!-- Cancel button -->
-            <div v-if="currentView == editView">
-              <button  @click="switchTab(tabs[0])" class="bg-red-100 text-red-700 hover:bg-red-200 px-3 py-2 font-medium text-sm rounded-md">Cancel</button>
-            </div>
 
-            <div v-else-if="props.can.editEntry">
-              <!-- Edit button -->
-              <button  @click="switchTab(tabs[1])" class="text-gray-500 bg-blue-100 hover:text-blue-700 hover:bg-blue-200 px-3 py-2 font-medium text-sm rounded-md">Edit</button>
+        <div class="sm:flex items-center my-5 sm:my-0">
+          <!-- Buttons -->
+          <div class="flex-auto">
+            <div class="mb-8 mt-5 space-x-5 flex items-center flex-row">
+
+                <!-- Cancel button -->
+                <div v-if="currentView == editView">
+                  <button  @click="switchTab(tabs[0])" class="bg-red-100 text-red-700 hover:bg-red-200 px-3 py-2 font-medium text-sm rounded-md">Cancel</button>
+                </div>
+
+                <div v-else-if="props.can.editEntry">
+                  <!-- Edit button -->
+                  <button  @click="switchTab(tabs[1])" class="text-gray-500 bg-blue-100 hover:text-blue-700 hover:bg-blue-200 px-3 py-2 font-medium text-sm rounded-md">Edit</button>
+                </div>
             </div>
+          </div>
+          <!-- Template type -->
+          <div>
+            <span class="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-800">{{template.name}}</span>
+          </div>
         </div>
         <!-- Dynamic view for edit or view -->
         <component :is="currentView" v-bind="currentProperties" @tab-toggle="tabToggle()"></component>
