@@ -30,14 +30,27 @@ class EntryController extends Controller
      */
     public function index(Request $request)
     {
-
-        $filters = $request->only(['search', 'template']);
+        $filters = $request->only(['search', 'template', 'sortBy']);
         $entries =  EntryResource::collection(
             Auth::user()->entries()
             ->when($request->input('search'), function($query, $search){
                 return $query->where('data.title', 'like', "%${search}%");
             })->when($request->input('template'), function($query, $template){
                 return $query->where('template_id', '=', $template);
+            })->when($request->input('sortBy'), function($query, $sortBy){
+                switch ($sortBy) {
+                    case 'newest':
+                        return $query->orderBy("data.date", "desc");
+                        break;
+                    case 'oldest':
+                        return $query->orderBy("data.date", "asc");
+                        break;
+                    case 'title':
+                        return $query->orderBy("data.title", "asc");
+                    default:
+                        return $query->orderBy("created_at", "asc");
+                        break;
+                }
             })->orderBy("created_at", "desc")->paginate(15)->withQueryString());
 
         // Fetch the templates (->all() removes the 'data' key)
