@@ -106,6 +106,21 @@ class User extends Authenticatable
         return $counter;
     }
 
+    public function totalWordCount(){
+        /**
+         * Calculate the total number of words
+         * in all the users entry
+         */
+        $total = 0;
+        foreach($this->entries()->get() as $entry){
+            foreach($entry->data as $field => $val) {
+              $total += str_word_count($val);
+            }
+        }
+
+        return $total;
+    }
+
     private function role() {
         /**
          * Get the role for this
