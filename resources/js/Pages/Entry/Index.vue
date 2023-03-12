@@ -104,9 +104,6 @@ export default {
         },
       };
     },
-    mounted() {
-        console.log(this.entries["data"])
-    },
     watch: {
         form: {
             deep: true,

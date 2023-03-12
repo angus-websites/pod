@@ -43,7 +43,6 @@ function getTemplateName(templateID){
    */
   for (var i = 0; i < $props.templates.length; i++) {
     let t = $props.templates[i]
-    console.log(t)
     if (t.id == templateID){
       return t.name
     }
