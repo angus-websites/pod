@@ -47,6 +47,7 @@ class HomeController extends Controller
             $features = $user->getAllFeatures();
 
             $featureData = [
+                'entry count' => count($user->entries),
                 "streak" => $user->streak(),
                 "total word count" => $user->totalWordCount(),
             ];

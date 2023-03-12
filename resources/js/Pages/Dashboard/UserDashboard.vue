@@ -1,23 +1,14 @@
 <template>
     <DashboardLayout>
-
-        <div class="flex flex-col space-y-5">
-            <template v-if="hasFeature('streaks')" >
-                <!-- Streak -->
-                <div class="mx-auto text-center p-5 rounded-md max-w-sm shadow-md bg-secondary">
-                    <dt class="text-base leading-7 text-slate-200">Current streak</dt>
-                    <dd class="order-first text-3xl font-semibold tracking-tight text-slate-50 sm:text-5xl">{{featureData.streak}} days</dd>
+        <div class="my-10">
+            <dl class="mt-5 justify-around flex flex-col sm:flex-row gap-y-16 sm:gap-y-0">
+                <div v-for="stat in stats" class="mx-auto flex max-w-xs flex-col gap-y-4 text-center">
+                    <dt class="text-base leading-7 text-gray-600">{{ stat.name }}</dt>
+                    <dd class="text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">{{ stat.stat }}</dd>
                 </div>
-            </template>
-
-            <template v-if="hasFeature('total word count')" >
-                <!-- Total word count -->
-                <div class="mx-auto text-center p-5 rounded-md max-w-sm shadow-md bg-secondary">
-                    <dt class="text-base leading-7 text-slate-200">Total word count</dt>
-                    <dd class="order-first text-3xl font-semibold tracking-tight text-slate-50 sm:text-5xl">{{featureData['total word count']}} words</dd>
-                </div>
-            </template>
+            </dl>
         </div>
+
     </DashboardLayout>
 </template>
 
@@ -28,6 +19,16 @@ const props = defineProps({
     features: Object,
     featureData: Object,
 })
+
+
+let stats = [{name: 'Number of entries', stat: `${props.featureData['entry count']} entries`}];
+
+stats = [
+  ...stats,
+  ...(hasFeature("streaks") ? [{name: 'Streak', stat: `${props.featureData['streak']} days` }] : []),
+  ...(hasFeature("total word count") ? [{name: 'Total word count', stat: `${props.featureData['total word count']} words` }] : [])
+];
+
 
 function hasFeature(feature){
     /**
@@ -40,5 +41,7 @@ function hasFeature(feature){
         }
     }
 }
+
+
 
 </script>
