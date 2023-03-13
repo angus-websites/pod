@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
@@ -14,6 +16,12 @@ class FeedbackController extends Controller
      */
     public function index()
     {
+
+        // Check permissions before rendering feedback form
+        if (! Gate::allows('access-feedback', Auth::user())) {
+            abort(403);
+        }
+
         return Inertia::render('Features/Feedback');
     }
 }

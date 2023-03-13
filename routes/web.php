@@ -30,6 +30,8 @@ Route::get('/', function () {
     ]);
 });
 
+//Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+
 /**
  * Sanctum middleware routes
  */
@@ -39,12 +41,8 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::resource('entries', EntryController::class);
-
-    // Features
-    Route::middleware(['feature:feedback,admin'])->group(function (){;
-        Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
-    });
+    Route::resource('entries', EntryController::class);    
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
 
 });
 
