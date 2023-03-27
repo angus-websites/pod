@@ -47,9 +47,9 @@ class HomeController extends Controller
             $features = $user->getAllFeatures();
 
             $featureData = [
-                'entry count' => count($user->entries),
-                "streak" => $user->streak(),
-                "total word count" => $user->totalWordCount(),
+                'entry count' => number_format(count($user->entries)),
+                "streak" => number_format($user->streak()),
+                "total word count" => number_format($user->totalWordCount()),
             ];
 
             return Inertia::render('Dashboard/UserDashboard', ["features" => $features, "featureData" => $featureData]);
