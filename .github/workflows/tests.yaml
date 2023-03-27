@@ -25,13 +25,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Install php extensions
-        run: |
-          apt-get update
-          apt-get install -y php-pear php8.1-dev php8.1-xml
-          pecl install mongodb-1.13.0
-          echo "extension=mongodb.so" | tee -a /etc/php/8.1/cli/conf.d/20-mongodb.ini
-
       - name: Install composer dependencies
         run: |
           composer install --no-scripts
