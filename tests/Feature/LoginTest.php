@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -67,9 +68,24 @@ class LoginTest extends TestCase
         ]);
 
         // Check that we get redirected
-        $response->assertRedirect(route('dashboard'));
+        $response->assertRedirect(RouteServiceProvider::HOME);
         $this->assertAuthenticatedAs($user);
 
+    }
+
+    /**
+     * Test users cannot login with invalid password
+     */
+    public function test_users_can_not_authenticate_with_invalid_password()
+    {
+        $user = User::factory()->create();
+
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'wrong-password',
+        ]);
+
+        $this->assertGuest();
     }
 
 
