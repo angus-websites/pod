@@ -44,7 +44,7 @@ jobs:
       - name: Install front-end dependencies
         run: |
           npm install
-          npm run dev
+          npm run prod
 
       - name: Run Testsuite
         run: vendor/bin/phpunit tests/
