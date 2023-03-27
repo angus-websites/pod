@@ -17,11 +17,14 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - name: Install Pecl & Mongo
-        run: docker build -t local < ../Dockerfile
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+
+      - name: Install php extensions
+        run: |
+          pecl install mongodb-1.13.0
+          echo "extension=mongodb.so" | tee -a /etc/php/8.1/cli/conf.d/20-mongodb.ini
 
       - name: Install composer dependencies
         run: |
@@ -31,6 +34,11 @@ jobs:
         run: |
           cp .env.testing .env
           php artisan key:generate
+
+      - name: Install front-end dependencies
+        run: |
+          npm install
+          npm run dev
 
       - name: Run Testsuite
         run: vendor/bin/phpunit tests/
