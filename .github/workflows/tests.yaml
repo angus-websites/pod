@@ -4,7 +4,7 @@ jobs:
   phpunit:
     runs-on: ubuntu-latest
     container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1-couch-mongo
+      image: kirschbaumdevelopment/laravel-test-runner:8.1
 
     services:
       mysql:
@@ -24,6 +24,13 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+
+      - name: Install php extensions
+        run: |
+          apt-get update
+          apt-get install -y php-pear php8.1-dev php8.1-xml
+          pecl install mongodb
+          echo "extension=mongodb.so" | tee -a /etc/php/8.1/cli/conf.d/20-mongodb.ini
 
       - name: Install composer dependencies
         run: |
