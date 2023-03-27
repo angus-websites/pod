@@ -4,7 +4,7 @@ jobs:
   phpunit:
     runs-on: ubuntu-latest
     container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1
+      image: kirschbaumdevelopment/laravel-test-runner:8.1-couch-mongo
 
     services:
       mysql:
@@ -15,6 +15,10 @@ jobs:
         ports:
           - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      mongo:
+        image: mongo:latest
+        ports:
+          -27017:27017
 
     steps:
       - uses: actions/checkout@v1
