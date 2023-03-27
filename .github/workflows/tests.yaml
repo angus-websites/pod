@@ -4,7 +4,7 @@ jobs:
   phpunit:
     runs-on: ubuntu-latest
     container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1-couch-mongo
+      image: kirschbaumdevelopment/laravel-test-runner:8.1
 
     services:
       mysql:
@@ -17,6 +17,8 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
+      - name: Install Pecl & Mongo
+        run: docker build -t local < ../Dockerfile
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
