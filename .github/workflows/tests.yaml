@@ -19,16 +19,24 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
+      mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
     strategy:
       fail-fast: true
       matrix:
-        php: [ 7.3, 7.4, 8.0, 8.1 ]
-        laravel: [ ^8.0 ]
+        php: [8.1 ]
+        laravel: [ ^9.0 ]
 
     steps:
       - uses: actions/checkout@v2
-
+      - name: Install php extensions
+        run: |
+          apt-get update
+          apt-get install -y php-pear php8.1-dev php8.1-xml
+          pecl install mongodb
+          echo "extension=mongodb.so" | tee -a /etc/php/8.1/cli/conf.d/20-mongodb.ini
       - name: Cache Composer packages
         id: composer-cache
         uses: actions/cache@v2
