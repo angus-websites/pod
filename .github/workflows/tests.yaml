@@ -1,45 +1,50 @@
-on: push
-name: Run Laravel tests
+name: Laravel Tests
+
+on:
+  push:
+  pull_request:
+
 jobs:
-  phpunit:
-    runs-on: ubuntu-latest
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1
+  tests:
+    runs-on: ubuntu-20.04
 
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql
         env:
-          MYSQL_ROOT_PASSWORD: "password"
-          MYSQL_DATABASE: "testing"
-      mongo:
-        image: mongo:latest
+          MYSQL_DATABASE: testing
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [ 7.3, 7.4, 8.0, 8.1 ]
+        laravel: [ ^8.0 ]
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
         with:
-          fetch-depth: 1
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: Install php extensions
-        run: |
-          apt-get update
-          apt-get install -y php-pear php8.1-dev php8.1-xml
-          pecl install mongodb
-          echo "extension=mongodb.so" | tee -a /etc/php/8.1/cli/conf.d/20-mongodb.ini
-
-      - name: Install composer dependencies
-        run: |
-          composer install --no-scripts
-
-      - name: Prepare Laravel Application
-        run: |
-          cp .env.testing .env
-          php artisan key:generate
-
-      - name: Install front-end dependencies
-        run: |
-          npm install
-          npm run build
-
-      - name: Run Testsuite
-        run: vendor/bin/phpunit tests/
+      - name: Run test suite
+        run: vendor/bin/phpunit --verbose
+        env:
+          DB_HOST: 127.0.0.1
+          DB_DATABASE: testing
+          DB_USERNAME: user
+          DB_PASSWORD: password
