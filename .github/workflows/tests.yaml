@@ -13,12 +13,11 @@ jobs:
         image: mysql
         env:
           MYSQL_DATABASE: testing
-          MYSQL_USER: user
+          MYSQL_USER: sail
           MYSQL_PASSWORD: password
           MYSQL_ROOT_PASSWORD: password
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       mongo:
         image: mongo:latest
         ports:
@@ -52,7 +51,4 @@ jobs:
       - name: Run test suite
         run: vendor/bin/phpunit --verbose
         env:
-          DB_HOST: 127.0.0.1
-          DB_DATABASE: testing
-          DB_USERNAME: user
-          DB_PASSWORD: password
+          APP_ENV: testing
