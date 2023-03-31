@@ -36,7 +36,7 @@ const submit = () => {
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
             </div>
             <form class="mt-8 space-y-6" @submit.prevent="submit">
-
+                
                 <div v-for="error in form.errors" class="rounded-md bg-red-50 p-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
