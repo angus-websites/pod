@@ -7,6 +7,8 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-20.04
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.1
 
     services:
       mysql:
