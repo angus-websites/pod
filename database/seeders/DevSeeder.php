@@ -49,7 +49,7 @@ class DevSeeder extends Seeder
         User::factory()->count(45)->hasEntries(20)->create()->each(function ($u){
 
             // Assign a random group to this user
-            $random_group_name = FeatureGroup::all()->random()->name;
+            $random_group_name = FeatureGroup::all()->where("active", "1")->random()->name;
             $u->addToGroup($random_group_name);
         });;
 

@@ -22,6 +22,7 @@ class FeatureGroupResource extends JsonResource
             'fg' => $this->fg,
             'description' => $this->description,
             'features' => FeatureResource::collection($this->belongsToMany(Feature::class)->get()),
+            'active' => $this->active,
         ];
     }
 }
