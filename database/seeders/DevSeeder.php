@@ -46,7 +46,7 @@ class DevSeeder extends Seeder
         $this->call(AdminSeeder::class);
 
         // Create some users with entries
-        User::factory()->count(20)->hasEntries(35)->create()->each(function ($u){
+        User::factory()->count(45)->hasEntries(20)->create()->each(function ($u){
 
             // Assign a random group to this user
             $random_group_name = FeatureGroup::all()->random()->name;

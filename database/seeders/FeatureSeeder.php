@@ -66,7 +66,6 @@ class FeatureSeeder extends Seeder
             'bg' => '#DF369D',
             'fg' => '#FFFFFF',
         ]);
-        $groupB->addFeature($leaderboard);
         $groupB->addFeature($totalWords);
         $groupB->addFeature($feedback);
 
@@ -76,9 +75,8 @@ class FeatureSeeder extends Seeder
             'bg' => '#EEDD55',
             'fg' => '#5e550c',
         ]);
-        $groupC->addFeature($leaderboard);
-        $groupC->addFeature($totalWords);
         $groupC->addFeature($streaks);
+        $groupC->addFeature($leaderboard);
         $groupC->addFeature($feedback);
 
         // Group D
@@ -88,6 +86,7 @@ class FeatureSeeder extends Seeder
             'fg' => '#0e4d0e',
         ]);
         $groupD->addFeature($totalWords);
+        $groupD->addFeature($leaderboard);
         $groupD->addFeature($feedback);
 
         // Group E
@@ -96,9 +95,8 @@ class FeatureSeeder extends Seeder
             'bg' => '#9572F3',
             'fg' => '#FFFFFF',
         ]);
-        $groupE->addFeature($ranked);
         $groupE->addFeature($streaks);
-        $groupE->addFeature($totalWords);
+        $groupE->addFeature($ranked);
         $groupE->addFeature($feedback);
 
         // Group F
@@ -107,7 +105,39 @@ class FeatureSeeder extends Seeder
             'bg' => '#717171',
             'fg' => '#FFFFFF',
         ]);
+        $groupF->addFeature($totalWords);
+        $groupF->addFeature($ranked);
         $groupF->addFeature($feedback);
+
+        // Group G
+        $groupG = FeatureGroup::create([
+            'name' => 'Group G',
+            'bg' => '#4E7EA5',
+            'fg' => '#FFFFFF',
+        ]);
+        $groupG->addFeature($streaks);
+        $groupG->addFeature($totalWords);
+        $groupG->addFeature($leaderboard);
+        $groupG->addFeature($feedback);
+
+        // Group H
+        $groupH = FeatureGroup::create([
+            'name' => 'Group H',
+            'bg' => '#9268A5',
+            'fg' => '#FFFFFF',
+        ]);
+        $groupH->addFeature($streaks);
+        $groupH->addFeature($totalWords);
+        $groupH->addFeature($ranked);
+        $groupH->addFeature($feedback);
+
+        // Group I
+        $groupI = FeatureGroup::create([
+            'name' => 'Group I',
+            'bg' => '#453F35',
+            'fg' => '#FFFFFF',
+        ]);
+        $groupI->addFeature($feedback);
 
     }
 }
