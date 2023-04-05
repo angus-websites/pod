@@ -39,15 +39,12 @@ class EntryController extends Controller
                 switch ($sortBy) {
                     case 'newest':
                         return $query->orderBy("data.date", "desc");
-                        break;
                     case 'oldest':
                         return $query->orderBy("data.date", "asc");
-                        break;
                     case 'title':
                         return $query->orderBy("data.title", "asc");
                     default:
                         return $query->orderBy("created_at", "asc");
-                        break;
                 }
             })->orderBy("created_at", "desc")->paginate(15)->withQueryString());
 
@@ -59,7 +56,7 @@ class EntryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
@@ -72,7 +69,7 @@ class EntryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -102,7 +99,7 @@ class EntryController extends Controller
      * Display the specified resource.
      *
      * @param  entry  $entry
-     * @return EntryResource
+     * @return \Inertia\Response
      */
     public function show(Entry $entry){
 
@@ -135,7 +132,7 @@ class EntryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Entry $entry)
     {
