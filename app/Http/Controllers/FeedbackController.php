@@ -12,7 +12,7 @@ class FeedbackController extends Controller
     /**
      * Show the form for submitting feedback
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {

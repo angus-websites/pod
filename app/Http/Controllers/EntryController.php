@@ -11,9 +11,7 @@ use App\Models\Entry;
 use App\Models\Template;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class EntryController extends Controller
 {
@@ -77,7 +75,7 @@ class EntryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
 
         // Fetch the template to avoid using client side details
         $template = Template::findOrFail($request->template);
@@ -143,7 +141,7 @@ class EntryController extends Controller
     {
 
         // Fetch the template
-        $template = $entry->template();        
+        $template = $entry->template();
 
         // Extract the validation rules & run
         $template->getValidator($request->content)->validate();
@@ -162,7 +160,7 @@ class EntryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Entry $entry)
     {

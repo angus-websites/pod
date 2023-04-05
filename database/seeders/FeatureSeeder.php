@@ -41,21 +41,12 @@ class FeatureSeeder extends Seeder
 
         ]);
 
-        $achievements =  Feature::create([
-            'name' => 'Achievements',
-            'description' => 'Users unlock various achievements & digital awards for completing certain tasks in the app'
-        ]);
-
         $feedback =  Feature::create([
             'name' => 'Feedback',
             'active' => false,
             'description' => 'Users can provide feedback on their experience using the app'
         ]);
 
-        Feature::create([
-            'name' => 'Admin',
-            'description' => 'Has access to all features'
-        ]);
 
         // ----- Seed our groups -----
 
@@ -66,7 +57,6 @@ class FeatureSeeder extends Seeder
             'fg' => '#FFFFFF',
         ]);
         $groupA->addFeature($streaks);
-        $groupA->addFeature($achievements);
         $groupA->addFeature($feedback);
 
 
@@ -98,7 +88,6 @@ class FeatureSeeder extends Seeder
             'fg' => '#0e4d0e',
         ]);
         $groupD->addFeature($totalWords);
-        $groupD->addFeature($achievements);
         $groupD->addFeature($feedback);
 
         // Group E

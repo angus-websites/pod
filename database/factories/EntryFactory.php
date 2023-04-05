@@ -16,7 +16,7 @@ class EntryFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
-    {        
+    {
 
         // Generate a random template
         $rand = rand(0, 2);
@@ -28,7 +28,7 @@ class EntryFactory extends Factory
 
                 $training_template = Template::where('name', '=', 'Training')->firstOrFail();
 
-                $name_of_training = $this->faker->realText(10);
+                $name_of_training = $this->faker->text(10);
                 $start = $this->faker->date;
                 $paragraphs = $this->faker->paragraphs(rand(2, 6));
                 $what_i_learned = "";
@@ -68,7 +68,7 @@ class EntryFactory extends Factory
                     ]
                 ];
                 break;
-            
+
             // General template
             default:
 
