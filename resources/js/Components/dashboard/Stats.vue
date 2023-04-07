@@ -14,7 +14,7 @@
                     </div>
 
                     <!-- Rank -->
-                    <div class="flex align-baseline gap-x-2">
+                    <div v-if="hasFeature('ranked')" class="flex align-baseline gap-x-2">
                         <span class="text-sm text-gray-500">Rank</span>
                         <span class="inline-flex items-center rounded bg-primary px-2 py-0.5 text-xs font-medium text-white">{{item.rank}}</span>
                     </div>
@@ -41,10 +41,13 @@ let stats = [{
 
 stats = [
     ...stats,
-    ...(hasFeature("streaks") ? [{name: 'Streak',
+    ...(hasFeature("streaks") ? [{
+        name: 'Streak',
         icon: StarIcon,
+        stat: `${props.featureData['streak']['data']} days`,
         rank: props.featureData['streak']['rank'],
-        stat: `${props.featureData['streak']['data']} days` }] : []),
+        }]
+        : []),
     ...(hasFeature("total word count") ? [{name: 'Total word count',
         icon: Bars3CenterLeftIcon,
         rank: props.featureData['total word count']['rank'],
