@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
-    
+
 use JustSteveKing\Laravel\FeatureFlags\Concerns\HasFeatures;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
@@ -71,11 +71,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function streak(){
+    public function streak(): int{
         /**
          * Get the current streak of entries for this user
          */
-        
+
         $now = now()->startOfDay();
 
         // Order the entries by date they were created at
@@ -106,7 +106,31 @@ class User extends Authenticatable
         return $counter;
     }
 
-    public function totalWordCount(){
+    private function streakRank(): int{
+        /**
+         * Get the rank of this current user against
+         * all other users in the database
+         */
+        $all_streaks = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            array_push($all_streaks, $user->streak());
+        }
+
+        // Sort highest -> lowest
+        rsort($all_streaks);
+
+        // Get rank
+        return array_search($this->streak(), array_reverse($all_streaks, true));
+    }
+
+    public function getStreakRank(): string{
+        $out_of = User::count();
+        $rank = $this->streakRank();
+        return $rank."/".$out_of;
+    }
+
+    public function totalWordCount(): int{
         /**
          * Calculate the total number of words
          * in all the users entry
@@ -119,6 +143,57 @@ class User extends Authenticatable
         }
 
         return $total;
+    }
+
+    private function totalWordCountRank(): int{
+      /**
+       * Get the rank of this user based on
+       * the total word count
+       */
+
+        $all_counts = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            array_push($all_counts, $user->totalWordCount());
+        }
+
+        // Sort highest -> lowest
+        rsort($all_counts);
+
+        // Get rank
+        return array_search($this->totalWordCount(), array_reverse($all_counts, true));
+
+    }
+
+    public function getTotalWordCountRank(): string{
+        $out_of = User::count();
+        $rank = $this->totalWordCountRank();
+        return $rank."/".$out_of;
+    }
+
+    private function entryCountRank(): int{
+        /**
+         * Get the rank of this user based on number of
+         * entries
+         */
+
+        $all_entry_counts = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            array_push($all_entry_counts, count($user->entries));
+        }
+
+        // Sort highest -> lowest
+        rsort($all_entry_counts);
+
+        // Get rank
+        return array_search(count($this->entries), array_reverse($all_entry_counts, true));
+    }
+
+    public function getEntryCountRank(): string{
+        $out_of = User::count();
+        $rank = $this->entryCountRank();
+        return $rank."/".$out_of;
     }
 
     private function role() {
@@ -143,7 +218,7 @@ class User extends Authenticatable
         /**
          * Is this user admin or super admin?
          */
-        
+
         // Check this user actually has a role
         if ($this->role()){
             return $super ? $this->role()->name == "Super Admin" :  in_array($this->role()->name, ["Admin", "Super Admin"]);
@@ -156,14 +231,14 @@ class User extends Authenticatable
          * Fetch all the features this user
          * has access to
          */
-        
+
         // Get the direct features
         $f = $this->features()->active()->get();
 
         // Get all features through the group
         foreach ($this->groups()->get() as $group) {
             $f = $f->merge($group->features()->active()->get());
-        } 
+        }
 
         return $f;
     }

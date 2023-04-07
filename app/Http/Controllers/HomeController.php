@@ -35,7 +35,7 @@ class HomeController extends Controller
             // Render the admin dashboard with the data
             return Inertia::render('Admin/Dashboard', [
                 "users" => $users,
-                "featureGroups" => $featureGroups, 
+                "featureGroups" => $featureGroups,
                 "features" => $features,
             ]);
         }
@@ -47,9 +47,9 @@ class HomeController extends Controller
             $features = $user->getAllFeatures();
 
             $featureData = [
-                'entry count' => number_format(count($user->entries)),
-                "streak" => number_format($user->streak()),
-                "total word count" => number_format($user->totalWordCount()),
+                'entry count' => ["data" => number_format(count($user->entries)), "rank" => $user->getEntryCountRank()],
+                "streak" => ["data" => number_format($user->streak()), "rank" => $user->getStreakRank()],
+                "total word count" => ["data" => number_format($user->totalWordCount()), "rank" => $user->getTotalWordCountRank()],
             ];
 
             return Inertia::render('Dashboard/UserDashboard', ["features" => $features, "featureData" => $featureData]);
