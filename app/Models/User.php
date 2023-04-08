@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use App\Http\Resources\UserResource;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Resources\Leaderboard\EntryCountResource;
+use App\Http\Resources\Leaderboard\StreakResource;
+
+use App\Http\Resources\Leaderboard\TotalWordCountResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
 
 use JustSteveKing\Laravel\FeatureFlags\Concerns\HasFeatures;
-use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -266,7 +267,7 @@ class User extends Authenticatable
             array_push($users, $top[1]);
         }
 
-        return UserResource::collection($users);
+        return StreakResource::collection($users);
     }
 
     public static function wordCountLeaderboard(){
@@ -292,7 +293,7 @@ class User extends Authenticatable
             array_push($users, $top[1]);
         }
 
-        return UserResource::collection($users);
+        return TotalWordCountResource::collection($users);
     }
 
     public static function entryCountLeaderboard(){
@@ -318,7 +319,7 @@ class User extends Authenticatable
             array_push($users, $top[1]);
         }
 
-        return UserResource::collection($users);
+        return EntryCountResource::collection($users);
     }
 
 }

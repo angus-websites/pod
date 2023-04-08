@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
-
-use App\Http\Resources\Leaderboard\TemplateResource;
+namespace App\Http\Resources\Leaderboard;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EntryResource extends JsonResource
+class StreakResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +16,9 @@ class EntryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'template' => $this->template_id,
-            'title' => $this->data['title'],
-            'data' => $this->data,
+            'name' => $this->name,
+            'value' => number_format($this->streak()),
+            'rank' => ($this->getStreakRank()),
         ];
     }
 }
