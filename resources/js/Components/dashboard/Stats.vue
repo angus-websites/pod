@@ -1,7 +1,7 @@
 <template>
     <div>
         <dl class="mt-5 flex flex-col md:flex-row justify-around gap-5">
-            <div v-for="item in stats" :key="item.name" class="relative flex-1 overflow-hidden rounded-lg bg-white p-5 shadow">
+            <div v-for="item in stats" :key="item.name" class="relative flex-1 overflow-hidden rounded-lg bg-white p-5 shadow border">
                 <dt>
                     <div class="absolute rounded-md bg-indigo-500 p-3">
                         <component :is="item.icon" class="h-6 w-6 text-white" aria-hidden="true" />
