@@ -122,8 +122,8 @@ class User extends Authenticatable
         // Sort highest -> lowest
         rsort($all_streaks);
 
-        // Get rank
-        return array_search($this->streak(), array_reverse($all_streaks, true));
+        // Get rank (Index + 1)
+        return array_search($this->streak(), array_reverse($all_streaks, true)) + 1;
     }
 
     public function getStreakRank(): string{
@@ -162,8 +162,8 @@ class User extends Authenticatable
         // Sort highest -> lowest
         rsort($all_counts);
 
-        // Get rank
-        return array_search($this->totalWordCount(), array_reverse($all_counts, true));
+        // Get rank (Index + 1)
+        return array_search($this->totalWordCount(), array_reverse($all_counts, true)) + 1;
 
     }
 
@@ -188,8 +188,8 @@ class User extends Authenticatable
         // Sort highest -> lowest
         rsort($all_entry_counts);
 
-        // Get rank
-        return array_search(count($this->entries), array_reverse($all_entry_counts, true));
+        // Get rank (Index + 1)
+        return array_search(count($this->entries), array_reverse($all_entry_counts, true)) + 1;
     }
 
     public function getEntryCountRank(): string{

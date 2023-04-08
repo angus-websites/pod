@@ -28,10 +28,10 @@ class LeaderboardTest extends TestCase
     }
 
     /**
-     * Test we get the correct inertia response
-     * from the dashboard for entry count leaderboard
+     * Test we get leaderboard data from
+     * the inertia request
      */
-    public function test_entry_count_leaderboard()
+    public function test_leaderboard_data_exists()
     {
 
         // Create our user with 10 entries
@@ -73,7 +73,7 @@ class LeaderboardTest extends TestCase
         // Visit the dashboard
         $response = $this->get(route('dashboard'));
 
-        // Check the user is number 1 on the leaderboard
+        // Check the user is number 1 on the leaderboard & rank is correct
         $response->assertInertia(fn (Assert $page) => $page
             // Checking nested properties using "dot" notation...
             ->has('featureData.streak.leaderboard.data.0', fn (Assert $page) => $page
