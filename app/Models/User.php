@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -242,4 +243,82 @@ class User extends Authenticatable
 
         return $f;
     }
+
+    public static function streakLeaderboard(){
+        /**
+         * Get the details for the top 5 users in the app
+         */
+
+        $all_streaks = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            array_push($all_streaks, [$user->streak(), $user]);
+        }
+
+        // Sort highest -> lowest
+        rsort($all_streaks);
+
+        // Take top 5
+        $top_five = array_slice($all_streaks, 0, 5, true);
+        $users = [];
+
+        foreach ($top_five as $top) {
+            array_push($users, $top[1]);
+        }
+
+        return UserResource::collection($users);
+    }
+
+    public static function wordCountLeaderboard(){
+        /**
+         * Get the details for the top 5 users in the app
+         * for word count
+         */
+
+        $all_word_counts = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            array_push($all_word_counts, [$user->totalWordCount(), $user]);
+        }
+
+        // Sort highest -> lowest
+        rsort($all_word_counts);
+
+        // Take top 5
+        $top_five = array_slice($all_word_counts, 0, 5, true);
+        $users = [];
+
+        foreach ($top_five as $top) {
+            array_push($users, $top[1]);
+        }
+
+        return UserResource::collection($users);
+    }
+
+    public static function entryCountLeaderboard(){
+        /**
+         * Get the details for the top 5 users in the app
+         * for number of entries
+         */
+
+        $all_entries = [];
+        $users = User::all();
+        foreach ($users as $user) {
+            array_push($all_entries, [count($user->entries), $user]);
+        }
+
+        // Sort highest -> lowest
+        rsort($all_entries);
+
+        // Take top 5
+        $top_five = array_slice($all_entries, 0, 5, true);
+        $users = [];
+
+        foreach ($top_five as $top) {
+            array_push($users, $top[1]);
+        }
+
+        return UserResource::collection($users);
+    }
+
 }

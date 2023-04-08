@@ -19,6 +19,9 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'groups' => FeatureGroupResource::collection($this->groups()->get()),
+            'streak' => number_format($this->streak()),
+            'entry count' => number_format(count($this->entries)),
+            'total word count' => number_format($this->totalWordCount())
         ];
     }
 }

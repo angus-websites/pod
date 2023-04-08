@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -10,7 +9,6 @@ use App\Models\User;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
-use App\Http\Resources\EntryResource;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\FeatureGroupResource;
 use App\Http\Resources\FeatureResource;
@@ -47,9 +45,21 @@ class HomeController extends Controller
             $features = $user->getAllFeatures();
 
             $featureData = [
-                'entry count' => ["data" => number_format(count($user->entries)), "rank" => $user->getEntryCountRank()],
-                "streak" => ["data" => number_format($user->streak()), "rank" => $user->getStreakRank()],
-                "total word count" => ["data" => number_format($user->totalWordCount()), "rank" => $user->getTotalWordCountRank()],
+                'entry count' => [
+                    "data" => number_format(count($user->entries)),
+                    "rank" => $user->getEntryCountRank(),
+                    "leaderboard" => User::entryCountLeaderboard(),
+                    ],
+                "streak" => [
+                    "data" => number_format($user->streak()),
+                    "rank" => $user->getStreakRank(),
+                    "leaderboard" => User::streakLeaderboard(),
+                ],
+                "total word count" => [
+                    "data" => number_format($user->totalWordCount()),
+                    "rank" => $user->getTotalWordCountRank(),
+                    "leaderboard" => User::wordCountLeaderboard(),
+                    ],
             ];
 
             return Inertia::render('Dashboard/UserDashboard', ["features" => $features, "featureData" => $featureData]);
