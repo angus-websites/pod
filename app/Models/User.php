@@ -22,13 +22,13 @@ Use \Carbon\Carbon;
 
 class User extends Authenticatable
 {
+    use HasFeatures;
     use HybridRelations;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use HasFeatures;
 
     protected $connection = 'mysql';
 
@@ -228,7 +228,7 @@ class User extends Authenticatable
         return false;
     }
 
-    public function getAllFeatures(){
+    public function allFeatures(){
         /**
          * Fetch all the features this user
          * has access to

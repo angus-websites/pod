@@ -51,7 +51,7 @@ class DevSeeder extends Seeder
             // Assign a random group to this user
             $random_group_name = FeatureGroup::all()->where("active", "1")->random()->name;
             $u->addToGroup($random_group_name);
-        });;
+        });
 
     }
 }

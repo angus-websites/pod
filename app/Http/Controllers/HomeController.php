@@ -42,7 +42,7 @@ class HomeController extends Controller
         else{
 
             // Extract the features into an array
-            $features = $user->getAllFeatures();
+            $features = $user->allFeatures();
 
             $featureData = [
                 'entry count' => [
