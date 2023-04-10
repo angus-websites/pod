@@ -158,4 +158,37 @@ class LeaderboardTest extends TestCase
         );
 
     }
+
+    /**
+     * Test the word count leaderboard with multiple users
+     */
+    public function test_total_word_count_leaderboard_with_multiple_users(){
+
+        // Create 10 other users each with 0 entries
+        User::factory()->count(10)->create();
+
+        // Create the number 1 rank
+        $first = User::factory()->hasEntries(5)->create();
+
+        // Add the leaderboard feature
+        $first->giveFeature("leaderboard");
+        $first->giveFeature("total word count");
+
+        // Acting as the first user
+        $this->actingAs($first);
+
+        // Visit the dashboard
+        $response = $this->get(route('dashboard'));
+
+        // Check the user is number 1 on the leaderboard & rank is correct
+        $response->assertInertia(fn (Assert $page) => $page
+            // Checking nested properties using "dot" notation...
+            ->has('featureData.total word count.leaderboard.data.0', fn (Assert $page) => $page
+                ->where('id', $first->id)
+                ->where('rank', "1/11")
+                ->etc()
+            )
+        );
+
+    }
 }

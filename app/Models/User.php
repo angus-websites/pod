@@ -123,7 +123,7 @@ class User extends Authenticatable
         rsort($all_streaks);
 
         // Get rank (Index + 1)
-        return array_search($this->streak(), array_reverse($all_streaks, true)) + 1;
+        return array_search($this->streak(), $all_streaks) + 1;
     }
 
     public function getStreakRank(): string{
@@ -163,7 +163,7 @@ class User extends Authenticatable
         rsort($all_counts);
 
         // Get rank (Index + 1)
-        return array_search($this->totalWordCount(), array_reverse($all_counts, true)) + 1;
+        return array_search($this->totalWordCount(), $all_counts) + 1;
 
     }
 
