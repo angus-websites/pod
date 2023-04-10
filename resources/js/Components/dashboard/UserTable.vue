@@ -1,7 +1,7 @@
 <template>
   <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex-auto">
-        <h2 class="text-lg font-semibold leading-6 text-gray-900">Users</h2>
+        <h2 class="text-lg font-semibold leading-6 text-gray-900">Users: {{ userCount}}</h2>
         <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
     </div>
     <div class="mt-8 flow-root">
@@ -56,6 +56,7 @@
 
 <script setup>
   const props = defineProps({
-      users: Object
+      users: Object,
+      userCount: Number
   })
 </script>
