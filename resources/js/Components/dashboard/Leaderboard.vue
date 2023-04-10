@@ -32,22 +32,33 @@
                         <table class="min-w-full divide-y divide-gray-300 table-fixed">
                             <thead class="bg-gray-50">
                                 <tr>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Rank</th>
+
                                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
                                     <th scope="col" class="text-left text-sm font-semibold text-gray-900">
                                         {{ currentTab.name }}
                                     </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Rank</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
                                 <tr v-for="person in leaderboard.data" :key="person.id" :class="[isUser(person) ? 'bg-primary text-white font-bold' : 'text-gray-500']">
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">{{ person.rank }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                         <span :class="[isUser(person) ? 'text-white' : 'text-gray-900 font-medium']">{{ person.name }}</span>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm">{{ person.value }}</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm">{{ person.rank }}</td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th scope="row" colspan="3" class="text-center p-5">You</th>
+                                </tr>
+                                <tr>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">{{ featureData[currentTab.id]['rank'] }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">{{ currentUser.name }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">{{ featureData[currentTab.id]['data']}}</td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
