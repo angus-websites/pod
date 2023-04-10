@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Facades\DB;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
@@ -17,6 +18,14 @@ class FeatureSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('feature_groups')->truncate();
+        DB::table('feature_feature_group')->truncate();
+        DB::table('feature_group_user')->truncate();
+        DB::table('feature_user')->truncate();
+        DB::table('features')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         // ----- Seed our features -----
 
