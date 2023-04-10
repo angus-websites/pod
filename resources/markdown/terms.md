@@ -1,3 +1,4 @@
 # Terms of Service
 
-Edit this file to define the terms of service for your application.
+<h2 id="usernames"> Usernames </h2>
+Usernames will be publicly visible to other users of the application
