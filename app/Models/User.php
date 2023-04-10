@@ -208,6 +208,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class)->first();
     }
 
+    public function getRole(){
+        return $this->role();
+    }
+
     public function entries(){
         /**
          * Fetch all the entries that

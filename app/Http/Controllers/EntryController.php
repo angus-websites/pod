@@ -46,7 +46,8 @@ class EntryController extends Controller
                     default:
                         return $query->orderBy("created_at", "asc");
                 }
-            })->orderBy("created_at", "desc")->paginate(15)->withQueryString());
+            })->orderBy("created_at", "desc")->paginate(15)->withQueryString()
+        );
 
         // Fetch the templates (->all() removes the 'data' key)
         $templates = TemplateResource::collection(Template::all())->all();

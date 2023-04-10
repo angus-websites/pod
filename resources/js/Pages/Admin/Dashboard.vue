@@ -5,7 +5,7 @@
         <FeaturesExplained :features="features.data" class="my-10"/>
         <FeatureMatrix :featureGroups="featureGroups.data" :features="features.data" class="my-10"  />
         <FeatureGroupsExplained :featureGroups="featureGroups.data" class="my-10" />
-        <UserTable :users="users.data" class="my-10" />
+        <UserTable :users="users" class="my-10" />
     </DashboardLayout>
 </template>
 

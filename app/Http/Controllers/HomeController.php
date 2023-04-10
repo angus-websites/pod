@@ -26,7 +26,10 @@ class HomeController extends Controller
         if ($user->isAdmin()){
 
             // Collect data the admins need
-            $users = UserResource::collection(User::all()->except($user->id));
+            $users = UserResource::collection(
+                User::where("id", "!=", $user->id)->paginate(10)->withQueryString()
+            );
+
             $featureGroups = FeatureGroupResource::collection(FeatureGroup::all());
             $features = FeatureResource::collection(Feature::all());
 
