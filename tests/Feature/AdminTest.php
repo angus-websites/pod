@@ -66,4 +66,26 @@ class AdminTest extends TestCase
         );
 
     }
+
+    /**
+     * Test that the number of users
+     * displayed to the admin is correct
+     */
+    public function test_user_count_correct(){
+
+        // Create 10 example users
+        User::factory()->count(10)->hasEntries(10)->create();
+
+        // Login as the admin
+        $this->actingAs($this->admin);
+
+        // Visit the dashboard
+        $response = $this->get(route('dashboard'));
+
+        // Check we get the correct data back
+        $response->assertInertia(fn(Assert $page) => $page
+            ->where('userCount', 11)
+            ->etc()
+        );
+    }
 }

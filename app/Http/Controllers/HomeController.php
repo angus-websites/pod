@@ -29,7 +29,6 @@ class HomeController extends Controller
             $users = UserResource::collection(
                 User::where("id", "!=", $user->id)->paginate(10)->withQueryString()
             );
-            $number_of_users = User::all()->count();
 
             $featureGroups = FeatureGroupResource::collection(FeatureGroup::all());
             $features = FeatureResource::collection(Feature::all());
@@ -37,7 +36,7 @@ class HomeController extends Controller
             // Render the admin dashboard with the data
             return Inertia::render('Admin/Dashboard', [
                 "users" => $users,
-                "userCount" => $number_of_users,
+                "userCount" => User::count(),
                 "featureGroups" => $featureGroups,
                 "features" => $features,
             ]);
