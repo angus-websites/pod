@@ -189,7 +189,7 @@ class User extends Authenticatable
         rsort($all_entry_counts);
 
         // Get rank (Index + 1)
-        return array_search(count($this->entries), array_reverse($all_entry_counts, true)) + 1;
+        return array_search(count($this->entries), $all_entry_counts) + 1;
     }
 
     public function getEntryCountRank(): string{
