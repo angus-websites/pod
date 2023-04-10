@@ -139,7 +139,7 @@ class User extends Authenticatable
          */
         $total = 0;
         foreach($this->entries()->get() as $entry){
-            foreach($entry->data as $field => $val) {
+            foreach($entry->data as $val) {
               $total += str_word_count($val);
             }
         }

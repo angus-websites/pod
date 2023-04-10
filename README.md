@@ -222,6 +222,14 @@ Run Vite
 
 Visit [Localhost](http://localhost/)
 
+## Tests
+
+Tests are located in the `tests` directory and can be run from the command line...
+
+```bash
+./vendor/bin/sail php artisan test
+```
+
 ## Tips
 
 When updating certain fields in the `.env` file when using Laravel Sail, you may need to restart the Docker container for changes to take affect.

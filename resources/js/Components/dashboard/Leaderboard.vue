@@ -29,22 +29,24 @@
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                     <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-300">
+                        <table class="min-w-full divide-y divide-gray-300 table-fixed">
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <th scope="col" class="text-left text-sm font-semibold text-gray-900">
                                         {{ currentTab.name }}
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Rank</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 bg-white">
-                            <tr v-for="person in people" :key="person.id">
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ person.name }}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ person.value }}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ person.rank }}</td>
-                            </tr>
+                                <tr v-for="person in leaderboard.data" :key="person.id" :class="[isUser(person) ? 'bg-primary text-white font-bold' : 'text-gray-500']">
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                        <span :class="[isUser(person) ? 'text-white' : 'text-gray-900 font-medium']">{{ person.name }}</span>
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">{{ person.value }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm">{{ person.rank }}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -55,29 +57,36 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import {ref, reactive, computed} from 'vue'
+import {usePage} from "@inertiajs/inertia-vue3";
+
+// Logged in user
+const currentUser = usePage().props.value.auth.user
 
 const props = defineProps({
     features: Object,
     featureData: Object,
 })
 
-const people = [
+let leaderboard = reactive(
     {
-        id: 0,
-        name: 'Lindsay Walton',
-        value: '12',
-        rank: '1',
-    },
-]
+        "title": "Number of entries",
+        "data": props.featureData["entry count"]["leaderboard"]["data"]
+    }
+);
 
 let tabs = [
-    { name: 'Number of entries', href: '#', current: true },
+    {
+        name: 'Number of entries',
+        id: 'entry count',
+        href: '#',
+        current: true },
 ]
 
 tabs = reactive([
     ...tabs,
     ...(hasFeature("streaks") ? [{
+            id: 'streak',
             name: 'Streaks',
             href: "#",
             current: false,
@@ -85,6 +94,7 @@ tabs = reactive([
         : []),
     ...(hasFeature("total word count") ? [{
         name: 'Word count',
+        id: 'total word count',
         href: "#",
         current: false,
     }] : [])
@@ -93,6 +103,14 @@ tabs = reactive([
 let currentTab = ref(tabs[0]);
 
 
+function isUser(person){
+    /**
+     * Check the current person on the leaderboard
+     * is the logged in user
+     */
+    console.log(person.id+" vs "+currentUser["id"])
+    return person.id === currentUser.id;
+}
 
 function hasFeature(feature){
     /**
@@ -123,12 +141,22 @@ function setCurrentTab(tab){
      */
     for (const tabKey in tabs) {
         let cTab = tabs[tabKey]
+
         // Disable
         cTab.current = false
 
         // Enable if current
         if (cTab.name == tab.name){
             cTab.current = true;
+
+            // Create a new leaderboard object
+            const l = {
+                "title": tab.name,
+                "data": props.featureData[tab.id]["leaderboard"]["data"]
+            }
+
+            // Change the leaderboard
+            Object.assign(leaderboard, l)
         }
     }
     currentTab.value = tab
