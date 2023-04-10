@@ -26,6 +26,18 @@
                           </select>
                         </div>
                     </div>
+                    <!-- Sort bar -->
+                    <div>
+                        <label for="sortBy" class="block text-sm font-medium text-gray-700">Sort by</label>
+                        <div class="mt-1">
+                          <select v-model="form.sortBy" id="sortBy" name="sortBy" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                            <option :value="null">Created at</option>
+                            <option value="newest">Newest</option>
+                            <option value="oldest">Oldest</option>
+                            <option value="title">Title</option>
+                          </select>
+                        </div>
+                    </div>
                     <!-- Search section -->
                     <div class="flex-1 flex flex-col md:flex-row md:space-x-3 md:space-y-0 space-y-3 items-center">
                         <!-- Search -->
@@ -56,7 +68,7 @@
                       <p class="text-sm text-gray-700">
                         Page
                         {{ ' ' }}
-                        <span class="font-medium">{{entries.meta.from}}</span>
+                        <span class="font-medium">{{entries.meta.current_page}}</span>
                         {{ ' ' }}
                         of
                         {{ ' ' }}
@@ -101,11 +113,9 @@ export default {
         form: {
           search: this.filters.search,
           template: this.filters.template ?? null,
+          sortBy: this.filters.sortBy ?? "newest",
         },
       };
-    },
-    mounted() {
-        console.log(this.entries["data"])
     },
     watch: {
         form: {
@@ -124,6 +134,7 @@ export default {
          */
         this.form.template = null;
         this.form.search = "";
+        this.form.sortBy = null;
         
       }
     }

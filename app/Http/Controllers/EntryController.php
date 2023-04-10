@@ -11,9 +11,7 @@ use App\Models\Entry;
 use App\Models\Template;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class EntryController extends Controller
 {
@@ -30,15 +28,26 @@ class EntryController extends Controller
      */
     public function index(Request $request)
     {
-
-        $filters = $request->only(['search', 'template']);
+        $filters = $request->only(['search', 'template', 'sortBy']);
         $entries =  EntryResource::collection(
             Auth::user()->entries()
             ->when($request->input('search'), function($query, $search){
                 return $query->where('data.title', 'like', "%${search}%");
             })->when($request->input('template'), function($query, $template){
                 return $query->where('template_id', '=', $template);
-            })->paginate(15)->withQueryString());
+            })->when($request->input('sortBy'), function($query, $sortBy){
+                switch ($sortBy) {
+                    case 'newest':
+                        return $query->orderBy("data.date", "desc");
+                    case 'oldest':
+                        return $query->orderBy("data.date", "asc");
+                    case 'title':
+                        return $query->orderBy("data.title", "asc");
+                    default:
+                        return $query->orderBy("created_at", "asc");
+                }
+            })->orderBy("created_at", "desc")->paginate(15)->withQueryString()
+        );
 
         // Fetch the templates (->all() removes the 'data' key)
         $templates = TemplateResource::collection(Template::all())->all();
@@ -48,7 +57,7 @@ class EntryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
@@ -61,10 +70,10 @@ class EntryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
-    {  
+    {
 
         // Fetch the template to avoid using client side details
         $template = Template::findOrFail($request->template);
@@ -91,7 +100,7 @@ class EntryController extends Controller
      * Display the specified resource.
      *
      * @param  entry  $entry
-     * @return EntryResource
+     * @return \Inertia\Response
      */
     public function show(Entry $entry){
 
@@ -124,13 +133,13 @@ class EntryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Entry $entry)
     {
 
         // Fetch the template
-        $template = $entry->template();        
+        $template = $entry->template();
 
         // Extract the validation rules & run
         $template->getValidator($request->content)->validate();
@@ -149,7 +158,7 @@ class EntryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Entry $entry)
     {

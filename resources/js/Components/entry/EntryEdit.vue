@@ -6,7 +6,7 @@
             <!-- Fields in template -->
             <div v-for="field in template.fields">
                 <label :for="field.id" class="block text-sm font-medium text-gray-700">{{field.label}}</label>
-                <div class="mt-1">
+                <div class="mt-2">
                     <component :is="TemplateInputs[field.type]" :key="field.id" :field="field" v-model.lazy="form.content[field.id]"></component>
                 </div>
             </div>

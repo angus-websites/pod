@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\TemplateResource;
+use App\Http\Resources\Leaderboard\TemplateResource;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

@@ -1,27 +1,25 @@
 
 <template>
-    <AppLayout title="Dashboard">
-        <PageContainer>
-            <Heading1>Admin Dashboard</Heading1>
-            <FeaturesExplained :features="features.data" class="my-10"/>
-            <FeatureMatrix :featureGroups="featureGroups.data" :features="features.data" class="my-10"  />
-            <UserTable :users="users.data" class="my-10" />
-        </PageContainer>
-    </AppLayout>
+    <DashboardLayout>
+        <Heading1>Admin Dashboard</Heading1>
+        <FeaturesExplained :features="features.data" class="my-10"/>
+        <FeatureMatrix :featureGroups="featureGroups.data" :features="features.data" class="my-10"  />
+        <FeatureGroupsExplained :featureGroups="featureGroups.data" class="my-10" />
+        <UserTable :users="users" :userCount="userCount" class="my-10" />
+    </DashboardLayout>
 </template>
 
 <script setup>
-import AppNavbar from "@/Components/_includes/AppNavbar.vue";
-import AppLayout from "@/Layouts/AppLayout.vue";
-import PageContainer from "@/Components/_util/PageContainer.vue";
+import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import Heading1 from "@/Components/headings/Heading1.vue";
 import UserTable from "@/Components/dashboard/UserTable.vue";
 import FeatureMatrix from "@/Components/dashboard/FeatureMatrix.vue";
 import FeaturesExplained from "@/Components/dashboard/FeaturesExplained.vue";
-import { reactive } from 'vue';
+import FeatureGroupsExplained from "@/Components/dashboard/FeatureGroupsExplained.vue";
 
 const props = defineProps({
     users: Object,
+    userCount: Number,
     featureGroups: Object,
     features: Object,
 })

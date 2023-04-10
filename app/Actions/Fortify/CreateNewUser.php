@@ -36,7 +36,7 @@ class CreateNewUser implements CreatesNewUsers
         ]);
 
         // Assign this user to a random feature group
-        $all_feature_groups = FeatureGroup::all();
+        $all_feature_groups = FeatureGroup::all()->where("active", "=", "1");
 
         if ($all_feature_groups->isNotEmpty()){
             $user->addToGroup($all_feature_groups->random()->name);

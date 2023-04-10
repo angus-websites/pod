@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Leaderboard;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
-class FeatureGroupResource extends JsonResource
+class StreakResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,11 +17,8 @@ class FeatureGroupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'bg' => $this->bg,
-            'fg' => $this->fg,
-            'description' => $this->description,
-            'features' => FeatureResource::collection($this->belongsToMany(Feature::class)->get()),
-            'active' => $this->active,
+            'value' => number_format($this->streak()),
+            'rank' => ($this->getStreakRank()),
         ];
     }
 }

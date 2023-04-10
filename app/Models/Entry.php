@@ -15,6 +15,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class Entry extends Model
 {
     use HasFactory;
+
     protected $connection = 'mongodb';
     protected $fillable = ['title','data'];
 

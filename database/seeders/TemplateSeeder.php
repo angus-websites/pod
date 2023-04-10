@@ -76,7 +76,7 @@ class TemplateSeeder extends Seeder
             [
                 'id' => 'what_i_learned',
                 'label' => 'What did you learn?',
-                'type' => 'textarea',
+                'type' => 'raw',
                 'required' => true,
                 'validation' => ['required', 'max:5000'],
             ],
@@ -107,7 +107,7 @@ class TemplateSeeder extends Seeder
             [
                 'id' => 'what_i_learned',
                 'label' => 'How did you learn this skill?',
-                'type' => 'textarea',
+                'type' => 'raw',
                 'required' => true,
                 'validation' => ['required', 'max:5000'],
             ],
