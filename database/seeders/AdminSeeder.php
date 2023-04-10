@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
 
       $superAdminRole=Role::where('name', '=', 'Super Admin')->firstOrFail();
       if(config('admin.admin_name')) {
-        $admin=User::create([
+        User::create([
           'name' => config('admin.admin_name'),
           'email' => config('admin.admin_email'),
           'role_id' => $superAdminRole->id,
