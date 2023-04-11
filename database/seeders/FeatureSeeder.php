@@ -19,13 +19,13 @@ class FeatureSeeder extends Seeder
     public function run()
     {
 
-//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-//        DB::table('feature_groups')->truncate();
-//        DB::table('feature_feature_group')->truncate();
-//        DB::table('feature_group_user')->truncate();
-//        DB::table('feature_user')->truncate();
-//        DB::table('features')->truncate();
-//        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('feature_groups')->truncate();
+        DB::table('feature_feature_group')->truncate();
+        DB::table('feature_group_user')->truncate();
+        DB::table('feature_user')->truncate();
+        DB::table('features')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         // ----- Seed our features -----
 

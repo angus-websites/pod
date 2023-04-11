@@ -38,6 +38,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // Can thie user access CV builder?
         Gate::define('access-cv', function (User $user) {
+
             if (Feature::where("name", "=", "CV Builder")->where("active", "=", 1)->exists()){
                 return $user->hasFeature('CV Builder') || $user->isAdmin();
             }
