@@ -43,10 +43,11 @@ const submit = () => {
 
                 <!-- Name -->
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Your name</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Username</label>
                     <div class="mt-1">
                       <input v-model="form.name" autofocus id="name" name="name" type="text" autocomplete="name" required="" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
                     </div>
+                    <small class="text-gray-600 text-xs">Will be publicly visible - <a :href="route('policy.show')+'#usernames'">Learn more</a></small>
                 </div>
 
                 <!-- Email -->
@@ -73,12 +74,18 @@ const submit = () => {
                     </div>
                 </div>
 
+                <!-- Terms and privacy policy -->
                 <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
-                    <InputLabel for="terms">
-                        <div class="flex items-center">
-                            <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
+                    <div class="relative flex items-start">
+                        <div class="flex h-6 items-center">
+                            <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                         </div>
-                    </InputLabel>
+                        <div class="ml-3 text-sm leading-6">
+                            <label for="comments" class="font-medium text-gray-900">
+                                I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div>
