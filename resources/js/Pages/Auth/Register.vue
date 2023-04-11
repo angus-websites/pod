@@ -47,7 +47,7 @@ const submit = () => {
                     <div class="mt-1">
                       <input v-model="form.name" autofocus id="name" name="name" type="text" autocomplete="name" required="" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
                     </div>
-                    <small class="text-gray-600 text-xs">Will be publicly visible - <a :href="route('terms.show')+'#usernames'">Learn more</a></small>
+                    <small class="text-gray-600 text-xs">Will be publicly visible - <a :href="route('policy.show')+'#usernames'">Learn more</a></small>
                 </div>
 
                 <!-- Email -->

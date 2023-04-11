@@ -26,5 +26,3 @@ We reserve the right to change these Terms of Service at any time without notice
 
 By using our website, you agree to be bound by these Terms of Service. If you have any questions or concerns about these Terms of Service, please contact us.
 
-<h2 id="usernames" class="my-2"> Usernames </h2>
-Usernames will be publicly visible to other users of the application
