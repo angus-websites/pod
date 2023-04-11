@@ -9,7 +9,7 @@ We may collect personal information from you when you use our website, such as y
 We use your personal information to provide you with our services and to communicate with you about our website.
 
 <h2 id="usernames">3. Usernames</h2>
-<p>Usernames will be publicly visible to other users of the application, certain users of the application will have access to features such as leaderboards that will allow them to view their ranking in the application compared to other users, usernames will be visible on these leaderboards</p>
+<p>Usernames will be publicly visible to other users of the application, certain users of the application will have access to features such as leaderboards that will allow them to view their ranking in the application compared to other users, usernames will be visible on these leaderboards.</p>
 
 ## 4. Disclosure of Information
 We do not sell, rent, or share your personal information with third parties for their marketing purposes. However, we may disclose your personal information to our service providers who assist us in providing our services. We may also disclose your personal information if required by law or if we believe that such disclosure is necessary to protect our rights or the rights of others.
