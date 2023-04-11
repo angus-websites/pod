@@ -42,7 +42,10 @@ Route::middleware([
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::resource('entries', EntryController::class);
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+
+    // CV Routes
     Route::get('/cv', [CVController::class, 'index'])->name('cv');
+
 
 });
 

@@ -9,6 +9,7 @@ use Database\Seeders\RoleSeeder;
 use Database\Seeders\TemplateSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Testing\AssertableInertia as Assert;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 use Tests\TestCase;
 
@@ -140,5 +141,28 @@ class CVTest extends TestCase
         $response->assertStatus(403);
     }
 
+//    public function test_user_with_feature_can_generate_cv_from_entries()
+//    {
+//        $this->seed(TemplateSeeder::class);
+//
+//        // Create user
+//        $user = User::factory()->hasEntries(5)->create();
+//
+//        // Give the CV builder feature
+//        $user->giveFeature("CV Builder");
+//
+//        // Acting as this user
+//        $this->actingAs($user);
+//
+//        // Test we can access the page
+//        $response = $this->get(route('cv'));
+//
+//        // Check we get the correct data back
+//        $response->assertInertia(fn (Assert $page) => $page
+//            // Checking nested properties using "dot" notation...
+//            ->has('data')
+//        );
+//
+//    }
 
 }
