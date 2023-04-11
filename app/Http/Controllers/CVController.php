@@ -28,6 +28,7 @@ class CVController extends Controller
 
     private function getCV(){
 
+
         $user = Auth::user();
 
         // Generate a prompt to be lazy loaded

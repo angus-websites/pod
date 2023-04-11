@@ -12,7 +12,8 @@ defineProps({
 </script>
 
 <template>
-    <Head :title="title" />
+    <Head :title="title">
+    </Head>
 
     <Banner />
 
