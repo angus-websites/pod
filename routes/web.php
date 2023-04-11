@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\FeedbackController;
+use \App\Http\Controllers\CVController;
 
 use App\Models\User;
 use Illuminate\Foundation\Application;
@@ -41,6 +42,7 @@ Route::middleware([
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::resource('entries', EntryController::class);
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+    Route::get('/cv', [CVController::class, 'index'])->name('cv');
 
 });
 

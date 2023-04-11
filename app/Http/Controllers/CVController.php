@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Inertia\Inertia;
 
-class FeedbackController extends Controller
+class CVController extends Controller
 {
     /**
-     * Show the form for submitting feedback
+     * Show the CV builder page
      *
      * @return \Inertia\Response
      */
@@ -18,10 +18,10 @@ class FeedbackController extends Controller
     {
 
         // Check permissions before rendering feedback form
-        if (! Gate::allows('access-feedback', Auth::user())) {
+        if (! Gate::allows('access-cv', Auth::user())) {
             abort(403);
         }
 
-        return Inertia::render('Feedback/Index');
+        return Inertia::render('CV/Index');
     }
 }
