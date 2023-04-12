@@ -26,9 +26,23 @@
                     </div>
 
                     <!-- Rendered content -->
-                    <div class="border p-5 shadow" v-if="data && !loading">
-                        <article class="prose" v-html="data.content">
-                        </article>
+                    <div class="" v-if="data && !loading">
+<!--                        <article class="prose prose-sm lg:prose-base max-w-none" v-html="data.content">-->
+<!--                        </article>-->
+                        <Editor
+                            :initial-value="data.content"
+                            @selectionChange="handlerFunction"
+                            api-key="ljfuynz3a61fqanmksvqwvil07uc83jbc1ntm6pk31w1n78g"
+                            :init="{
+                                branding: false,
+                                menubar: false,
+                                min_height: 300,
+                                height: 800,
+                                plugins: [
+                                'autolink lists link wordcount'
+                                ],
+                            }"
+                        />
                     </div>
                 </div>
 
@@ -45,6 +59,7 @@ import Heading1 from "@/Components/headings/Heading1.vue";
 import {Inertia} from "@inertiajs/inertia";
 import RingLoader from 'vue-spinner/src/RingLoader.vue'
 import {ref} from "vue";
+import Editor from '@tinymce/tinymce-vue'
 
 const props = defineProps({
     data: Object,

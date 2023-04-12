@@ -1,12 +1,13 @@
 <template>
     <div>
-        <Editor 
+        <Editor
         :initial-value="modelValue"
         @selectionChange="handlerFunction"
-        api-key="ljfuynz3a61fqanmksvqwvil07uc83jbc1ntm6pk31w1n78g" 
+        api-key="ljfuynz3a61fqanmksvqwvil07uc83jbc1ntm6pk31w1n78g"
         :init="{
             branding: false,
-            height: 300,
+            min_height: 300,
+            height: 400,
             menubar: false,
             plugins: [
             'autolink lists link wordcount'
