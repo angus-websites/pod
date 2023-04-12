@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -54,6 +56,10 @@ class HandleInertiaRequests extends Middleware
                 ? $request->user()->isAdmin(true) ? 1 : 0
                 : 0,
 
+            'canGenerateCV' => fn () => Gate::allows('access-cv', $request->user())
+                ? 1
+                : 0,
+
             'flash' => function () use ($request) {
                 return [
                     'success' => $request->session()->get('success'),
@@ -61,7 +67,7 @@ class HandleInertiaRequests extends Middleware
                     'info' => $request->session()->get('info'),
                 ];
             },
-            
+
         ]);
     }
 }

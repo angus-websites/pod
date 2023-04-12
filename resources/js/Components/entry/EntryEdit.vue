@@ -56,7 +56,7 @@ const props = defineProps({
 const emit = defineEmits(['tabToggle'])
 
 // We use content instead of 'data' as it seems to be a keyword
-const form = useForm({
+const form = useForm("entryContent",{
     content: props.entry.data,
 })
 
@@ -77,7 +77,7 @@ function submitForm(){
      * Submit the form
      * and update the entry
      */
-    
+
     // Update
     form.put(route('entries.update', props.entry.id), {
         // If we succeed, switch tabs

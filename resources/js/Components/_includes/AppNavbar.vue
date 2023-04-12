@@ -51,7 +51,7 @@
 
                 </div>
             </div>
-            
+
             <!-- Navbar -->
             <div class="w-full py-3 lg:border-t lg:border-white lg:border-opacity-20">
               <div class="lg:grid lg:grid-cols-3 lg:items-center lg:gap-8">
@@ -111,11 +111,23 @@ import { usePage } from '@inertiajs/inertia-vue3'
 
 // Fetch user
 const user = computed(() => usePage().props.value.auth.user)
+const canGenerateCV = usePage().props.value.canGenerateCV
 
-const navigation = [
+let navigation = [
     { name: 'Dashboard', href: route('dashboard'), current: route().current('dashboard') },
     { name: 'Entries', href: '/entries', current: route().current('entries.*') },
 ]
+
+navigation = [
+    ...navigation,
+    ...(canGenerateCV ? [{
+            name: 'Generate CV',
+            href: route('cv'),
+            current: route().current('cv')
+        }]
+        : []),
+]
+
 const userNavigation = [
     { name: 'Your Profile', href: route('profile.show') },
 ]

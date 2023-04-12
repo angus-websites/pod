@@ -25,6 +25,13 @@ class LeaderboardTest extends TestCase
         parent::setUp();
         $this->seed(TemplateSeeder::class);
         $this->seed(FeatureSeeder::class);
+
+        // Headers for the inertia partial reload
+        $this->headers = [
+            'HTTP_X-Inertia-Partial-Data' => 'featureData',
+            'HTTP_X-Inertia-Partial-Component' => 'Dashboard/UserDashboard'
+
+        ];
     }
 
     /**
@@ -44,7 +51,7 @@ class LeaderboardTest extends TestCase
         $this->actingAs($user);
 
         // Visit the dashboard
-        $response = $this->get(route('dashboard'));
+        $response = $this->get(route('dashboard'), $this->headers);
 
         // Check we get the correct data back
         $response->assertInertia(fn (Assert $page) => $page
@@ -70,8 +77,9 @@ class LeaderboardTest extends TestCase
         // Acting as this user
         $this->actingAs($user);
 
-        // Visit the dashboard
-        $response = $this->get(route('dashboard'));
+
+        // Visit the route and request the partial reload data
+        $response = $this->get(route('dashboard'), $this->headers);
 
         // Check the user is number 1 on the leaderboard & rank is correct
         $response->assertInertia(fn (Assert $page) => $page
@@ -108,7 +116,7 @@ class LeaderboardTest extends TestCase
         $this->actingAs($first);
 
         // Visit the dashboard
-        $response = $this->get(route('dashboard'));
+        $response = $this->get(route('dashboard'), $this->headers);
 
         // Check the user is number 1 on the leaderboard & rank is correct
         $response->assertInertia(fn (Assert $page) => $page
@@ -127,7 +135,7 @@ class LeaderboardTest extends TestCase
         $this->actingAs($second);
 
         // Visit the dashboard
-        $response = $this->get(route('dashboard'));
+        $response = $this->get(route('dashboard'), $this->headers);
 
         // Check the user is number 1 on the leaderboard & rank is correct
         $response->assertInertia(fn (Assert $page) => $page
@@ -145,7 +153,7 @@ class LeaderboardTest extends TestCase
         $this->actingAs($third);
 
         // Visit the dashboard
-        $response = $this->get(route('dashboard'));
+        $response = $this->get(route('dashboard'), $this->headers);
 
         // Check the user is number 1 on the leaderboard & rank is correct
         $response->assertInertia(fn (Assert $page) => $page
@@ -178,7 +186,7 @@ class LeaderboardTest extends TestCase
         $this->actingAs($first);
 
         // Visit the dashboard
-        $response = $this->get(route('dashboard'));
+        $response = $this->get(route('dashboard'), $this->headers);
 
         // Check the user is number 1 on the leaderboard & rank is correct
         $response->assertInertia(fn (Assert $page) => $page

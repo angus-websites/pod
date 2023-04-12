@@ -22,6 +22,6 @@ class FeedbackController extends Controller
             abort(403);
         }
 
-        return Inertia::render('Features/Feedback');
+        return Inertia::render('Feedback/Index');
     }
 }

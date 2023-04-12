@@ -119,7 +119,6 @@ function isUser(person){
      * Check the current person on the leaderboard
      * is the logged in user
      */
-    console.log(person.id+" vs "+currentUser["id"])
     return person.id === currentUser.id;
 }
 

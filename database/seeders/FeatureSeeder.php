@@ -56,6 +56,12 @@ class FeatureSeeder extends Seeder
             'description' => 'Users can provide feedback on their experience using the app'
         ]);
 
+        $cvBuilder =  Feature::create([
+            'name' => 'CV Builder',
+            'active' => false,
+            'description' => "Users can generate CV's from their entry content"
+        ]);
+
 
         // ----- Seed our groups -----
 
@@ -67,7 +73,7 @@ class FeatureSeeder extends Seeder
         ]);
         $groupA->addFeature($streaks);
         $groupA->addFeature($feedback);
-
+        $groupA->addFeature($cvBuilder);
 
         // Group B
         $groupB = FeatureGroup::create([
@@ -77,6 +83,8 @@ class FeatureSeeder extends Seeder
         ]);
         $groupB->addFeature($totalWords);
         $groupB->addFeature($feedback);
+        $groupB->addFeature($cvBuilder);
+
 
         // Group C
         $groupC = FeatureGroup::create([
@@ -87,6 +95,8 @@ class FeatureSeeder extends Seeder
         $groupC->addFeature($streaks);
         $groupC->addFeature($leaderboard);
         $groupC->addFeature($feedback);
+        $groupC->addFeature($cvBuilder);
+
 
         // Group D
         $groupD = FeatureGroup::create([
@@ -97,6 +107,7 @@ class FeatureSeeder extends Seeder
         $groupD->addFeature($totalWords);
         $groupD->addFeature($leaderboard);
         $groupD->addFeature($feedback);
+        $groupD->addFeature($cvBuilder);
 
         // Group E
         $groupE = FeatureGroup::create([
@@ -107,6 +118,7 @@ class FeatureSeeder extends Seeder
         $groupE->addFeature($streaks);
         $groupE->addFeature($ranked);
         $groupE->addFeature($feedback);
+        $groupE->addFeature($cvBuilder);
 
         // Group F
         $groupF = FeatureGroup::create([
@@ -117,6 +129,7 @@ class FeatureSeeder extends Seeder
         $groupF->addFeature($totalWords);
         $groupF->addFeature($ranked);
         $groupF->addFeature($feedback);
+        $groupF->addFeature($cvBuilder);
 
         // Group G
         $groupG = FeatureGroup::create([
@@ -128,6 +141,7 @@ class FeatureSeeder extends Seeder
         $groupG->addFeature($totalWords);
         $groupG->addFeature($leaderboard);
         $groupG->addFeature($feedback);
+        $groupG->addFeature($cvBuilder);
 
         // Group H
         $groupH = FeatureGroup::create([
@@ -139,6 +153,8 @@ class FeatureSeeder extends Seeder
         $groupH->addFeature($totalWords);
         $groupH->addFeature($ranked);
         $groupH->addFeature($feedback);
+        $groupH->addFeature($cvBuilder);
+
 
         // Group I
         $groupI = FeatureGroup::create([
@@ -147,6 +163,8 @@ class FeatureSeeder extends Seeder
             'fg' => '#FFFFFF',
         ]);
         $groupI->addFeature($feedback);
+        $groupI->addFeature($cvBuilder);
+
 
     }
 }

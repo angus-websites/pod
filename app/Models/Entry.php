@@ -37,4 +37,18 @@ class Entry extends Model
         return $this->belongsTo(Template::class)->firstOrFail();
     }
 
+    /**
+     * Stringify all the data about this entry
+     */
+    public function stringify(){
+        $content = "";
+        foreach ($this->template()->fields as $field) {
+            $label = $field["label"];
+            $value = $this['data'][$field['id']];
+            $content.=$label.": ".$value."\n";
+        }
+
+        return $content;
+    }
+
 }
