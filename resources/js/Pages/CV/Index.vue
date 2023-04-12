@@ -17,7 +17,7 @@
                         <Heading1>
                             Generate a CV <span class="inline-flex items-center rounded-full bg-yellow-300 px-2.5 py-0.5 text-xs font-medium text-yellow-900">Early access</span>
                         </Heading1>
-                        <p class="mt-1 sm:mt-2 text-sm text-gray-700">Here you can generate a CSV based on the content of your entries</p>
+                        <p class="mt-1 sm:mt-2 text-sm text-gray-700">Here you can generate a CV based on the content of your entries</p>
                         <hr class="my-5">
                     </div>
 
