@@ -159,8 +159,8 @@ class CVTest extends TestCase
         // Acting as this user
         $this->actingAs($user);
 
-        // Test we can access the page
-        $response = $this->get(route('cv'), $this->headers);
+        // Send a get request to the page
+        $response = $this->call('GET', route('cv.download'), ["cvContent"=>"Hello world"]);
 
         // Assert a 403
         $response->assertStatus(403);

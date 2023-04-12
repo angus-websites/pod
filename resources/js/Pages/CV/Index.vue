@@ -1,14 +1,19 @@
 
 <template>
     <AppLayout title="CV">
+        <div class="flex justify-center bg-yellow-300 py-2.5 px-6 sm:px-3.5">
+            <div class="text-center text-sm font-medium flex flex-col gap-y-2 md:flex-row md:gap-x-2 items-center">
+                <p><span class="inline-flex items-center rounded-full bg-white px-2.5 py-0.5 text-xs font-medium text-yellow-900">Early access</span></p>
+                <p class="text-yellow-900">This is a new feature, you may experience some bugs</p>
+            </div>
+        </div>
 
         <PageContainer>
             <div class="px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col gap-y-10">
-
                     <div>
                         <Heading1>
-                            Generate a CV <span class="inline-flex items-center rounded-full bg-orange-200 px-2.5 py-0.5 text-xs font-medium text-orange-800">Early access</span>
+                            Generate a CV <span class="inline-flex items-center rounded-full bg-yellow-300 px-2.5 py-0.5 text-xs font-medium text-yellow-900">Early access</span>
                         </Heading1>
                         <p class="mt-1 sm:mt-2 text-sm text-gray-700">Here you can generate a CSV based on the content of your entries</p>
                         <hr class="my-5">
@@ -16,9 +21,11 @@
 
                     <!-- Generate button -->
                     <div class="text-center">
-                        <PrimaryButton @click="generate" :disabled="loading">
+                        <div>
+                            <PrimaryButton @click="generate" :disabled="loading">
                             Generate
-                        </PrimaryButton>
+                            </PrimaryButton>
+                        </div>
                     </div>
 
                     <!-- Loading screen -->
