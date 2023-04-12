@@ -35,6 +35,11 @@ class CVController extends Controller
      */
     public function createPDF(Request $request){
 
+        // Check permissions before rendering feedback form
+        if (! Gate::allows('access-cv', Auth::user())) {
+            abort(403);
+        }
+
 
         $cvContent = $request->cvContent;
 

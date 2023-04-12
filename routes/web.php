@@ -46,9 +46,6 @@ Route::middleware([
     // CV Routes
     Route::get('/cv', [CVController::class, 'index'])->name('cv');
     Route::get('/cv/download', [CVController::class, 'createPDF'])->name('cv.download');
-    Route::get('/cv/test', [CVController::class, 'pdfTest'])->name('cv.test');
-
-
 
 });
 
