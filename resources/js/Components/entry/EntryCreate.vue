@@ -49,7 +49,7 @@ const template = toRef(props, 'template')
 const form_content = {};
 
 // We use content instead of 'data' as it seems to be a keyword
-const form = useForm({
+const form = useForm("entryCreate",{
     content: form_content,
     template: template,
 })
@@ -63,7 +63,7 @@ function submitForm(){
      * Submit the form
      * and update the entry
      */
-    
+
     // Only send the template id in the request
     form.transform((data) => ({
         ...data,

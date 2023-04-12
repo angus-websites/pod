@@ -48,27 +48,33 @@ class HomeController extends Controller
             // Extract the features into an array
             $features = $user->allFeatures();
 
-            $featureData = [
-                'entry count' => [
-                    "data" => number_format(count($user->entries)),
-                    "rank" => $user->getEntryCountRank(),
-                    "leaderboard" => User::entryCountLeaderboard(),
-                    ],
-                "streak" => [
-                    "data" => number_format($user->streak()),
-                    "rank" => $user->getStreakRank(),
-                    "leaderboard" => User::streakLeaderboard(),
-                ],
-                "total word count" => [
-                    "data" => number_format($user->totalWordCount()),
-                    "rank" => $user->getTotalWordCountRank(),
-                    "leaderboard" => User::wordCountLeaderboard(),
-                    ],
-            ];
-
-            return Inertia::render('Dashboard/UserDashboard', ["features" => $features, "featureData" => $featureData]);
+            return Inertia::render('Dashboard/UserDashboard', [
+                "features" => $features,
+                "featureData" => Inertia::lazy(fn () => $this->getFeatureData($user))
+            ]);
         }
 
 
+    }
+
+    private function getFeatureData($user): array
+    {
+        return [
+            'entry count' => [
+                "data" => number_format(count($user->entries)),
+                "rank" => $user->getEntryCountRank(),
+                "leaderboard" => User::entryCountLeaderboard(),
+            ],
+            "streak" => [
+                "data" => number_format($user->streak()),
+                "rank" => $user->getStreakRank(),
+                "leaderboard" => User::streakLeaderboard(),
+            ],
+            "total word count" => [
+                "data" => number_format($user->totalWordCount()),
+                "rank" => $user->getTotalWordCountRank(),
+                "leaderboard" => User::wordCountLeaderboard(),
+            ],
+        ];
     }
 }

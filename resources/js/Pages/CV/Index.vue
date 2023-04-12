@@ -56,7 +56,6 @@ let loading = ref(false);
 function generate(){
     Inertia.reload({
         only: ['data'],
-        progressIndicator: false,
         onStart: (visit) => {
             loading.value=true;
         },
