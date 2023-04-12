@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\CVController;
 use App\Models\Role;
 use App\Models\User;
 use Database\Seeders\FeatureSeeder;
@@ -155,7 +156,6 @@ class CVTest extends TestCase
         // Create user
         $user = User::factory()->hasEntries(5)->create();
 
-
         // Acting as this user
         $this->actingAs($user);
 
@@ -164,6 +164,30 @@ class CVTest extends TestCase
 
         // Assert a 403
         $response->assertStatus(403);
+
+    }
+
+    public function test_user_cannot_generate_cv_if_number_of_entries_too_small()
+    {
+        $numberOfEntries = CVController::$minEntries - 1;
+
+        $this->seed(TemplateSeeder::class);
+
+        // Create user
+        $user = User::factory()->hasEntries($numberOfEntries)->create();
+
+        // Give them the feature
+        $user->giveFeature("CV Builder");
+
+        // Acting as this user
+        $this->actingAs($user);
+
+        // Attempt to generate the CV
+        $response = $this->get(route('cv'), $this->headers);
+
+        // Assert a 403
+        $response->assertStatus(403);
+
 
     }
 
