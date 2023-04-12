@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use OpenAI\Laravel\Facades\OpenAI;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CVController extends Controller
 {
@@ -32,7 +34,19 @@ class CVController extends Controller
      * and convert it to PDF
      */
     public function createPDF(Request $request){
-       echo "hi";
+
+
+        $cvContent = $request->cvContent;
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($cvContent);
+
+        // return $pdf->stream(); // Just stream the data without download
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'cv.pdf', ['Content-Type' => 'application/pdf']);
+
     }
 
     /**
@@ -40,9 +54,6 @@ class CVController extends Controller
      * all the users content
      */
     private function getCV(){
-
-        sleep(2);
-        return ["content" => "Hello"];
 
         $user = Auth::user();
 

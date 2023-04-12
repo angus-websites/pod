@@ -1,6 +1,7 @@
 
 <template>
-    <AppLayout title="Feedback">
+    <AppLayout title="CV">
+
         <PageContainer>
             <div class="px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col gap-y-10">
@@ -30,14 +31,15 @@
 
                         <!-- Download button -->
                         <div class="text-center">
-                            <button @click="download" type="button" class="inline-flex items-center gap-x-1.5 rounded-md bg-secondary px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ">
+                            <a :href="route('cv.download', { cvContent: cvContent })"
+                               class="inline-flex items-center gap-x-1.5 rounded-md bg-secondary px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ">
                                 Download
                                 <ArrowDownTrayIcon class="-mr-0.5 h-5 w-5" aria-hidden="true" />
-                            </button>
+                            </a>
                         </div>
 
                         <Editor
-                            :initial-value="data.content"
+                            v-model="cvContent"
                             @selectionChange="handlerFunction"
                             api-key="ljfuynz3a61fqanmksvqwvil07uc83jbc1ntm6pk31w1n78g"
                             :init="{
@@ -50,12 +52,10 @@
                                 ],
                             }"
                         />
-
-
                     </div>
                 </div>
 
-                {{ cvContent }}
+
 
             </div>
         </PageContainer>
@@ -79,22 +79,7 @@ const props = defineProps({
 
 // Vars
 let loading = ref(false);
-let cvContent = ref(props.data);
-
-function handlerFunction(event, editor){
-    console.log(editor.getContent())
-    cvContent.value = editor.getContent()
-}
-
-function download(){
-  console.log("Downloading")
-    Inertia.visit(route("cv.download"), {
-        method: 'post',
-        data: {
-            cvData: cvContent,
-        },
-    })
-}
+let cvContent = ref("");
 
 function generate(){
     Inertia.reload({
@@ -104,8 +89,10 @@ function generate(){
         },
         onFinish: (visit) =>{
             loading.value=false
+            cvContent.value = props.data.content
         }
     })
+
 }
 
 </script>
