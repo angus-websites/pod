@@ -24,6 +24,13 @@ class CVTest extends TestCase
         // Seed features and ensure active
         $this->seed(FeatureSeeder::class);
         Feature::where("name", "=", "CV Builder")->update(['active'=>'1']);
+
+        // Lazy loaded headers
+        $this->headers = [
+            'HTTP_X-Inertia-Partial-Data' => 'data',
+            'HTTP_X-Inertia-Partial-Component' => 'CV/Index'
+
+        ];
     }
 
     /**
@@ -141,28 +148,23 @@ class CVTest extends TestCase
         $response->assertStatus(403);
     }
 
-//    public function test_user_with_feature_can_generate_cv_from_entries()
-//    {
-//        $this->seed(TemplateSeeder::class);
-//
-//        // Create user
-//        $user = User::factory()->hasEntries(5)->create();
-//
-//        // Give the CV builder feature
-//        $user->giveFeature("CV Builder");
-//
-//        // Acting as this user
-//        $this->actingAs($user);
-//
-//        // Test we can access the page
-//        $response = $this->get(route('cv'));
-//
-//        // Check we get the correct data back
-//        $response->assertInertia(fn (Assert $page) => $page
-//            // Checking nested properties using "dot" notation...
-//            ->has('data')
-//        );
-//
-//    }
+    public function test_user_cannot_generate_cv_from_api_if_doesnt_have_access()
+    {
+        $this->seed(TemplateSeeder::class);
+
+        // Create user
+        $user = User::factory()->hasEntries(5)->create();
+
+
+        // Acting as this user
+        $this->actingAs($user);
+
+        // Test we can access the page
+        $response = $this->get(route('cv'), $this->headers);
+
+        // Assert a 403
+        $response->assertStatus(403);
+
+    }
 
 }

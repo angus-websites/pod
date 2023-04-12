@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use OpenAI\Laravel\Facades\OpenAI;
+use Illuminate\Http\Request;
 
 class CVController extends Controller
 {
@@ -26,6 +27,18 @@ class CVController extends Controller
         return Inertia::render('CV/Index', ["data" => Inertia::lazy(fn () => $this->getCV())]);
     }
 
+    /**
+     * Take the user generated HTML
+     * and convert it to PDF
+     */
+    public function createPDF(Request $request){
+       echo "hi";
+    }
+
+    /**
+     * Use OpenAI to generate a CV from
+     * all the users content
+     */
     private function getCV(){
 
 
@@ -60,5 +73,6 @@ class CVController extends Controller
 
         return Arr::get($result, 'choices.0.message');
     }
+
 
 }
