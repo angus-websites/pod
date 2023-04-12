@@ -8,7 +8,7 @@
 
                     <div>
                         <Heading1>
-                            Generate a CV <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">Early access</span>
+                            Generate a CV <span class="inline-flex items-center rounded-full bg-orange-200 px-2.5 py-0.5 text-xs font-medium text-orange-800">Early access</span>
                         </Heading1>
                         <p class="mt-1 sm:mt-2 text-sm text-gray-700">Here you can generate a CSV based on the content of your entries</p>
                         <hr class="my-5">

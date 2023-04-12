@@ -58,7 +58,7 @@ class CVController extends Controller
         $user = Auth::user();
 
         // Generate a prompt to be lazy loaded
-        $prompt = "Generate a CV for me based on the following diary entries and send the result back as raw html... \n";
+        $prompt = "Generate a CV for me based on the following diary entries in raw html (body only)... \n";
 
         // Fill basic information in
         $prompt.="Basic info...\n";
