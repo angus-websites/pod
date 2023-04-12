@@ -60,6 +60,10 @@ class HandleInertiaRequests extends Middleware
                 ? 1
                 : 0,
 
+            'canGiveFeedback' => fn () => Gate::allows('access-feedback', $request->user())
+                ? 1
+                : 0,
+
             'flash' => function () use ($request) {
                 return [
                     'success' => $request->session()->get('success'),
