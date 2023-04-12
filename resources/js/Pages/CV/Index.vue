@@ -26,9 +26,16 @@
                     </div>
 
                     <!-- Rendered content -->
-                    <div class="" v-if="data && !loading">
-<!--                        <article class="prose prose-sm lg:prose-base max-w-none" v-html="data.content">-->
-<!--                        </article>-->
+                    <div class="flex flex-col justify-center gap-y-5" v-if="data && !loading">
+
+                        <!-- Download button -->
+                        <div class="text-center">
+                            <button @click="download" type="button" class="inline-flex items-center gap-x-1.5 rounded-md bg-secondary px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ">
+                                Download
+                                <ArrowDownTrayIcon class="-mr-0.5 h-5 w-5" aria-hidden="true" />
+                            </button>
+                        </div>
+
                         <Editor
                             :initial-value="data.content"
                             @selectionChange="handlerFunction"
@@ -43,8 +50,12 @@
                                 ],
                             }"
                         />
+
+
                     </div>
                 </div>
+
+                {{ cvContent }}
 
             </div>
         </PageContainer>
@@ -58,8 +69,9 @@ import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import Heading1 from "@/Components/headings/Heading1.vue";
 import {Inertia} from "@inertiajs/inertia";
 import RingLoader from 'vue-spinner/src/RingLoader.vue'
-import {ref} from "vue";
+import {ref, reactive} from "vue";
 import Editor from '@tinymce/tinymce-vue'
+import { ArrowDownTrayIcon } from '@heroicons/vue/20/solid'
 
 const props = defineProps({
     data: Object,
@@ -67,6 +79,22 @@ const props = defineProps({
 
 // Vars
 let loading = ref(false);
+let cvContent = ref(props.data);
+
+function handlerFunction(event, editor){
+    console.log(editor.getContent())
+    cvContent.value = editor.getContent()
+}
+
+function download(){
+  console.log("Downloading")
+    Inertia.visit(route("cv.download"), {
+        method: 'post',
+        data: {
+            cvData: cvContent,
+        },
+    })
+}
 
 function generate(){
     Inertia.reload({

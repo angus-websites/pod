@@ -41,6 +41,8 @@ class CVController extends Controller
      */
     private function getCV(){
 
+        sleep(2);
+        return ["content" => "Hello"];
 
         $user = Auth::user();
 
