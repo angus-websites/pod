@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('mongodb')->create('user_feedback', function (Blueprint $table) {
+        Schema::connection('mongodb')->create('feedback_user', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->bigInteger('feedback_question_id')->unsigned();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection('mongodb')->dropIfExists('user_feedback');
+        Schema::connection('mongodb')->dropIfExists('feedback_user');
     }
 };

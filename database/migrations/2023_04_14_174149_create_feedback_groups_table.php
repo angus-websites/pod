@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('feedback_question_groups', function (Blueprint $table) {
+        Schema::create('feedback_groups', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->text("name");
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedback_question_groups');
+        Schema::dropIfExists('feedback_groups');
     }
 };
