@@ -8,14 +8,14 @@ use Jenssegers\Mongodb\Eloquent\HybridRelations;
 
 class FeedbackQuestionGroup extends Model
 {
-    use HasFactory;
     use HybridRelations;
+    use HasFactory;
 
     public function questions(){
         /**
          * Fetch all the entries that
          * belong to this user
          */
-        return $this->hasMany(FeedbackQuestion::class);
+        return $this->hasMany(FeedbackQuestion::class,);
     }
 }

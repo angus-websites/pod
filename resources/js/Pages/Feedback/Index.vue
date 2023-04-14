@@ -11,9 +11,15 @@
 
                 <!-- Main container -->
                 <div class="mt-6 flex flex-col space-y-20">
-                    <div>
-                        <Heading2>General</Heading2>
+
+                    <div v-for="group in feedbackGroups.data">
+                        <Heading2>{{ group.name }}</Heading2>
                         <hr>
+
+                        <!-- Questions -->
+                        <template v-for="question in group.questions.data">
+
+                        </template>
                     </div>
 
                     <div v-if="features.data.length > 0">
@@ -59,6 +65,7 @@ import Heading3 from "@/Components/headings/Heading3.vue";
 
 const props = defineProps({
     features: Object,
+    feedbackGroups: Object,
 })
 
 </script>

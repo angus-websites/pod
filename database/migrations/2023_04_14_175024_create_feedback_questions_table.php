@@ -19,10 +19,10 @@ return new class extends Migration
             $table->text("name");
             $table->text("question_type");
 
-            $table->bigInteger('feedback_question_group_id')->unsigned();
+            $table->bigInteger('feedback_question_groups_id')->unsigned();
 
             //Foreign keys
-            $table->foreign('feedback_question_group_id')
+            $table->foreign('feedback_question_groups_id')
                 ->references('id')->on('feedback_groups')->onDelete('cascade');
         });
     }

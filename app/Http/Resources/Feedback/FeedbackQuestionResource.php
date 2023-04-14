@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Feedback;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EntryResource extends JsonResource
+class FeedbackQuestionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,9 @@ class EntryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'template' => $this->template_id,
-            'title' => $this->data['title'],
-            'data' => $this->data,
+            'name' => $this->name,
+            'question_group' => $this->group(),
+            'question_type' => $this->question_type,
         ];
     }
 }

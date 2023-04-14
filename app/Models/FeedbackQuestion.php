@@ -9,4 +9,8 @@ class FeedbackQuestion extends Model
 {
     protected $connection = 'mongodb';
     use HasFactory;
+
+    public function group(){
+        return $this->belongsTo(FeedbackQuestionGroup::class)->firstOrFail();
+    }
 }
