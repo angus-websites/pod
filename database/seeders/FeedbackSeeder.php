@@ -44,16 +44,19 @@ class FeedbackSeeder extends Seeder
             "name" => "What do you think about this website?",
             "feedback_question_group_id" => $general->id,
             "question_type" => "text",
+            "data" => [],
         ]);
 
         FeedbackQuestion::create([
             "name" => "Which feature is your favourite?",
             "feedback_question_group_id" => $features->id,
             "question_type" => "radio",
-            "options" => [
-                "Leaderboard",
-                "Streaks",
-                "Total word count"
+            "data" => [
+                "options" => [
+                    "Leaderboard",
+                    "Streaks",
+                    "Total word count"
+                ]
             ]
         ]);
 

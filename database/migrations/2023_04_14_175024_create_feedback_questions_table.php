@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
-use Jenssegers\Mongodb\Schema\Blueprint;
+use Illuminate\Database\Schema\Blueprint;
+
 
 return new class extends Migration
 {
@@ -19,11 +20,11 @@ return new class extends Migration
             $table->text("name");
             $table->text("question_type");
 
-            $table->bigInteger('feedback_question_groups_id')->unsigned();
+            $table->bigInteger('feedback_question_group_id')->unsigned();
 
             //Foreign keys
-            $table->foreign('feedback_question_groups_id')
-                ->references('id')->on('feedback_groups')->onDelete('cascade');
+            $table->foreign('feedback_question_group_id')
+                ->references('id')->on('feedback_question_groups')->onDelete('cascade');
         });
     }
 

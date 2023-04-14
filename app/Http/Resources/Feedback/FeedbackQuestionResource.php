@@ -18,6 +18,7 @@ class FeedbackQuestionResource extends JsonResource
             'name' => $this->name,
             'question_group' => $this->group(),
             'question_type' => $this->question_type,
+            'data' => $this->data
         ];
     }
 }
