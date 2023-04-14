@@ -10,38 +10,53 @@
                 </div>
 
                 <!-- Main container -->
-                <div class="mt-6 flex flex-col space-y-20 md:max-w-xl">
+                <div class="mt-10 flex flex-col space-y-10">
 
-                    <div v-for="group in feedbackGroups.data">
-                        <Heading2>{{ group.name }}</Heading2>
-                        <hr>
+                    <!-- Question group -->
+                    <div v-for="(group, g) in feedbackGroups.data">
 
-                        <!-- Questions -->
-                        <template v-for="question in group.questions">
-                            <Heading3>{{question.name}}</Heading3>
+                        <div class="relative mb-10">
+                            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                                <div class="w-full border-t border-gray-300" />
+                            </div>
+                            <div class="relative flex justify-center">
+                                <span class="bg-white px-3 text-base font-semibold leading-6 text-gray-900">Section {{g+1}}</span>
+                            </div>
+                        </div>
 
-                            <template v-if="question.type == 'text'">
-                                <div class="mt-2">
-                                    <textarea rows="4" name="comment" id="comment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                </div>
-                            </template>
+                        <div class="bg-white rounded-lg border p-5 pt-1">
 
-                            <template v-else-if="question.type == 'radio'">
-                                <fieldset>
-                                    <div class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
-                                        <div v-for="(option, index) in question.data.options" :key="index" class="relative flex items-start py-4">
-                                            <div class="min-w-0 flex-1 text-sm leading-6">
-                                                <label :for="`side-${option.id}`" class="select-none font-medium text-gray-900">{{ option.label }}</label>
-                                            </div>
-                                            <div class="ml-3 flex h-6 items-center">
-                                                <input :id="`side-${option.id}`" name="plan" type="radio" :checked="option.id === null" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                            </div>
+                            <Heading2 class="m-0">{{ group.name }}</Heading2>
+                            <small>{{ group.caption }}</small>
+
+                            <!-- Questions -->
+                            <div class="mt-5 flex flex-col space-y-5 md:max-w-lg">
+                                <div v-for="(question, q) in group.questions">
+                                    <Heading3><b>{{g+1}}.{{q+1}}</b> &nbsp; {{question.name}}</Heading3>
+
+                                    <template v-if="question.type == 'text'">
+                                        <div class="mt-2">
+                                            <textarea rows="4" name="comment" id="comment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                         </div>
-                                    </div>
-                                </fieldset>
-                            </template>
+                                    </template>
 
-                        </template>
+                                    <template v-else-if="question.type == 'radio'">
+                                        <fieldset>
+                                            <div class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
+                                                <div v-for="(option, index) in question.data.options" :key="index" class="relative flex items-start py-4">
+                                                    <div class="min-w-0 flex-1 text-sm leading-6">
+                                                        <label :for="`side-${option.id}`" class="select-none font-medium text-gray-900">{{ option.label }}</label>
+                                                    </div>
+                                                    <div class="ml-3 flex h-6 items-center">
+                                                        <input :id="`side-${option.id}`" name="plan" type="radio" :checked="option.id === null" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div v-if="features.data.length > 0">

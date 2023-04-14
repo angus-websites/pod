@@ -60,6 +60,19 @@ class FeedbackSeeder extends Seeder
             ]
         ]);
 
+        FeedbackQuestion::create([
+            "name" => "Second favourite?",
+            "feedback_group_id" => $features->id,
+            "question_type" => "radio",
+            "data" => [
+                "options" => [
+                    ["label" => "Leaderboard", "id" => "leaderboard"],
+                    ["label" => "Streaks", "id" => "streaks"],
+                    ["label" => "Total word count", "id" => "twc"],
+                ]
+            ]
+        ]);
+
 
 
 
