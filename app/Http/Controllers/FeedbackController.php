@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\FeatureResource;
+use App\Models\FeedbackQuestionGroup;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
@@ -23,9 +24,17 @@ class FeedbackController extends Controller
             abort(403);
         }
 
+        // Get all the feedback groups to display
+        $feedbackGroups = FeedbackQuestionGroup::all();
+
         // Get all the features this user has access to
         $features = FeatureResource::collection(Auth::user()->allFeatures());
 
-        return Inertia::render('Feedback/Index', ["features"=>$features]);
+        return Inertia::render('Feedback/Index',
+            [
+                "features"=>$features,
+                "feedbackGroups"=>$feedbackGroups
+            ]
+        );
     }
 }

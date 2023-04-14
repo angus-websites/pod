@@ -17,15 +17,13 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->text("name");
+            $table->text("question_type");
 
             $table->bigInteger('feedback_question_group_id')->unsigned();
-            $table->bigInteger('feedback_question_type_id')->unsigned();
 
             //Foreign keys
             $table->foreign('feedback_question_group_id')
                 ->references('id')->on('feedback_groups')->onDelete('cascade');
-            $table->foreign('feedback_question_type_id')
-                ->references('id')->on('feedback_question_types')->onDelete('cascade');
         });
     }
 
