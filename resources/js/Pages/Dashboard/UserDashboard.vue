@@ -6,8 +6,8 @@
         </div>
 
         <template v-if="featureData">
-            <Stats :features="features" :featureData="featureData" />
-            <Leaderboard :features="features" :featureData="featureData" v-if="hasFeature('leaderboard')" class="mt-10"/>
+            <Stats :features="features.data" :featureData="featureData" />
+            <Leaderboard :features="features.data" :featureData="featureData" v-if="hasFeature('leaderboard')" class="mt-10"/>
         </template>
     </DashboardLayout>
 </template>
@@ -49,8 +49,8 @@ function hasFeature(feature){
      * Does the user have access
      * to this feature?
      */
-    for (var i = 0; i < props.features.length; i++) {
-        if (props.features[i].name == feature){
+    for (var i = 0; i < props.features.data.length; i++) {
+        if (props.features.data[i].name == feature){
             return true;
         }
     }

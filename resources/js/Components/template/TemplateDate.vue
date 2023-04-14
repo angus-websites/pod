@@ -16,7 +16,7 @@ export default {
         },
         newValue()
         {
-            
+
             return this.modelValue ? this.modelValue : new Date().toISOString().slice(0,10);
         }
 
