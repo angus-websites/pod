@@ -48,7 +48,7 @@
                                                         <label :for="`side-${option.id}`" class="select-none font-medium text-gray-900">{{ option.label }}</label>
                                                     </div>
                                                     <div class="ml-3 flex h-6 items-center">
-                                                        <input :id="`side-${option.id}`" name="plan" type="radio" :checked="option.id === null" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                                        <input :id="`side-${option.id}`" :name="question.name" type="radio" :checked="option.id === null" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                                     </div>
                                                 </div>
                                             </div>
