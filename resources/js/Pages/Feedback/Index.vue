@@ -10,14 +10,36 @@
                 </div>
 
                 <!-- Main container -->
-                <div class="mt-6 flex flex-col space-y-20">
+                <div class="mt-6 flex flex-col space-y-20 md:max-w-xl">
 
                     <div v-for="group in feedbackGroups.data">
                         <Heading2>{{ group.name }}</Heading2>
                         <hr>
 
                         <!-- Questions -->
-                        <template v-for="question in group.questions.data">
+                        <template v-for="question in group.questions">
+                            <Heading3>{{question.name}}</Heading3>
+
+                            <template v-if="question.type == 'text'">
+                                <div class="mt-2">
+                                    <textarea rows="4" name="comment" id="comment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                </div>
+                            </template>
+
+                            <template v-else-if="question.type == 'radio'">
+                                <fieldset>
+                                    <div class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
+                                        <div v-for="(option, index) in question.data.options" :key="index" class="relative flex items-start py-4">
+                                            <div class="min-w-0 flex-1 text-sm leading-6">
+                                                <label :for="`side-${option.id}`" class="select-none font-medium text-gray-900">{{ option.label }}</label>
+                                            </div>
+                                            <div class="ml-3 flex h-6 items-center">
+                                                <input :id="`side-${option.id}`" name="plan" type="radio" :checked="option.id === null" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </template>
 
                         </template>
                     </div>

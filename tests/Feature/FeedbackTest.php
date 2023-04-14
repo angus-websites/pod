@@ -6,6 +6,7 @@ use App\Http\Controllers\CVController;
 use App\Models\Role;
 use App\Models\User;
 use Database\Seeders\FeatureSeeder;
+use Database\Seeders\FeedbackSeeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\TemplateSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -141,6 +142,25 @@ class FeedbackTest extends TestCase
         // Test we can access the page
         $response = $this->get(route('feedback'));
         $response->assertStatus(403);
+    }
+
+    public function test_feedback_works_with_seed_data()
+    {
+        // Seed
+        $this->seed(FeedbackSeeder::class);
+
+        // Create user
+        $user = User::factory()->create();
+
+        // Give the feedback feature
+        $user->giveFeature("feedback");
+
+        // Acting as this user
+        $this->actingAs($user);
+
+        // Test we can access the page
+        $response = $this->get(route('feedback'));
+        $response->assertStatus(200);
     }
 
 

@@ -53,9 +53,9 @@ class FeedbackSeeder extends Seeder
             "question_type" => "radio",
             "data" => [
                 "options" => [
-                    "Leaderboard",
-                    "Streaks",
-                    "Total word count"
+                    ["label" => "Leaderboard", "id" => "leaderboard"],
+                    ["label" => "Streaks", "id" => "streaks"],
+                    ["label" => "Total word count", "id" => "twc"],
                 ]
             ]
         ]);

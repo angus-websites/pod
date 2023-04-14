@@ -16,8 +16,8 @@ class FeedbackQuestionResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'question_group' => $this->group(),
-            'question_type' => $this->question_type,
+            'group' => $this->group()->id,
+            'type' => strtolower($this->question_type),
             'data' => $this->data
         ];
     }
