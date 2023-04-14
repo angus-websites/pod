@@ -18,11 +18,11 @@ return new class extends Migration
             $table->timestamps();
             $table->text("name");
 
-            $table->bigInteger('feedback_group_id')->unsigned();
+            $table->bigInteger('feedback_question_group_id')->unsigned();
             $table->bigInteger('feedback_question_type_id')->unsigned();
 
             //Foreign keys
-            $table->foreign('feedback_group_id')
+            $table->foreign('feedback_question_group_id')
                 ->references('id')->on('feedback_groups')->onDelete('cascade');
             $table->foreign('feedback_question_type_id')
                 ->references('id')->on('feedback_question_types')->onDelete('cascade');
