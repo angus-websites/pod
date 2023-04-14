@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\FeedbackQuestion;
-use App\Models\FeedbackQuestionGroup;
+use App\Models\FeedbackGroup;
 use App\Models\UserFeedback;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,19 +20,19 @@ class FeedbackSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         //Clear data
-        FeedbackQuestionGroup::truncate();
+        FeedbackGroup::truncate();
         FeedbackQuestion::truncate();
         UserFeedback::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         // Groups
-        $general = FeedbackQuestionGroup::create([
+        $general = FeedbackGroup::create([
             "name" => "General",
             "caption" => "Some general questions about the app",
             "position" => 0,
         ]);
 
-        $features = FeedbackQuestionGroup::create([
+        $features = FeedbackGroup::create([
             "name" => "Features",
             "caption" => "Specific questions about the apps features",
             "position" => 1,
@@ -42,14 +42,14 @@ class FeedbackSeeder extends Seeder
         // Create some questions
         FeedbackQuestion::create([
             "name" => "What do you think about this website?",
-            "feedback_question_group_id" => $general->id,
+            "feedback_group_id" => $general->id,
             "question_type" => "text",
             "data" => [],
         ]);
 
         FeedbackQuestion::create([
             "name" => "Which feature is your favourite?",
-            "feedback_question_group_id" => $features->id,
+            "feedback_group_id" => $features->id,
             "question_type" => "radio",
             "data" => [
                 "options" => [

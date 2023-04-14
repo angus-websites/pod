@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
-class FeedbackQuestionGroup extends Model
+class FeedbackGroup extends Model
 {
     use HybridRelations;
     use HasFactory;

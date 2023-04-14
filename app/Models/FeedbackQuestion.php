@@ -11,6 +11,6 @@ class FeedbackQuestion extends Model
     use HasFactory;
 
     public function group(){
-        return $this->belongsTo(FeedbackQuestionGroup::class)->firstOrFail();
+        return $this->belongsTo(FeedbackGroup::class)->firstOrFail();
     }
 }

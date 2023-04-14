@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\FeatureResource;
-use App\Http\Resources\Feedback\FeedbackQuestionGroupResource;
+use App\Http\Resources\Feedback\FeedbackGroupResource;
 use App\Http\Resources\Feedback\FeedbackQuestionResource;
 use App\Models\FeedbackQuestion;
-use App\Models\FeedbackQuestionGroup;
+use App\Models\FeedbackGroup;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
@@ -28,8 +28,8 @@ class FeedbackController extends Controller
         }
 
         // Get all the feedback groups to display
-        $feedbackGroups = FeedbackQuestionGroupResource::collection(
-            FeedbackQuestionGroup::all()
+        $feedbackGroups = FeedbackGroupResource::collection(
+            FeedbackGroup::all()
         );
 
         // Get all the features this user has access to
