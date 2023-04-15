@@ -202,11 +202,16 @@ Migrate the database
 ./vendor/bin/sail php artisan migrate
 ```
 
-Seed the database tables
+### Database seeding
+
+The project has two main seeding classes `DevSeeder` as well as the default `DatabaseSeeder`, `DevSeeder` will seed a bunch of example users and is meant for development purposes, to run this seeder run the following command...
 
 ```bash
-./vendor/bin/sail php artisan db:seed
+./vendor/bin/sail php artisan db:seed --class=DevSeeder
 ```
+
+`DatabaseSeeder` seeds only essential data and is meant for a production server.
+
 
 Install npm dependencies
 
