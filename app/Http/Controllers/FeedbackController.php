@@ -67,16 +67,26 @@ class FeedbackController extends Controller
             // Add the relevant data to the request, user_id, answer etc
             $feedbackData = [];
             foreach ($content as $question => $answer) {
-                $feedbackData[] = [
-                    "feedback_question_id" => $question,
-                    "user_id" => $userID,
-                    "feedback_batch" => $uuid,
-                    "answer" => $answer,
-                ];
+                // If there was no answer, don't save to database
+                if ($answer) {
+                    $feedbackData[] = [
+                        "feedback_question_id" => $question,
+                        "user_id" => $userID,
+                        "feedback_batch" => $uuid,
+                        "answer" => $answer,
+                    ];
+                }
             }
 
-            // Save all to the user-feedback table
-            UserFeedback::insert($feedbackData);
+            // Only insert if we have at least one bit of valid data
+
+            if (count($feedbackData) > 0){
+                // Save all to the user-feedback table
+                UserFeedback::insert($feedbackData);
+            }else{
+                return Redirect::back()->with('error', 'Nothing submitted');
+            }
+
 
         }else{
             abort(400, "Missing feedback data");
