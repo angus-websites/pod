@@ -9,7 +9,7 @@
                     <hr class="my-5">
                 </div>
 
-                <form>
+                <form @submit.prevent="submit">
                     <!-- Main container -->
                     <div class="mt-10 flex flex-col space-y-10">
 
@@ -37,7 +37,7 @@
 
                                         <template v-if="question.type == 'text'">
                                             <div class="mt-2">
-                                                <textarea rows="4" name="comment" id="comment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                <textarea  rows="4" name="comment" id="comment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                             </div>
                                         </template>
 
@@ -78,10 +78,49 @@ import Heading1 from "@/Components/headings/Heading1.vue";
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import Heading2 from "@/Components/headings/Heading2.vue";
 import Heading3 from "@/Components/headings/Heading3.vue";
+import { reactive, onMounted } from 'vue'
 
 const props = defineProps({
-    features: Object,
     feedbackGroups: Object,
 })
+
+// Initiate an object to store the feedback in
+let feedback = {
+    "groups": [],
+}
+
+onMounted(() => {
+
+    // When we mount, construct an object to store feedback in
+    for (const groupKey in props.feedbackGroups["data"]) {
+
+        const currentGroup = props.feedbackGroups["data"][groupKey]
+        feedback["groups"].push({
+            "name": currentGroup.name,
+            "id": currentGroup.id,
+            "answers": {}
+        })
+
+        for (const questionKey in currentGroup.questions) {
+            const currentQuestion = currentGroup.questions[questionKey]
+            feedback["groups"][groupKey]["answers"][currentQuestion.name] = ""
+        }
+    }
+})
+
+
+
+
+const form = reactive({
+    content: props.feedbackGroups.data,
+})
+
+function submit()
+{
+    /**
+     * Submit the form to backend
+     */
+    console.log("Hello")
+}
 
 </script>

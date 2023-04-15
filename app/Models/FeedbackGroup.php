@@ -32,10 +32,10 @@ class FeedbackGroup extends Model
         $features = $user->allFeatures()->pluck("id");
 
         // Only select the feeedback we have access to
-        $targeted = FeedbackQuestion::where('targeted', true)->whereIn('data.feature_id', $features)->get();
+        $targeted = $this->questions()->where('targeted', true)->whereIn('data.feature_id', $features)->get();
 
         // Get all the other feedback
-        $others =  FeedbackQuestion::where('targeted', "!=", true)->get();
+        $others =  $this->questions()->where('targeted', "!=", true)->get();
 
         // Merge the two together and return
         return $others->merge($targeted);

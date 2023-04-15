@@ -32,14 +32,24 @@ class FeedbackController extends Controller
             FeedbackGroup::all()
         );
 
-        // Get all the features this user has access to
-        $features = FeatureResource::collection(Auth::user()->allFeatures());
 
         return Inertia::render('Feedback/Index',
             [
-                "features"=>$features,
                 "feedbackGroups"=>$feedbackGroups,
             ]
         );
+    }
+
+    /**
+     * Handles submitted forms
+     */
+    public function submit()
+    {
+        // Check permissions before processing feedback
+        if (! Gate::allows('access-feedback', Auth::user())) {
+            abort(403);
+        }
+
+
     }
 }
