@@ -15,6 +15,7 @@ class FeedbackQuestionResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'group' => $this->group()->id,
             'type' => strtolower($this->question_type),

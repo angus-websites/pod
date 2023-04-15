@@ -37,7 +37,7 @@
 
                                         <template v-if="question.type == 'text'">
                                             <div class="mt-2">
-                                                <textarea  rows="4" name="comment" id="comment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                <textarea v-model="feedback.answers[question.id]"   rows="4" name="comment" id="comment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                             </div>
                                         </template>
 
@@ -49,7 +49,7 @@
                                                             <label :for="`side-${option.id}`" class="select-none font-medium text-gray-900">{{ option.label }}</label>
                                                         </div>
                                                         <div class="ml-3 flex h-6 items-center">
-                                                            <input :id="`side-${option.id}`" :name="question.name" type="radio" :checked="option.id === null" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                                            <input v-model="feedback.answers[question.id]" :value="option.id" :id="`side-${option.id}`" :name="question.name" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -62,7 +62,7 @@
 
                         <!-- Submit -->
                          <div class="mt-10">
-                             <PrimaryButton>Submit</PrimaryButton>
+                             <PrimaryButton :disabled="form.processing">Submit</PrimaryButton>
                          </div>
                     </div>
                 </form>
@@ -78,41 +78,26 @@ import Heading1 from "@/Components/headings/Heading1.vue";
 import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import Heading2 from "@/Components/headings/Heading2.vue";
 import Heading3 from "@/Components/headings/Heading3.vue";
-import { reactive, onMounted } from 'vue'
+import {reactive, onBeforeMount} from 'vue'
+import {useForm} from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     feedbackGroups: Object,
 })
 
 // Initiate an object to store the feedback in
-let feedback = {
-    "groups": [],
-}
+let feedback = reactive({
+    "answers": {}
+})
 
-onMounted(() => {
-
-    // When we mount, construct an object to store feedback in
-    for (const groupKey in props.feedbackGroups["data"]) {
-
-        const currentGroup = props.feedbackGroups["data"][groupKey]
-        feedback["groups"].push({
-            "name": currentGroup.name,
-            "id": currentGroup.id,
-            "answers": {}
-        })
-
-        for (const questionKey in currentGroup.questions) {
-            const currentQuestion = currentGroup.questions[questionKey]
-            feedback["groups"][groupKey]["answers"][currentQuestion.name] = ""
-        }
-    }
+// We need to run before the UI is rendered
+onBeforeMount(() => {
+    setupForm()
 })
 
 
-
-
-const form = reactive({
-    content: props.feedbackGroups.data,
+const form = useForm({
+    feedback: feedback,
 })
 
 function submit()
@@ -120,7 +105,20 @@ function submit()
     /**
      * Submit the form to backend
      */
-    console.log("Hello")
+    form.post(route('feedback.submit'), {
+        onSuccess: () => setupForm(),
+    })
+}
+
+function setupForm(){
+    // When we mount, construct an object to store feedback in
+    for (const groupKey in props.feedbackGroups["data"]) {
+        const currentGroup = props.feedbackGroups["data"][groupKey]
+        for (const questionKey in currentGroup.questions) {
+            const currentQuestion = currentGroup.questions[questionKey]
+            feedback["answers"][currentQuestion.id] = ""
+        }
+    }
 }
 
 </script>

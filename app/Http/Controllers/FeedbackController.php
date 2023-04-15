@@ -7,10 +7,13 @@ use App\Http\Resources\Feedback\FeedbackGroupResource;
 use App\Http\Resources\Feedback\FeedbackQuestionResource;
 use App\Models\FeedbackQuestion;
 use App\Models\FeedbackGroup;
+use App\Models\UserFeedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class FeedbackController extends Controller
 {
@@ -43,12 +46,43 @@ class FeedbackController extends Controller
     /**
      * Handles submitted forms
      */
-    public function submit()
+    public function submit(Request $request)
     {
         // Check permissions before processing feedback
         if (! Gate::allows('access-feedback', Auth::user())) {
             abort(403);
         }
+
+        // Ensure we receive some content
+        if($request->has('feedback')){
+
+            $userID = Auth::user()->id;
+
+            // Generate a UID for this submission
+            $uuid = Str::uuid()->toString();
+
+            // Extract our content
+            $content = $request->feedback["answers"];
+
+            // Add the relevant data to the request, user_id, answer etc
+            $feedbackData = [];
+            foreach ($content as $question => $answer) {
+                $feedbackData[] = [
+                    "feedback_question_id" => $question,
+                    "user_id" => $userID,
+                    "feedback_batch" => $uuid,
+                    "answer" => $answer,
+                ];
+            }
+
+            // Save all to the user-feedback table
+            UserFeedback::insert($feedbackData);
+
+        }else{
+            abort(400, "Missing feedback data");
+        }
+
+        return Redirect::back()->with('success', 'Form submitted');
 
 
     }
