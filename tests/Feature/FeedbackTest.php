@@ -2,11 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Http\Controllers\CVController;
+
 use App\Models\Role;
 use App\Models\User;
 use Database\Seeders\FeatureSeeder;
 use Database\Seeders\FeedbackSeeder;
+use Database\Seeders\FeedbackTestSeeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\TemplateSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -163,18 +164,16 @@ class FeedbackTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_feeback_is_relevant_to_users()
+    public function test_user_with_feature_receives_feedback_for_feature()
     {
-        // Seed
-        $this->seed(FeedbackSeeder::class);
+        // Create some test feedback data
+        $this->seed(FeedbackTestSeeder::class);
 
         // Create user
         $user = User::factory()->create();
 
-        // Give the feedback feature
+        // Give the feedback & leaderboard feature
         $user->giveFeature("feedback");
-
-        // Also give the user some gamification features
         $user->giveFeature("leaderboard");
 
         // Acting as this user
@@ -182,26 +181,25 @@ class FeedbackTest extends TestCase
 
         // Test we can access the page
         $response = $this->get(route('feedback'));
-        //$response->assertStatus(200);
 
         $response->assertInertia(fn (Assert $page) => $page
             // Checking nested properties using "dot" notation...
-            ->has('feedbackGroups.data.1.questions.3', fn (Assert $page) => $page
-                ->where('name','Did the leaderboard encourage you to use the application more?')
+            ->has('feedbackGroups.data.0.questions.0', fn (Assert $page) => $page
+                ->where('name','Q1')
                 ->etc()
             )
         );
     }
 
-    public function test_user_does_not_receive_feedback_for_features_they_dont_have()
+    public function test_user_without_feature_does_not_receives_feedback_for_feature()
     {
-        // Seed
-        $this->seed(FeedbackSeeder::class);
+        // Create some test feedback data
+        $this->seed(FeedbackTestSeeder::class);
 
         // Create user
         $user = User::factory()->create();
 
-        // Give the feedback feature
+        // Give the feedback & leaderboard feature
         $user->giveFeature("feedback");
 
         // Acting as this user
@@ -209,12 +207,11 @@ class FeedbackTest extends TestCase
 
         // Test we can access the page
         $response = $this->get(route('feedback'));
-        //$response->assertStatus(200);
 
         $response->assertInertia(fn (Assert $page) => $page
             // Checking nested properties using "dot" notation...
-            ->has('feedbackGroups.data.1.questions.2', fn (Assert $page) => $page
-                ->whereNot('name','Did the leaderboard encourage you to use the application more?')
+            ->has('feedbackGroups.data.0', fn (Assert $page) => $page
+                ->missing('questions.0')
                 ->etc()
             )
         );
