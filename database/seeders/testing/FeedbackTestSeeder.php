@@ -12,9 +12,8 @@ use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 class FeedbackTestSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
-     * @return void
+     * Generating test data
+     * for the feedback tests
      */
     public function run()
     {

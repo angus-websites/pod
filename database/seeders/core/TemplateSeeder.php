@@ -1,14 +1,12 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\core;
 
 //Models
-use App\Models\Template;
 use App\Models\Entry;
-
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Template;
 use Illuminate\Database\Seeder;
+
 
 class TemplateSeeder extends Seeder
 {

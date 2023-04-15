@@ -1,11 +1,10 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\core;
 
-use App\Models\FeedbackQuestion;
 use App\Models\FeedbackGroup;
+use App\Models\FeedbackQuestion;
 use App\Models\UserFeedback;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;

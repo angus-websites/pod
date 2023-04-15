@@ -5,10 +5,10 @@ namespace Tests\Feature;
 
 use App\Models\Role;
 use App\Models\User;
-use Database\Seeders\FeatureSeeder;
-use Database\Seeders\FeedbackSeeder;
-use Database\Seeders\RoleSeeder;
-use Database\Seeders\TemplateSeeder;
+use Database\Seeders\core\FeatureSeeder;
+use Database\Seeders\core\FeedbackSeeder;
+use Database\Seeders\core\RoleSeeder;
+use Database\Seeders\core\TemplateSeeder;
 use Database\Seeders\testing\FeedbackTestSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Hash;
