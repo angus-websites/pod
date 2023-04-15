@@ -96,17 +96,21 @@ Templates contain the following top level attributes...
 Fields is an array of the inputs this template will provide for the user. This array **MUST** have a field with an id of **title**
 
 ```json
-"fields": [
-  {
-    "id": "title",
-    "label": "Entry title",
-    "type": "text",
-    "required": true,
-    "validation": [
-      "required",
-      "max:100"
-    ]
-  }
+{
+  "fields": [
+    ...
+    {
+      "id": "title",
+      "label": "Entry title",
+      "type": "text",
+      "required": true,
+      "validation": [
+        "required",
+        "max:100"
+      ]
+    }
+  ]
+}
 ```
 
 and each field consists of the following options
