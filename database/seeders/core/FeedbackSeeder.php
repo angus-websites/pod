@@ -44,7 +44,6 @@ class FeedbackSeeder extends Seeder
             "name" => "What do you think about this website?",
             "feedback_group_id" => $general->id,
             "question_type" => "text",
-            "required" => true,
             "data" => [],
         ]);
 
@@ -52,7 +51,6 @@ class FeedbackSeeder extends Seeder
             "name" => "Which feature is your favourite?",
             "feedback_group_id" => $features->id,
             "question_type" => "radio",
-            "required" => true,
             "data" => [
                 "options" => [
                     ["label" => "Leaderboard", "id" => "leaderboard"],
@@ -66,7 +64,6 @@ class FeedbackSeeder extends Seeder
             "name" => "Second favourite?",
             "feedback_group_id" => $features->id,
             "question_type" => "radio",
-            "required" => true,
             "data" => [
                 "options" => [
                     ["label" => "Leaderboard", "id" => "leaderboard"],
@@ -80,7 +77,6 @@ class FeedbackSeeder extends Seeder
             "name" => "Did the leaderboard encourage you to use the application more?",
             "feedback_group_id" => $features->id,
             "question_type" => "radio",
-            "required" => true,
             "targeted" => true,
             "data" => [
                 "options" => [

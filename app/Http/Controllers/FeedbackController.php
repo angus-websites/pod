@@ -32,7 +32,7 @@ class FeedbackController extends Controller
 
         // Get all the feedback groups to display
         $feedbackGroups = FeedbackGroupResource::collection(
-            FeedbackGroup::all()
+            FeedbackGroup::all()->sortBy("position")
         );
 
 
