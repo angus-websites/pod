@@ -18,7 +18,8 @@ class FeedbackGroupResource extends JsonResource
             'name' => $this->name,
             'caption' => $this->caption,
             'position' => $this->position,
-            'questions' => FeedbackQuestionResource::collection($this->questions()->get())
+            'questions' => FeedbackQuestionResource::collection(
+                $this->userQuestions())
         ];
     }
 }

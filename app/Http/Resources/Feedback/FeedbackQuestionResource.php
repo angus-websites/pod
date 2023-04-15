@@ -18,6 +18,7 @@ class FeedbackQuestionResource extends JsonResource
             'name' => $this->name,
             'group' => $this->group()->id,
             'type' => strtolower($this->question_type),
+            'targeted' => ($this->targeted) ? ($this->targeted) : false,
             'data' => $this->data
         ];
     }

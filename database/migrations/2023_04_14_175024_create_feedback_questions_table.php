@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
             $table->text("name");
             $table->text("question_type");
+            $table->boolean("required");
 
             $table->bigInteger('feedback_group_id')->unsigned();
 

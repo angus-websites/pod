@@ -163,5 +163,62 @@ class FeedbackTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_feeback_is_relevant_to_users()
+    {
+        // Seed
+        $this->seed(FeedbackSeeder::class);
+
+        // Create user
+        $user = User::factory()->create();
+
+        // Give the feedback feature
+        $user->giveFeature("feedback");
+
+        // Also give the user some gamification features
+        $user->giveFeature("leaderboard");
+
+        // Acting as this user
+        $this->actingAs($user);
+
+        // Test we can access the page
+        $response = $this->get(route('feedback'));
+        //$response->assertStatus(200);
+
+        $response->assertInertia(fn (Assert $page) => $page
+            // Checking nested properties using "dot" notation...
+            ->has('feedbackGroups.data.1.questions.3', fn (Assert $page) => $page
+                ->where('name','Did the leaderboard encourage you to use the application more?')
+                ->etc()
+            )
+        );
+    }
+
+    public function test_user_does_not_receive_feedback_for_features_they_dont_have()
+    {
+        // Seed
+        $this->seed(FeedbackSeeder::class);
+
+        // Create user
+        $user = User::factory()->create();
+
+        // Give the feedback feature
+        $user->giveFeature("feedback");
+
+        // Acting as this user
+        $this->actingAs($user);
+
+        // Test we can access the page
+        $response = $this->get(route('feedback'));
+        //$response->assertStatus(200);
+
+        $response->assertInertia(fn (Assert $page) => $page
+            // Checking nested properties using "dot" notation...
+            ->has('feedbackGroups.data.1.questions.2', fn (Assert $page) => $page
+                ->whereNot('name','Did the leaderboard encourage you to use the application more?')
+                ->etc()
+            )
+        );
+    }
+
 
 }

@@ -8,6 +8,7 @@ use App\Models\UserFeedback;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
 class FeedbackSeeder extends Seeder
 {
@@ -44,6 +45,7 @@ class FeedbackSeeder extends Seeder
             "name" => "What do you think about this website?",
             "feedback_group_id" => $general->id,
             "question_type" => "text",
+            "required" => true,
             "data" => [],
         ]);
 
@@ -51,6 +53,7 @@ class FeedbackSeeder extends Seeder
             "name" => "Which feature is your favourite?",
             "feedback_group_id" => $features->id,
             "question_type" => "radio",
+            "required" => true,
             "data" => [
                 "options" => [
                     ["label" => "Leaderboard", "id" => "leaderboard"],
@@ -64,12 +67,29 @@ class FeedbackSeeder extends Seeder
             "name" => "Second favourite?",
             "feedback_group_id" => $features->id,
             "question_type" => "radio",
+            "required" => true,
             "data" => [
                 "options" => [
                     ["label" => "Leaderboard", "id" => "leaderboard"],
                     ["label" => "Streaks", "id" => "streaks"],
                     ["label" => "Total word count", "id" => "twc"],
                 ]
+            ]
+        ]);
+
+        FeedbackQuestion::create([
+            "name" => "Did the leaderboard encourage you to use the application more?",
+            "feedback_group_id" => $features->id,
+            "question_type" => "radio",
+            "required" => true,
+            "targeted" => true,
+            "data" => [
+                "options" => [
+                    ["label" => "Yes", "id" => "yes"],
+                    ["label" => "No", "id" => "no"],
+                ],
+                "feature_id" => Feature::where("name", "=", "leaderboard")->firstOrFail()->id
+
             ]
         ]);
 
