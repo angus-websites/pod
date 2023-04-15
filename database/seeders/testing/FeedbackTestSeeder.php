@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\testing;
 
 use App\Models\FeedbackGroup;
 use App\Models\FeedbackQuestion;
