@@ -13,7 +13,7 @@
                     <!-- Main container -->
                     <div class="mt-10 flex flex-col space-y-10">
 
-                        <template v-if="feedbackGroups.data > 0">
+                        <template v-if="feedbackGroups.data.length > 0">
                             <!-- Question group -->
                             <div v-for="(group, g) in feedbackGroups.data">
 
