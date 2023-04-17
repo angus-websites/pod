@@ -79,5 +79,13 @@ class FeedbackGroup extends Model
         return $others->merge($questions);
     }
 
+    public function userAnswers()
+    {
+        /**
+         * Get the answers for this group
+         * of questions
+         */
 
+        echo "l";
+    }
 }

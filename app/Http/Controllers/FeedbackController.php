@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\FeatureResource;
 use App\Http\Resources\Feedback\FeedbackGroupResource;
 use App\Http\Resources\Feedback\FeedbackQuestionResource;
+use App\Http\Resources\Feedback\FeedbackReviewGroupResource;
 use App\Models\FeedbackQuestion;
 use App\Models\FeedbackGroup;
 use App\Models\UserFeedback;
@@ -108,7 +109,9 @@ class FeedbackController extends Controller
         }
 
         // Fetch all the user feedback
-        $feedback = UserFeedback::all();
+        $feedback = FeedbackReviewGroupResource::collection(
+            FeedbackGroup::all()
+        )  ;
 
         return Inertia::render('Feedback/Review',
             ["feedback" => $feedback]

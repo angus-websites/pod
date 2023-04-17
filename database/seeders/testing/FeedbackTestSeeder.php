@@ -35,7 +35,6 @@ class FeedbackTestSeeder extends Seeder
             "name" => "Q1",
             "feedback_group_id" => $features->id,
             "question_type" => "text",
-            "required" => true,
             "targeted" => true,
             "data" => [
                 "feature_id" =>  [$leaderboardId]
@@ -46,7 +45,6 @@ class FeedbackTestSeeder extends Seeder
             "name" => "QL&S",
             "feedback_group_id" => $features->id,
             "question_type" => "text",
-            "required" => true,
             "targeted" => true,
             "data" => [
                 "operator" => "all",
@@ -58,7 +56,6 @@ class FeedbackTestSeeder extends Seeder
             "name" => "QLOrR",
             "feedback_group_id" => $features->id,
             "question_type" => "text",
-            "required" => true,
             "targeted" => true,
             "data" => [
                 "operator" => "any",
