@@ -79,5 +79,5 @@ class FeedbackGroup extends Model
         return $others->merge($questions);
     }
 
-    
+
 }

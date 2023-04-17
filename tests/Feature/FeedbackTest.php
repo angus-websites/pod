@@ -326,6 +326,16 @@ class FeedbackTest extends TestCase
         // Test we can access the page
         $response = $this->get(route('feedback.review'));
         $response->assertStatus(200);
+
+        // Test we get the correct inertia data
+        $response->assertInertia(fn (Assert $page) => $page
+            // Checking nested properties using "dot" notation...
+            ->has('feedback.data.0.questions.0', fn (Assert $page) => $page
+                ->has('answers')
+                ->etc()
+            )
+        );
+
     }
 
 
