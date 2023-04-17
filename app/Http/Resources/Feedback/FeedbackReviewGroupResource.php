@@ -19,8 +19,9 @@ class FeedbackReviewGroupResource extends JsonResource
             'name' => $this->name,
             'caption' => $this->caption,
             'position' => $this->position,
-            'answers' => FeedbackReviewAnswerResource::collection(
-                $this->userAnswers()->get())
+            'questions' => FeedbackReviewQuestionResource::collection(
+                $this->questions()->get()
+            )
         ];
     }
 }

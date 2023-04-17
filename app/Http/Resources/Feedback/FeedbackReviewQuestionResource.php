@@ -4,7 +4,7 @@ namespace App\Http\Resources\Feedback;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FeedbackReviewAnswerResource extends JsonResource
+class FeedbackReviewQuestionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +15,10 @@ class FeedbackReviewAnswerResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'answer' => $this->answer,
+            'name' => $this->name,
+            'answers' => FeedbackReviewAnswerResource::collection(
+                $this->answers()->get()
+            )
         ];
     }
 }

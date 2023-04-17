@@ -304,7 +304,7 @@ class FeedbackTest extends TestCase
 
         // -------- Seed some user feedback -----
         $this->seed(UserFeedbackTestSeeder::class);
-        
+
         // -------- Create admin --------
 
         $this->seed(RoleSeeder::class);

@@ -111,7 +111,7 @@ class FeedbackController extends Controller
         // Fetch all the user feedback
         $feedback = FeedbackReviewGroupResource::collection(
             FeedbackGroup::all()
-        )  ;
+        );
 
         return Inertia::render('Feedback/Review',
             ["feedback" => $feedback]
