@@ -16,6 +16,9 @@ class FeedbackReviewQuestionResource extends JsonResource
     {
         return [
             'name' => $this->name,
+            'caption' => $this->caption,
+            'type' => strtolower($this->question_type),
+            'targeted' => ($this->targeted) ?? false,
             'answers' => FeedbackReviewAnswerResource::collection(
                 $this->answers()->get()
             )
