@@ -145,7 +145,7 @@ class FeedbackSeeder extends Seeder
         // -- Streaks --
         FeedbackQuestion::create([
             "name" => "Did the ability to see your entry streak encourage you to use the website more?",
-            "caption" => "On the dashboard you can see how many consecutive days you have written in your diary, did this encourage you to use the website more",
+            "caption" => "On the dashboard you can see how many consecutive days you have written in your diary, did this encourage you to use the website more?",
             "feedback_group_id" => $using->id,
             "question_type" => "radio",
             "targeted" => true,

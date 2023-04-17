@@ -13,4 +13,8 @@ class FeedbackQuestion extends Model
     public function group(){
         return $this->belongsTo(FeedbackGroup::class, "feedback_group_id")->firstOrFail();
     }
+
+    public function answers(){
+        return $this->hasMany(UserFeedback::class);
+    }
 }

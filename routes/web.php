@@ -44,6 +44,7 @@ Route::middleware([
 
     // Feedback routes
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+    Route::get('/feedback/review', [FeedbackController::class, 'review'])->name('feedback.review');
     Route::post('/feedback/submit', [FeedbackController::class, 'submit'])->name('feedback.submit');
 
     // CV Routes

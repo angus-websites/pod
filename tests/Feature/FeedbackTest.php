@@ -10,6 +10,7 @@ use Database\Seeders\core\FeedbackSeeder;
 use Database\Seeders\core\RoleSeeder;
 use Database\Seeders\core\TemplateSeeder;
 use Database\Seeders\testing\FeedbackTestSeeder;
+use Database\Seeders\testing\UserFeedbackTestSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -272,6 +273,86 @@ class FeedbackTest extends TestCase
             )
         );
     }
+
+    public function test_admin_can_access_review_and_normal_user_cannot()
+    {
+        // -------- Create admin --------
+
+        $this->seed(RoleSeeder::class);
+        $this->seed(TemplateSeeder::class);
+
+        // Create the admin
+        $admin = User::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        $admin->role_id = Role::where('name', '=', 'Super Admin')->firstOrFail()->id;
+        $admin->save();
+
+        // Acting as this user
+        $this->actingAs($admin);
+
+        // Test we can access the page
+        $response = $this->get(route('feedback.review'));
+        $response->assertStatus(200);
+
+    }
+
+    public function test_normal_user_cannot_review_feedback()
+    {
+        // Create user
+        $user = User::factory()->create();
+
+        // Acting as this user
+        $this->actingAs($user);
+
+        // Test we cannot access the page
+        $response = $this->get(route('feedback.review'));
+        $response->assertStatus(403);
+    }
+
+    public function test_admin_can_access_review_with_feedback_content()
+    {
+
+        // -------- Seed some user feedback -----
+        $this->seed(UserFeedbackTestSeeder::class);
+
+        // -------- Create admin --------
+
+        $this->seed(RoleSeeder::class);
+        $this->seed(TemplateSeeder::class);
+
+        // Create the admin
+        $admin = User::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        $admin->role_id = Role::where('name', '=', 'Super Admin')->firstOrFail()->id;
+        $admin->save();
+
+        // Acting as this user
+        $this->actingAs($admin);
+
+        // Test we can access the page
+        $response = $this->get(route('feedback.review'));
+        $response->assertStatus(200);
+
+        // Test we get the correct inertia data
+        $response->assertInertia(fn (Assert $page) => $page
+            // Checking nested properties using "dot" notation...
+            ->has('feedback.data.0.questions.0', fn (Assert $page) => $page
+                ->has('answers')
+                ->etc()
+            )
+        );
+
+    }
+
+
 
 
 }

@@ -44,5 +44,11 @@ class AuthServiceProvider extends ServiceProvider
             }
             return 0;
         });
+
+        // Can this user access feedback review?
+        Gate::define('review-feedback', function (User $user) {
+
+            return $user->isAdmin();
+        });
     }
 }

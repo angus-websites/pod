@@ -9,6 +9,10 @@
                     <hr class="my-5">
                 </div>
 
+                <div v-if="canReviewFeedback">
+                    <SecondaryButton :isLink="true" :href="route('feedback.review')">Review Feedback</SecondaryButton>
+                </div>
+
                 <form @submit.prevent="submit">
                     <!-- Main container -->
                     <div class="mt-10 flex flex-col space-y-10">
@@ -90,7 +94,11 @@ import PrimaryButton from "@/Components/buttons/PrimaryButton.vue";
 import Heading2 from "@/Components/headings/Heading2.vue";
 import Heading3 from "@/Components/headings/Heading3.vue";
 import {reactive, onBeforeMount} from 'vue'
-import {useForm} from '@inertiajs/inertia-vue3';
+import {useForm, usePage} from '@inertiajs/inertia-vue3';
+import SecondaryButton from "@/Components/buttons/SecondaryButton.vue";
+
+const canReviewFeedback = usePage().props.value.canReviewFeedback
+
 
 const props = defineProps({
     feedbackGroups: Object,

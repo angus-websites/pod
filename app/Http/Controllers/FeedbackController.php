@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\FeatureResource;
 use App\Http\Resources\Feedback\FeedbackGroupResource;
 use App\Http\Resources\Feedback\FeedbackQuestionResource;
+use App\Http\Resources\Feedback\FeedbackReviewGroupResource;
 use App\Models\FeedbackQuestion;
 use App\Models\FeedbackGroup;
 use App\Models\UserFeedback;
@@ -94,6 +95,27 @@ class FeedbackController extends Controller
 
         return Redirect::back()->with('success', 'Form submitted');
 
+
+    }
+
+    /**
+     * Allow the feedback to be reviewed
+     */
+    public function review()
+    {
+        // Check permissions before rendering feedback form
+        if (! Gate::allows('review-feedback', Auth::user())) {
+            abort(403);
+        }
+
+        // Fetch all the user feedback
+        $feedback = FeedbackReviewGroupResource::collection(
+            FeedbackGroup::all()
+        );
+
+        return Inertia::render('Feedback/Review',
+            ["feedback" => $feedback]
+        );
 
     }
 }
