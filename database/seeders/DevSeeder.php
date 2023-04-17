@@ -2,38 +2,28 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
 use App\Models\User;
-use App\Models\Entry;
-use App\Models\Role;
-use App\Models\Template;
-
+use Database\Seeders\core\AdminSeeder;
+use Database\Seeders\core\FeatureSeeder;
+use Database\Seeders\core\FeedbackSeeder;
+use Database\Seeders\core\RoleSeeder;
+use Database\Seeders\core\TemplateSeeder;
+use Illuminate\Database\Seeder;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 class DevSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * For seeding a database
+     * for development purposes, this
+     * will create fake users and entries
      *
      * @return void
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Template::truncate();
-        DB::table('feature_groups')->truncate();
-        DB::table('feature_feature_group')->truncate();
-        DB::table('feature_group_user')->truncate();
-        DB::table('feature_user')->truncate();
-        DB::table('features')->truncate();
-        User::truncate();
-        Entry::truncate();
-        Role::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
+        // Create some roles for the app
         $this->call(RoleSeeder::class);
 
         // Create the Templates
@@ -45,13 +35,17 @@ class DevSeeder extends Seeder
         // Admin seed
         $this->call(AdminSeeder::class);
 
+        // Feedback Seeding
+        $this->call(FeedbackSeeder::class);
+
         // Create some users with entries
         User::factory()->count(50)->hasEntries(25)->create()->each(function ($u){
-
             // Assign a random group to this user
             $random_group_name = FeatureGroup::all()->where("active", "1")->random()->name;
             $u->addToGroup($random_group_name);
         });
+
+
 
     }
 }

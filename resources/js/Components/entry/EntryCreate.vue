@@ -16,7 +16,7 @@
 
             <!-- Save button -->
             <div class="mt-5">
-                <PrimaryButton type="submit">Save</PrimaryButton>
+                <PrimaryButton :disabled="form.processing" type="submit">Save</PrimaryButton>
             </div>
         </div>
     </form>

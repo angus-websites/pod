@@ -96,17 +96,21 @@ Templates contain the following top level attributes...
 Fields is an array of the inputs this template will provide for the user. This array **MUST** have a field with an id of **title**
 
 ```json
-"fields": [
-  {
-    "id": "title",
-    "label": "Entry title",
-    "type": "text",
-    "required": true,
-    "validation": [
-      "required",
-      "max:100"
-    ]
-  }
+{
+  "fields": [
+    ...
+    {
+      "id": "title",
+      "label": "Entry title",
+      "type": "text",
+      "required": true,
+      "validation": [
+        "required",
+        "max:100"
+      ]
+    }
+  ]
+}
 ```
 
 and each field consists of the following options
@@ -136,18 +140,99 @@ As mentioned above, these features can be grouped together, these are known as *
 
 Users are then randomly assigned into a feature group when they sign up for the site.
 
-#### Feedback
 
-The results from the experiment are then drawn from the users feedback of their *version* of the application. This will hopefully indicate the most effective forms of gamification.
+## Feedback
 
+User feedback is integrated into the application, feedback is a feature in itself so can be toggled using the `active` column in the `features` table
 
-## Tech Stack
+### Accessing feedback forms
 
-**Client:** Vue.js, InertiaJS, TailwindCSS
+Users can fill in feedback by navigating to the [feedback page](http://localhost/feedback) where they will be presented with a form of entirely optional questions to answer, only the questions the user answers will be saved to the database. 
 
-**Server:** PHP (Laravel framework)
+### Dynamic feedback
 
-**Database:** MYSQL, MongoDB
+The reason for integrating feedback into the application was to allow a dynamic feedback form to be displayed to the users. Depending on the features the user has access to, different forms will be presented to them, allowing for a much more tailored feedback experience for the users.
+
+### Customising feedback questions
+
+The questions for feedback are stored in `database/seeders/core/FeedbackSeeder.php`
+
+In order to create a question, it must have an associated `FeedbackGroup` which is the group of questions it belongs to on the form, think of this as a section of a form, i.e "General questions"
+
+#### Feedback Groups
+
+```php
+$general = FeedbackGroup::create([
+    "name" => "General",
+    "caption" => "Some general questions about the app",
+    "position" => 0,
+]);
+```
+
+Here is an example of seeding a feedback group, all three fields are required and are explained below...
+
+| Field    | Description                                                                                           |
+|----------|-------------------------------------------------------------------------------------------------------|
+| name     | The name of this group, this will be displayed on screen                                              |
+| caption  | A small piece of text to explain the types of questions in this group,this will be displayed on scren |
+| position | The position of this group on the screen (starting from 0 at the top)                                 |
+
+#### Feedback Questions
+
+```php
+FeedbackQuestion::create([
+    "name" => "How would you rate this application?",
+    "feedback_group_id" => $general->id,
+    "question_type" => "radio",
+    "data" => [
+        "options" => [
+            ["label" => "Fantastic", "id" => "fantastic"],
+            ["label" => "Good", "id" => "good"],
+            ["label" => "Ok", "id" => "ok"],
+            ["label" => "Poor", "id" => "poor"],
+        ]
+    ]
+]);
+```
+
+This example illustrates creating a new feedback question for the user that asks them to review the application from a series of radio buttons.
+
+We can also target certain features when creating feedback questions using the following syntax...
+
+```php
+FeedbackQuestion::create([
+    "name" => "Did you enjoy using the leaderboard feature?",
+    "feedback_group_id" => $featureGroup->id,
+    "question_type" => "radio",
+    "targeted" => true, // Note the targeted attribute set to true
+    "data" => [
+        "options" => [
+            ["label" => "Yes", "id" => "yes"],
+            ["label" => "No", "id" => "no"],
+        ],
+        "feature_id" => Feature::where("name", "=", "leaderboard")->firstOrFail()->id
+    ]
+]);
+```
+
+Below explains all the available attributes for a feedback question...
+
+| Field               | Description                                                                                 |
+|---------------------|---------------------------------------------------------------------------------------------|
+| name                | The name of this question to be displayed on screen                                         |
+| feedback_group_id   | The id of the feedback group this question belongs to                                       |
+| question_type       | The type of question this is, currently the available options are `text`, `radio`           |
+| targeted (optional) | Does this question target a specific feature? `true` or can be missed                       |
+| data                | An array of additional attributes that are needed for particular configurations (see below) |
+
+Certain data attributes are required for particular configrations...
+
+- if `targeted` is `true` then `data.feature_id` will need to contain a list of id's to target,
+- if `targeted` is `true` then you will need to specify an `operator` field which indicates how the array of `data.feature_id` should be handled...
+  - An operator of `all` will mean that all user will need to match **all** the features specified in the array
+  - An operator of `any` will mean the user can view the question if they have **any** feature in the array
+  - If an operator is not specified the default will be `all`
+- if `question_type` is `radio` then a list of options will need to be present in `data.options`, each option needs a display label and a unique id.
 
 
 ## Run Locally
@@ -202,11 +287,16 @@ Migrate the database
 ./vendor/bin/sail php artisan migrate
 ```
 
-Seed the database tables
+### Database seeding
+
+The project has two main seeding classes `DevSeeder` as well as the default `DatabaseSeeder`, `DevSeeder` will seed a bunch of example users and is meant for development purposes, to run this seeder run the following command...
 
 ```bash
-./vendor/bin/sail php artisan db:seed
+./vendor/bin/sail php artisan db:seed --class=DevSeeder
 ```
+
+`DatabaseSeeder` seeds only essential data and is meant for a production server.
+
 
 Install npm dependencies
 
@@ -237,6 +327,14 @@ When updating certain fields in the `.env` file when using Laravel Sail, you may
 ## Demo
 
 A live version of POD is available [here](http://pod.angusgoody.com/)
+
+## Tech Stack
+
+**Client:** Vue.js, InertiaJS, TailwindCSS
+
+**Server:** PHP (Laravel framework)
+
+**Database:** MYSQL, MongoDB
 
 ## Authors
 

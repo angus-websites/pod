@@ -46,7 +46,7 @@ class HomeController extends Controller
         else{
 
             // Extract the features into an array
-            $features = $user->allFeatures();
+            $features = FeatureResource::collection($user->allFeatures());
 
             return Inertia::render('Dashboard/UserDashboard', [
                 "features" => $features,

@@ -112,6 +112,7 @@ import { usePage } from '@inertiajs/inertia-vue3'
 // Fetch user
 const user = computed(() => usePage().props.value.auth.user)
 const canGenerateCV = usePage().props.value.canGenerateCV
+const canGiveFeedback = usePage().props.value.canGiveFeedback
 
 let navigation = [
     { name: 'Dashboard', href: route('dashboard'), current: route().current('dashboard') },
@@ -126,6 +127,13 @@ navigation = [
             current: route().current('cv')
         }]
         : []),
+    ...(canGiveFeedback ? [{
+            name: 'Feedback',
+            href: route('feedback'),
+            current: route().current('feedback')
+        }]
+        : []),
+
 ]
 
 const userNavigation = [

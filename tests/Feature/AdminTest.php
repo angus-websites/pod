@@ -3,19 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\Role;
-use App\Models\Template;
 use App\Models\User;
-use Database\Seeders\AdminSeeder;
-use Database\Seeders\FeatureSeeder;
-use Database\Seeders\RoleSeeder;
-use Database\Seeders\TemplateSeeder;
-
+use Database\Seeders\core\RoleSeeder;
+use Database\Seeders\core\TemplateSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
-use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
-use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 

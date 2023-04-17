@@ -13,8 +13,8 @@
 
             <!-- Save button -->
             <div class="flex justify-between mt-5">
-                <PrimaryButton type="submit">Save</PrimaryButton>
-                <DangerButton v-if="can.deleteEntry" @click="deleteEntry">Delete</DangerButton>
+                <PrimaryButton :disabled="form.processing" type="submit">Save</PrimaryButton>
+                <DangerButton :disabled="form.processing" v-if="can.deleteEntry" @click="deleteEntry">Delete</DangerButton>
             </div>
         </div>
     </form>

@@ -1,13 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\core;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
 use Illuminate\Support\Facades\DB;
-use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
+use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 class FeatureSeeder extends Seeder
 {
@@ -52,13 +50,11 @@ class FeatureSeeder extends Seeder
 
         $feedback =  Feature::create([
             'name' => 'Feedback',
-            'active' => false,
             'description' => 'Users can provide feedback on their experience using the app'
         ]);
 
         $cvBuilder =  Feature::create([
             'name' => 'CV Builder',
-            'active' => false,
             'description' => "Users can generate CV's from their entry content"
         ]);
 

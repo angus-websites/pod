@@ -41,7 +41,10 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::resource('entries', EntryController::class);
+
+    // Feedback routes
     Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+    Route::post('/feedback/submit', [FeedbackController::class, 'submit'])->name('feedback.submit');
 
     // CV Routes
     Route::get('/cv', [CVController::class, 'index'])->name('cv');
