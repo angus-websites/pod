@@ -59,7 +59,7 @@ class FeedbackGroup extends Model
 
             }
 
-            // Or operator (any features present)
+            // Any operator (any features present)
             else{
                 foreach ($targetedQuestion->data["feature_id"] as $targetedQuestionFeatureId){
                     if (in_array($targetedQuestionFeatureId, $features->toArray())){

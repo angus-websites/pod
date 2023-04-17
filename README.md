@@ -227,7 +227,11 @@ Below explains all the available attributes for a feedback question...
 
 Certain data attributes are required for particular configrations...
 
-- if `targeted` is `true` then `data.feature_id` will need to point to the id of the feature it targets
+- if `targeted` is `true` then `data.feature_id` will need to contain a list of id's to target,
+- if `targeted` is `true` then you will need to specify an `operator` field which indicates how the array of `data.feature_id` should be handled...
+  - An operator of `all` will mean that all user will need to match **all** the features specified in the array
+  - An operator of `any` will mean the user can view the question if they have **any** feature in the array
+  - If an operator is not specified the default will be `all`
 - if `question_type` is `radio` then a list of options will need to be present in `data.options`, each option needs a display label and a unique id.
 
 
