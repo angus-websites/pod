@@ -61,11 +61,6 @@ class FeedbackSeeder extends Seeder
             "position" => 1,
         ]);
 
-        $features = FeedbackGroup::create([
-            "name" => "Additional feedback",
-            "caption" => "Please provide some additional feedback about the website",
-            "position" => 2,
-        ]);
 
         $last = FeedbackGroup::create([
             "name" => "Final thoughts",

@@ -21,6 +21,8 @@ class FeedbackTestSeeder extends Seeder
         // Present features
         $leaderboardId = Feature::where("name", "=", "leaderboard")->firstOrFail()->id;
         $totalWordCountId = Feature::where("name", "=", "total word count")->firstOrFail()->id;
+        $streakId = Feature::where("name", "=", "streaks")->firstOrFail()->id;
+
 
         $features = FeedbackGroup::create([
             "name" => "Features",
@@ -41,13 +43,25 @@ class FeedbackTestSeeder extends Seeder
         ]);
 
         FeedbackQuestion::create([
+            "name" => "QL&S",
+            "feedback_group_id" => $features->id,
+            "question_type" => "text",
+            "required" => true,
+            "targeted" => true,
+            "data" => [
+                "operator" => "all",
+                "feature_id" =>  [$leaderboardId, $streakId]
+            ],
+        ]);
+
+        FeedbackQuestion::create([
             "name" => "QLOrR",
             "feedback_group_id" => $features->id,
             "question_type" => "text",
             "required" => true,
             "targeted" => true,
             "data" => [
-                "operator" => "or",
+                "operator" => "any",
                 "feature_id" =>  [$leaderboardId, $totalWordCountId]
             ],
         ]);

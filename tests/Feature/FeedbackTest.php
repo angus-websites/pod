@@ -228,7 +228,7 @@ class FeedbackTest extends TestCase
         // Give the feedback & leaderboard feature
         $user->giveFeature("feedback");
         $user->giveFeature("leaderboard");
-        $user->giveFeature("total word count");
+        $user->giveFeature("streaks");
 
         // Acting as this user
         $this->actingAs($user);
@@ -239,7 +239,7 @@ class FeedbackTest extends TestCase
         $response->assertInertia(fn (Assert $page) => $page
             // Checking nested properties using "dot" notation...
             ->has('feedbackGroups.data.0.questions.1', fn (Assert $page) => $page
-                ->where('name','QL&W')
+                ->where('name','QL&S')
                 ->etc()
             )
         );
@@ -255,6 +255,7 @@ class FeedbackTest extends TestCase
 
         // Give the feedback & leaderboard feature
         $user->giveFeature("feedback");
+        $user->giveFeature("leaderboard");
         $user->giveFeature("total word count");
 
         // Acting as this user
@@ -265,7 +266,7 @@ class FeedbackTest extends TestCase
 
         $response->assertInertia(fn (Assert $page) => $page
             // Checking nested properties using "dot" notation...
-            ->has('feedbackGroups.data.0.questions.0', fn (Assert $page) => $page
+            ->has('feedbackGroups.data.0.questions.1', fn (Assert $page) => $page
                 ->where('name','QLOrR')
                 ->etc()
             )
