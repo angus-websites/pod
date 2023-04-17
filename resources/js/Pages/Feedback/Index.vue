@@ -5,7 +5,7 @@
             <div class="px-4 sm:px-6 lg:px-8">
                 <div>
                     <Heading1>Feedback</Heading1>
-                    <p class="mt-1 sm:mt-2 text-sm text-gray-700">Here you can submit feedback about the application</p>
+                    <p class="mt-1 sm:mt-2 text-sm text-gray-700">Here you can submit feedback about the application (all questions are optional)</p>
                     <hr class="my-5">
                 </div>
 
