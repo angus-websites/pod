@@ -3,12 +3,12 @@
         <table class="table table-fixed min-w-full divide-y divide-gray-300">
             <thead>
                 <tr>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">#</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Answer</th>
+                    <th scope="col" class="py-3.5 w-2/12 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">#</th>
+                    <th scope="col" class="px-3 w-10/12 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Answer</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(answer, a) in answers" :key="a" :class="a % 2 === 0 ? undefined : 'bg-gray-50'">
+                <tr v-for="(answer, a) in answers" :key="a">
 
                     <td class="py-3.5 pl-4 pr-3 text-left text-sm text-gray-900 sm:pl-6">
                         {{ a }}

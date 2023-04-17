@@ -274,7 +274,7 @@ class FeedbackTest extends TestCase
         );
     }
 
-    public function test_admin_can_access_review()
+    public function test_admin_can_access_review_and_normal_user_cannot()
     {
         // -------- Create admin --------
 
@@ -297,6 +297,20 @@ class FeedbackTest extends TestCase
         // Test we can access the page
         $response = $this->get(route('feedback.review'));
         $response->assertStatus(200);
+
+    }
+
+    public function test_normal_user_cannot_review_feedback()
+    {
+        // Create user
+        $user = User::factory()->create();
+
+        // Acting as this user
+        $this->actingAs($user);
+
+        // Test we cannot access the page
+        $response = $this->get(route('feedback.review'));
+        $response->assertStatus(403);
     }
 
     public function test_admin_can_access_review_with_feedback_content()
