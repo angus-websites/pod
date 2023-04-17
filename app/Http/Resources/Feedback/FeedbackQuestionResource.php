@@ -17,10 +17,11 @@ class FeedbackQuestionResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'caption' => ($this->caption) ? : null,
             'group' => $this->group()->id,
             'type' => strtolower($this->question_type),
-            'targeted' => ($this->targeted) ? ($this->targeted) : false,
-            'data' => $this->data
+            'targeted' => ($this->targeted) ? : false,
+            'data' => ($this->data) ? : [],
         ];
     }
 }

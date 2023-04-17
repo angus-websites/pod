@@ -33,8 +33,13 @@
 
                                     <!-- Questions -->
                                     <div class="mt-5 flex flex-col space-y-5 md:max-w-lg">
-                                        <div v-for="(question, q) in group.questions">
+
+                                        <div v-if="group.questions.length < 1">
+                                            No questions for this section
+                                        </div>
+                                        <div v-else v-for="(question, q) in group.questions">
                                             <Heading3><b>{{g+1}}.{{q+1}}</b> &nbsp; {{question.name}}</Heading3>
+                                            <small v-if="question.caption">{{question.caption}}</small>
 
                                             <template v-if="question.type == 'text'">
                                                 <div class="mt-2">
@@ -59,6 +64,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
                             <!-- Submit -->
@@ -113,6 +119,14 @@ function submit()
     form.post(route('feedback.submit'), {
         onSuccess: () => setupForm(),
     })
+}
+
+function shouldWeShowGroup(group)
+{
+    /**
+     * Should this group be displayed?
+     */
+    return
 }
 
 function setupForm(){
