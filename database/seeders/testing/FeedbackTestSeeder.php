@@ -18,6 +18,10 @@ class FeedbackTestSeeder extends Seeder
     public function run()
     {
 
+        // Present features
+        $leaderboardId = Feature::where("name", "=", "leaderboard")->firstOrFail()->id;
+        $totalWordCountId = Feature::where("name", "=", "total word count")->firstOrFail()->id;
+
         $features = FeedbackGroup::create([
             "name" => "Features",
             "caption" => "Specific questions about the apps features",
@@ -32,7 +36,19 @@ class FeedbackTestSeeder extends Seeder
             "required" => true,
             "targeted" => true,
             "data" => [
-                "feature_id" =>  Feature::where("name", "=", "leaderboard")->firstOrFail()->id
+                "feature_id" =>  [$leaderboardId]
+            ],
+        ]);
+
+        FeedbackQuestion::create([
+            "name" => "QLOrR",
+            "feedback_group_id" => $features->id,
+            "question_type" => "text",
+            "required" => true,
+            "targeted" => true,
+            "data" => [
+                "operator" => "or",
+                "feature_id" =>  [$leaderboardId, $totalWordCountId]
             ],
         ]);
 

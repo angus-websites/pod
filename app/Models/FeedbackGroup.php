@@ -32,13 +32,51 @@ class FeedbackGroup extends Model
         $features = $user->allFeatures()->pluck("id");
 
         // Only select the feeedback we have access to
-        $targeted = $this->questions()->where('targeted', true)->whereIn('data.feature_id', $features)->get();
+        $targeted = $this->questions()->where('targeted', true)->get();
+
+        // Store the targeted questions
+        $questions = [];
+
+        // Get all features specified
+        foreach($targeted as $targetedQuestion){
+
+            // Extract an operator (default is all)
+            $operator = $targetedQuestion->data["operator"] ?? "all";
+
+            // All operator (all features must be present)
+            if ($operator == "all"){
+
+                $match = true;
+                foreach ($targetedQuestion->data["feature_id"] as $targetedQuestionFeatureId){
+                    if (!in_array($targetedQuestionFeatureId, $features->toArray())){
+                        $match=false;
+                        break;
+                    }
+                }
+                if ($match){
+                    $questions[] = $targetedQuestion;
+                }
+
+            }
+
+            // Or operator (any features present)
+            else{
+                foreach ($targetedQuestion->data["feature_id"] as $targetedQuestionFeatureId){
+                    if (in_array($targetedQuestionFeatureId, $features->toArray())){
+                        $questions[] = $targetedQuestion;
+                        break;
+                    }
+                }
+            }
+
+        }
+
 
         // Get all the other feedback
         $others =  $this->questions()->where('targeted', "!=", true)->get();
 
         // Merge the two together and return
-        return $others->merge($targeted);
+        return $others->merge($questions);
     }
 
 

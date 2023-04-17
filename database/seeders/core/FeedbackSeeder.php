@@ -39,6 +39,13 @@ class FeedbackSeeder extends Seeder
             ["label" => "No", "id" => "no"],
         ];
 
+        // Reusable features
+        $leaderboardId = Feature::where("name", "=", "leaderboard")->firstOrFail()->id;
+        $streaksId = Feature::where("name", "=", "streaks")->firstOrFail()->id;
+        $totalWordCountId = Feature::where("name", "=", "total word count")->firstOrFail()->id;
+        $rankedId = Feature::where("name", "=", "ranked")->firstOrFail()->id;
+        $cvId = Feature::where("name", "=", "cv builder")->firstOrFail()->id;
+
 
         // ----- Groups -----
 
@@ -136,7 +143,7 @@ class FeedbackSeeder extends Seeder
             "targeted" => true,
             "data" => [
                 "options" => $yesNo,
-                "feature_id" => Feature::where("name", "=", "leaderboard")->firstOrFail()->id
+                "feature_id" => [$leaderboardId]
             ]
         ]);
 
@@ -149,7 +156,7 @@ class FeedbackSeeder extends Seeder
             "targeted" => true,
             "data" => [
                 "options" => $yesNo,
-                "feature_id" => Feature::where("name", "=", "streaks")->firstOrFail()->id
+                "feature_id" => [$streaksId]
             ]
         ]);
 
@@ -161,7 +168,7 @@ class FeedbackSeeder extends Seeder
             "targeted" => true,
             "data" => [
                 "options" => $yesNo,
-                "feature_id" => Feature::where("name", "=", "ranked")->firstOrFail()->id
+                "feature_id" => [$rankedId]
             ]
         ]);
 
@@ -173,7 +180,7 @@ class FeedbackSeeder extends Seeder
             "targeted" => true,
             "data" => [
                 "options" => $yesNo,
-                "feature_id" => Feature::where("name", "=", "total word count")->firstOrFail()->id
+                "feature_id" => [$totalWordCountId]
             ]
         ]);
 
@@ -185,7 +192,7 @@ class FeedbackSeeder extends Seeder
             "targeted" => true,
             "data" => [
                 "options" => $yesNo,
-                "feature_id" => Feature::where("name", "=", "cv builder")->firstOrFail()->id
+                "feature_id" => [$cvId]
             ]
         ]);
 
@@ -195,11 +202,62 @@ class FeedbackSeeder extends Seeder
             "question_type" => "radio",
             "targeted" => true,
             "data" => [
-                "options" => array_merge($satsifactionOptions, ["label" => "NA", "id" => "na"],),
-                "feature_id" => Feature::where("name", "=", "cv builder")->firstOrFail()->id
+                "options" => array_merge($satsifactionOptions, array(["label" => "NA", "id" => "na"])),
+                "feature_id" => [$cvId]
             ]
         ]);
 
+        // -- Multi targeted questions
+
+        FeedbackQuestion::create([
+            "name" => "Which of the following features encouraged you to use the application more",
+            "feedback_group_id" => $using->id,
+            "question_type" => "radio",
+            "targeted" => true,
+            "data" => [
+                "options" => [
+                    ["label" => "Viewing your total word count", "id" => "totalWordCount"],
+                    ["label" => "Being able to see my current entry streak", "id" => "streak"],
+                ],
+                "operator" => "all",
+                "feature_id" => [$totalWordCountId, $streaksId]
+            ]
+        ]);
+
+        FeedbackQuestion::create([
+            "name" => "When viewing the leaderboard, which statistic did you care about the most?",
+            "feedback_group_id" => $using->id,
+            "question_type" => "radio",
+            "targeted" => true,
+            "data" => [
+                "options" => [
+                    ["label" => "Number of entries", "id" => "numberOfEntries"],
+                    ["label" => "Longest streak", "id" => "streak"],
+                    ["label" => "Total word count", "id" => "totalWordCount"],
+                    ["label" => "I didnt care about any of the leaderboard features", "id" => "didntCare"],
+
+                ],
+                "feature_id" => [$leaderboardId, $streaksId, $totalWordCountId]
+            ]
+        ]);
+
+
+        FeedbackQuestion::create([
+            "name" => "What rank did you care the most about?",
+            "caption" => "On your dashboard, you can see your rank for certain statistics compared to other users, which statistic did you care the most about",
+            "feedback_group_id" => $using->id,
+            "question_type" => "radio",
+            "targeted" => true,
+            "data" => [
+                "options" => [
+                    ["label" => "Number of entries", "id" => "numberOfEntries"],
+                    ["label" => "Longest streak", "id" => "streak"],
+                    ["label" => "Total word count", "id" => "totalWordCount"],
+                    ["label" => "I didnt care about any of the rankings", "id" => "didntCare"],
+                ],
+                "feature_id" => [$rankedId, $streaksId, $totalWordCountId]
+            ]
+        ]);
 
 
 

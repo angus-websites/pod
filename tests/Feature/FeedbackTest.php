@@ -217,5 +217,60 @@ class FeedbackTest extends TestCase
         );
     }
 
+    public function test_user_receives_feedback_with_targeted_feature_using_and_operator()
+    {
+        // Create some test feedback data
+        $this->seed(FeedbackTestSeeder::class);
+
+        // Create user
+        $user = User::factory()->create();
+
+        // Give the feedback & leaderboard feature
+        $user->giveFeature("feedback");
+        $user->giveFeature("leaderboard");
+        $user->giveFeature("total word count");
+
+        // Acting as this user
+        $this->actingAs($user);
+
+        // Test we can access the page
+        $response = $this->get(route('feedback'));
+
+        $response->assertInertia(fn (Assert $page) => $page
+            // Checking nested properties using "dot" notation...
+            ->has('feedbackGroups.data.0.questions.1', fn (Assert $page) => $page
+                ->where('name','QL&W')
+                ->etc()
+            )
+        );
+    }
+
+    public function test_user_receives_feedback_with_targeted_feature_using_or_operator()
+    {
+        // Create some test feedback data
+        $this->seed(FeedbackTestSeeder::class);
+
+        // Create user
+        $user = User::factory()->create();
+
+        // Give the feedback & leaderboard feature
+        $user->giveFeature("feedback");
+        $user->giveFeature("total word count");
+
+        // Acting as this user
+        $this->actingAs($user);
+
+        // Test we can access the page
+        $response = $this->get(route('feedback'));
+
+        $response->assertInertia(fn (Assert $page) => $page
+            // Checking nested properties using "dot" notation...
+            ->has('feedbackGroups.data.0.questions.0', fn (Assert $page) => $page
+                ->where('name','QLOrR')
+                ->etc()
+            )
+        );
+    }
+
 
 }
