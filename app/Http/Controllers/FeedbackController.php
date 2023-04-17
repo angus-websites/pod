@@ -96,4 +96,23 @@ class FeedbackController extends Controller
 
 
     }
+
+    /**
+     * Allow the feedback to be reviewed
+     */
+    public function review()
+    {
+        // Check permissions before rendering feedback form
+        if (! Gate::allows('review-feedback', Auth::user())) {
+            abort(403);
+        }
+
+        // Fetch all the user feedback
+        $feedback = UserFeedback::all();
+
+        return Inertia::render('Feedback/Review',
+            ["feedback" => $feedback]
+        );
+
+    }
 }
