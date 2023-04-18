@@ -12,9 +12,27 @@ use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\FeatureGroupResource;
 use App\Http\Resources\FeatureResource;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
 
 class HomeController extends Controller
 {
+    /**
+     * Render the app home page
+     */
+    public function welcome()
+    {
+        $initialContent="<h1>Welcome to pod</h1>";
+        return Inertia::render('Welcome', [
+            "initialContent" => $initialContent,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+        ]);
+
+    }
+
     /**
      * Render the dashboard view
      */
