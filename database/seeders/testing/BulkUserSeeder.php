@@ -20,7 +20,7 @@ class BulkUserSeeder extends Seeder
 
             $n = rand(5,35);
 
-            Entry::factory()->count($n)->create(['user_id' => $u->id]);
+            (new EntryFactory)->count($n)->create(['user_id' => $u->id]);
         });
     }
 }
