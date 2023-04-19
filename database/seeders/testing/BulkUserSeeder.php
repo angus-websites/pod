@@ -4,7 +4,6 @@ namespace Database\Seeders\testing;
 
 use App\Models\Entry;
 use App\Models\User;
-use Database\Factories\EntryFactory;
 use Illuminate\Database\Seeder;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
@@ -20,7 +19,7 @@ class BulkUserSeeder extends Seeder
 
             $n = rand(5,35);
 
-            (new EntryFactory)->count($n)->create(['user_id' => $u->id]);
+            Entry::factory()->count($n)->create(['user_id' => $u->id]);
         });
     }
 }
