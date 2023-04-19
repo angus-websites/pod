@@ -6,8 +6,8 @@
                 <!-- Heading -->
                 <div class="sm:flex sm:items-end">
                     <div class="sm:flex-auto">
-                        <Heading1>Entries</Heading1>
-                        <p class="mt-1 sm:mt-2 text-sm text-gray-700">A list of your entries, you can search and filter by template type</p>
+                        <Heading1>Your Entries</Heading1>
+                        <p class="mt-1 sm:mt-2 text-sm text-gray-700">A list of your entries, you can search and filter by template type. You have <b>{{numberOfEntries}}</b> entries.</p>
                     </div>
                     <PrimaryButton isLink="true" :href="route('entries.create')" class="my-5 sm:my-0">
                         <span>New Entry</span>
@@ -57,6 +57,16 @@
                     </div>
 
                 </div>
+
+                <!-- Stat bar -->
+                <div class="my-8 flex flex-row justify-center gap-x-10">
+                    <div v-if="showing === entries.meta.total">
+                        <p class="mt-1 text-sm text-gray-700">Showing {{ showing }} results</p>
+                    </div>
+                    <div v-else>
+                        <p class="mt-1 text-sm text-gray-700">Showing {{ showing }} / {{ entries.meta.total }} results</p>
+                    </div>
+                </div>
                 <!-- Entry table-->
                 <EntryTable :entries="entries" :templates="templates"/>
 
@@ -105,7 +115,7 @@ export default {
         PrimaryButton,
         MagnifyingGlassIcon,
     },
-    props: ["entries", "templates", "filters"],
+    props: ["entries", "templates", "filters", "numberOfEntries", "showing"],
     data() {
       return {
         form: {

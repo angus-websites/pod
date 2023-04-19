@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Database\Seeders\core\FeedbackSeeder;
+use Database\Seeders\testing\BulkUserSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +16,6 @@ class PopulateFeedbackSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(FeedbackSeeder::class);
+        $this->call(BulkUserSeeder::class);
     }
 }
