@@ -10,7 +10,7 @@
                     <component :is="TemplateInputs[field.type]" :key="field.id" :field="field" v-model.lazy="form.content[field.id]"></component>
                 </div>
                 <template v-if="$page.props.errors">
-                    <p v-if="$page.props.errors[field.id]" class="mt-2 text-sm text-red-600" id="email-error">{{ $page.props.errors[field.id] }}</p>
+                    <p v-if="$page.props.errors[field.id]" class="mt-2 text-sm text-red-600">{{ $page.props.errors[field.id] }}</p>
                 </template>
             </div>
 
