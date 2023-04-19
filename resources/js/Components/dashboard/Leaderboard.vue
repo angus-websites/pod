@@ -11,8 +11,8 @@
         <div class="mt-8">
             <div class="sm:hidden">
                 <label for="tabs" class="sr-only">Select a tab</label>
-                <select @change="onTabChange($event)" id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                    <option v-for="tab in tabs" :key="tab.name" :selected="tab.current">{{ tab.name }}</option>
+                <select @change="switchSelect" id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                    <option v-for="tab in tabs" :value="tab.id" :key="tab.name" :selected="tab.current">{{ tab.name }}</option>
                 </select>
             </div>
             <div class="hidden sm:block">
@@ -32,10 +32,13 @@
                         <table class="min-w-full divide-y divide-gray-300 table-fixed">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Rank</th>
-
-                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
-                                    <th scope="col" class="text-left text-sm font-semibold text-gray-900">
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 w-2/12">
+                                        Rank
+                                    </th>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 w-7/12">
+                                        Name
+                                    </th>
+                                    <th scope="col" class="text-left text-sm font-semibold text-gray-900 w-4/12">
                                         {{ currentTab.name }}
                                     </th>
                                 </tr>
@@ -170,5 +173,23 @@ function setCurrentTab(tab){
         }
     }
     currentTab.value = tab
+}
+
+function switchSelect(event){
+    const tabId = event.target.value;
+
+    // Check it's not current
+    if (currentTab.id != tabId){
+
+        // Change tab
+        for (const tabKey in tabs) {
+            let currentTab = tabs[tabKey]
+            if(currentTab.id == tabId){
+                return setCurrentTab(currentTab)
+
+            }
+        }
+    }
+
 }
 </script>

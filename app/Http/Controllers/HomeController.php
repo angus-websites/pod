@@ -22,7 +22,9 @@ class HomeController extends Controller
      */
     public function welcome()
     {
-        $initialContent="<h1>Welcome to pod</h1>";
+        $initialContent='<h1>Welcome to pod</h1><h2>What is it?<br data-mce-bogus="1"></h2><p>Pod is a website that allows students on placement to keep track of their progress, achievements and skills in a single place.<br data-mce-bogus="1"></p><h2>Features<br data-mce-bogus="1"></h2><ul><li>A rich WYSIWYG editor to record your year<br data-mce-bogus="1"></li><li>Quickly search and filter your entries<br data-mce-bogus="1"></li><li>Generate a CV from your data<br data-mce-bogus="1"></li></ul>';
+
+
         return Inertia::render('Welcome', [
             "initialContent" => $initialContent,
             'canLogin' => Route::has('login'),

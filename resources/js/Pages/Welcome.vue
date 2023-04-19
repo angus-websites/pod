@@ -1,6 +1,8 @@
 <template>
     <GuestLayout title="Home">
         <main class="mx-auto mt-16 max-w-7xl px-4 sm:mt-24">
+
+            <!-- Intro -->
             <div class="text-center">
                 <h1 class="text-4xl font-bold tracking-tight text-grey-900 sm:text-5xl md:text-6xl">
                     <span class="block xl:inline">Keep track of</span>
@@ -21,10 +23,11 @@
                 </div>
             </div>
 
-            <div class="flex flex-col gap-y-36 mt-20">
+            <div class="flex flex-col gap-y-24 mt-20">
                 <!-- Tiny -->
-                <div>
+                <div class="text-center">
                     <TemplateRaw field="" v-model="initialContent" />
+                    <small class="my-5">Feel free to mess around with our example editor above</small>
                 </div>
 
                 <div>

@@ -10,15 +10,19 @@
           <table class="min-w-full divide-y divide-gray-300">
             <thead>
               <tr>
-                <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Name</th>
-                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Email</th>
-                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Groups</th>
+                <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0 w-4/12">Name</th>
+                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 w-6/12">Email</th>
+                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 w-2/12">Groups</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
               <tr v-for="user in users.data" :key="user.id">
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ user.name }}</td>
-                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ user.email }}</td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                    <p @click="copyValue(user.email)" class="cursor-pointer">
+                        <template v-for="n in 12">&#8226;</template>
+                    </p>
+                </td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                   <div class="flex items-center flex-row gap-x-2">
                     <span v-for="group in user.groups" :style="{ backgroundColor: group.bg, color: group.fg}" class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">{{group.name}}</span>
@@ -55,8 +59,19 @@
 </template>
 
 <script setup>
-  const props = defineProps({
-      users: Object,
-      userCount: Number
-  })
+
+const props = defineProps({
+  users: Object,
+  userCount: Number
+})
+
+async function copyValue(value){
+    try {
+        await navigator.clipboard.writeText(value);
+        alert('Copied');
+    } catch($e) {
+        alert('Cannot copy');
+    }
+}
+
 </script>
