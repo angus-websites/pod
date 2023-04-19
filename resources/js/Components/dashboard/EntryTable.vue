@@ -5,20 +5,18 @@
         <Link :href="route('entries.show', entry.id)" class="block hover:bg-gray-50">
             <div class="flex items-center px-4 py-4 sm:px-6">
                 <div class="flex min-w-0 flex-1 items-center">
-                    <div class="min-w-0 flex-1 md:grid md:grid-cols-3 md:gap-4">
-                        <div>
-                            <p class="truncate text-sm font-medium text-secondary">{{ entry.title }}</p>
-                            <p class="mt-2 flex items-center text-sm text-gray-500">
-                                <img v-if="getTemplateIcon(entry.template)" :src="getTemplateIcon(entry.template)" alt="" aria-hidden="true" class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400">
-                                <span class="truncate">{{ getTemplateName(entry.template)}}</span>
-                            </p>
-                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:hidden">
-                                <small class="truncate">{{ entry.data.date }}</small>
-                            </p>
-                        </div>
+                    <div>
+                        <p class="truncate text-md font-medium text-secondary">{{ entry.title }}</p>
+                        <p class="mt-2 flex items-center text-sm text-gray-500">
+                            <img v-if="getTemplateIcon(entry.template)" :src="getTemplateIcon(entry.template)" alt="" aria-hidden="true" class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400">
+                            <span class="truncate">{{ getTemplateName(entry.template)}}</span>
+                        </p>
+                        <p class="mt-2 flex items-center text-sm text-gray-500 sm:hidden">
+                            <small class="truncate">{{ entry.data.date }}</small>
+                        </p>
                     </div>
                 </div>
-                <div class="sm:flex-1 hidden sm:block">
+                <div class="sm:flex-1 hidden sm:block text-center">
                     <p class="text-sm text-gray-500">{{ entry.data.date }}</p>
                 </div>
                 <div>
