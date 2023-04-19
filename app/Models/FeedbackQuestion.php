@@ -8,6 +8,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class FeedbackQuestion extends Model
 {
     protected $connection = 'mongodb';
+    protected $guarded = ['id'];
     use HasFactory;
 
     public function group(){

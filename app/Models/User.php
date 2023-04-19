@@ -222,6 +222,14 @@ class User extends Authenticatable
         return $this->hasMany(Entry::class);
     }
 
+    public function feedback(){
+        /**
+         * Fetch all the entries that
+         * belong to this user
+         */
+        return $this->hasMany(UserFeedback::class);
+    }
+
     public function isAdmin($super=false){
         /**
          * Is this user admin or super admin?
