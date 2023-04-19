@@ -190,6 +190,6 @@ function switchSelect(event){
             }
         }
     }
-    
+
 }
 </script>
