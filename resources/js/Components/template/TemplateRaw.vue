@@ -9,9 +9,8 @@
             min_height: 300,
             height: 400,
             menubar: false,
-            plugins: [
-            'autolink lists link wordcount'
-            ],
+            plugins: ['autolink' ,'link', 'wordcount', 'lists'],
+            toolbar: 'undo redo | styles bold italic alignleft aligncenter alignright alignjustify bullist numlist outdent indent link unlink image fullscreen',
         }"
         />
     </div>

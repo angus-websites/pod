@@ -49,9 +49,17 @@ class EntryController extends Controller
             })->orderBy("created_at", "desc")->paginate(15)->withQueryString()
         );
 
+        $numberOfEntries = Auth::user()->entries()->count();
+        $showing = $entries->count();
+
         // Fetch the templates (->all() removes the 'data' key)
         $templates = TemplateResource::collection(Template::all())->all();
-        return Inertia::render('Entry/Index', ['entries' => $entries, 'filters' => $filters, "templates" => $templates]);
+        return Inertia::render('Entry/Index', [
+            'entries' => $entries,
+            'filters' => $filters,
+            'numberOfEntries' => $numberOfEntries,
+            'showing' => $showing,
+            "templates" => $templates]);
     }
 
     /**
@@ -79,10 +87,10 @@ class EntryController extends Controller
         $template = Template::findOrFail($request->template);
 
         // Extract the validation rules
-        $template->getValidator($request->content)->validate();
+        $template->getValidator($request['content'])->validate();
 
         // Convert the array content into "data"
-        $input = ["data" => $request->content];
+        $input = ["data" => $request['content']];
 
         // Create the new Entry
         $new_entry = new Entry();
@@ -132,10 +140,10 @@ class EntryController extends Controller
         $template = $entry->template();
 
         // Extract the validation rules & run
-        $template->getValidator($request->content)->validate();
+        $template->getValidator($request['content'])->validate();
 
         // Convert the array content into "data"
-        $input = ["data" => $request->content];
+        $input = ["data" => $request['content']];
 
         $entry->fill($input)->save();
 

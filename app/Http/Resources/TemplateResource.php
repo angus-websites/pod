@@ -8,6 +8,7 @@ class TemplateResource extends JsonResource
 {
     // Remove the "data" top level wrap
     public static $wrap = null;
+
     /**
      * Transform the resource into an array.
      *

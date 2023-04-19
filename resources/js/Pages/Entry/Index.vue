@@ -6,8 +6,8 @@
                 <!-- Heading -->
                 <div class="sm:flex sm:items-end">
                     <div class="sm:flex-auto">
-                        <Heading1>Entries</Heading1>
-                        <p class="mt-1 sm:mt-2 text-sm text-gray-700">A list of your entries, you can search and filter by template type</p>
+                        <Heading1>Your Entries</Heading1>
+                        <p class="mt-1 sm:mt-2 text-sm text-gray-700">A list of your entries, you can search and filter by template type. You have <b>{{numberOfEntries}}</b> entries.</p>
                     </div>
                     <PrimaryButton isLink="true" :href="route('entries.create')" class="my-5 sm:my-0">
                         <span>New Entry</span>
@@ -40,24 +40,32 @@
                     </div>
                     <!-- Search section -->
                     <div class="flex-1 flex flex-col md:flex-row md:space-x-3 md:space-y-0 space-y-3 items-center">
-                        <!-- Search -->
+
                         <div class="w-full">
-                          <label for="search" class="sr-only">Search</label>
-                          <div class="relative text-gray-400 focus-within:text-gray-500">
-                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                              <MagnifyingGlassIcon class="h-5 w-5" aria-hidden="true" />
+                            <div class="mt-2 flex rounded-md shadow-sm">
+                                <div class="relative flex flex-grow items-stretch text-gray-400 focus-within:text-gray-500">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <MagnifyingGlassIcon class="h-5 w-5" aria-hidden="true" />
+                                    </div>
+                                    <input v-model="form.search" id="search" class="block w-full rounded-l-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" placeholder="Search" type="search" name="search" />
+                                </div>
+                                <button @click="reset" type="button" class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-600 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                    Reset
+                                </button>
                             </div>
-                            <input v-model="form.search" id="search" class="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" placeholder="Search" type="search" name="search" />
-                          </div>
                         </div>
-
-                        <!-- Reset button -->
-                        <div class="text-center">
-                          <button @click="reset" type="button" class="font-medium text-sm text-gray-700 hover:underline">Reset</button>
-                        </div>
-
                     </div>
-                    
+
+                </div>
+
+                <!-- Stat bar -->
+                <div class="my-8 flex flex-row justify-center gap-x-10">
+                    <div v-if="showing === entries.meta.total">
+                        <p class="mt-1 text-sm text-gray-700">Showing {{ showing }} results</p>
+                    </div>
+                    <div v-else>
+                        <p class="mt-1 text-sm text-gray-700">Showing {{ showing }} / {{ entries.meta.total }} results</p>
+                    </div>
                 </div>
                 <!-- Entry table-->
                 <EntryTable :entries="entries" :templates="templates"/>
@@ -83,7 +91,7 @@
 
             </div>
 
-            
+
         </PageContainer>
     </AppLayout>
 </template>
@@ -107,7 +115,7 @@ export default {
         PrimaryButton,
         MagnifyingGlassIcon,
     },
-    props: ["entries", "templates", "filters"],
+    props: ["entries", "templates", "filters", "numberOfEntries", "showing"],
     data() {
       return {
         form: {
@@ -135,7 +143,7 @@ export default {
         this.form.template = null;
         this.form.search = "";
         this.form.sortBy = null;
-        
+
       }
     }
 

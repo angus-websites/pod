@@ -112,5 +112,40 @@ class TemplateSeeder extends Seeder
 
           ],
         ]);
+
+        // Feedback template
+        Template::create([
+            'name' => "Feedback",
+            'description' => "For if you receive feedback from something",
+            'fields' => [
+                [
+                    'id' => 'title',
+                    'label' => 'Title for the feedback',
+                    'type' => 'text',
+                    'required' => true,
+                    'validation' => ['required', 'max:100'],
+                ],
+                [
+                    'id' => 'date',
+                    'label' => 'When did you receive this feedback?',
+                    'type' => 'date',
+                    'validation' => ['date', 'before_or_equal:today'],
+                ],
+                [
+                    'id' => 'the_feedback',
+                    'label' => 'What was the feedback?',
+                    'type' => 'raw',
+                    'required' => true,
+                    'validation' => ['required', 'max:5000'],
+                ],
+                [
+                    'id' => 'improvement',
+                    'label' => 'What is your plan to act on the feedback?',
+                    'type' => 'raw',
+                    'validation' => ['max:5000'],
+                ],
+
+            ],
+        ]);
     }
 }
