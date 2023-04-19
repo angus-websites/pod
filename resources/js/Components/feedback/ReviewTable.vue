@@ -14,7 +14,7 @@
                         {{ a }}
                     </td>
                     <td class="px-3 py-3.5 text-left text-sm text-gray-900 lg:table-cell">
-                        {{ answer.answer }}
+                        <p class="line-clamp-5">{{ answer.answer }}</p>
                     </td>
                 </tr>
             </tbody>
