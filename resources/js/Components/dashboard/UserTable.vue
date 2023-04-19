@@ -59,7 +59,6 @@
 </template>
 
 <script setup>
-import { ClipboardIcon } from '@heroicons/vue/20/solid'
 
 const props = defineProps({
   users: Object,
