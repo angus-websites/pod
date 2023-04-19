@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\core\FeedbackSeeder;
 use Database\Seeders\testing\BulkUserSeeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PopulateFeedbackSeeder extends Seeder
+class PopulateBulkSeeder extends Seeder
 {
     /**
      * Modify this to customise feedback seeding

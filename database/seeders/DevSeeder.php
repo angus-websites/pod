@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Entry;
 use App\Models\User;
 use Database\Seeders\core\AdminSeeder;
 use Database\Seeders\core\FeatureSeeder;
@@ -39,10 +40,13 @@ class DevSeeder extends Seeder
         $this->call(FeedbackSeeder::class);
 
         // Create some users with entries
-        User::factory()->count(50)->hasEntries(25)->create()->each(function ($u){
+        User::factory()->count(15)->create()->each(function ($u){
             // Assign a random group to this user
             $random_group_name = FeatureGroup::all()->where("active", "1")->random()->name;
             $u->addToGroup($random_group_name);
+
+            $n = rand(1,50);
+            Entry::factory()->count($n)->create(['user_id' => $u->id]);
         });
 
 

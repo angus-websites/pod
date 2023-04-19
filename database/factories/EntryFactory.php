@@ -29,7 +29,6 @@ class EntryFactory extends Factory
                 $training_template = Template::where('name', '=', 'Training')->firstOrFail();
 
                 $name_of_training = $this->faker->text(10);
-                $start = $this->faker->date;
                 $paragraphs = $this->faker->paragraphs(rand(2, 6));
                 $what_i_learned = "";
                 foreach ($paragraphs as $para) {
@@ -40,8 +39,8 @@ class EntryFactory extends Factory
                     'template_id' => $training_template,
                     'data' => [
                         'title'=>$name_of_training,
-                        "date" => $start,
-                        'what_i_learned'=>$what_i_learned
+                        'what_i_learned'=>$what_i_learned,
+                        "date" => $this->getDate(),
                     ]
                 ];
                 break;
@@ -52,7 +51,6 @@ class EntryFactory extends Factory
                 $skill_template = Template::where('name', '=', 'New Skill')->firstOrFail();
 
                 $skill_name = $this->faker->realText(10);
-                $date = $this->faker->date;
                 $paragraphs = $this->faker->paragraphs(rand(2, 6));
                 $what_i_learned = "";
                 foreach ($paragraphs as $para) {
@@ -63,8 +61,8 @@ class EntryFactory extends Factory
                     'template_id' => $skill_template,
                     'data' => [
                         'title'=>$skill_name,
-                        'date'=>$date,
-                        'what_i_learned'=>$what_i_learned
+                        'what_i_learned'=>$what_i_learned,
+                        'date'=>$this->getDate()
                     ]
                 ];
                 break;
@@ -81,17 +79,25 @@ class EntryFactory extends Factory
                     $content .= "<p>{$para}</p>";
                 }
 
+
+
                 $entry_content = [
                     'template_id'=>$general_template,
                     'data' => [
                         'title'=>$title,
                         'content'=>$content,
-                        'date'=>$this->faker->date
+                        'date'=>$this->getDate()
                     ]
                 ];
                 break;
         }
 
         return $entry_content;
+    }
+
+
+    private function getDate(): string
+    {
+        return $this->faker->dateTimeThisYear()->format("d-m-Y");
     }
 }

@@ -12,13 +12,13 @@ class BulkUserSeeder extends Seeder
 {
     public function run(){
 
-        User::factory()->count(5)->create()->each(function ($u){
+        User::factory()->count(9)->create()->each(function ($u){
 
             // Assign a random group to this user
             $random_group_name = FeatureGroup::all()->where("active", "1")->random()->name;
             $u->addToGroup($random_group_name);
 
-            $n = rand(5,50);
+            $n = rand(5,35);
 
             Entry::factory()->count($n)->create(['user_id' => $u->id]);
         });
