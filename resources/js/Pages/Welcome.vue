@@ -25,7 +25,7 @@
 
             <div class="flex flex-col gap-y-24 mt-20">
                 <!-- Tiny -->
-                <div class="text-center">
+                <div v-if="initialContent" class="text-center">
                     <TemplateRaw field="" v-model="initialContent" />
                     <small class="my-5">Feel free to mess around with our example editor above</small>
                 </div>

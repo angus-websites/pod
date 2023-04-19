@@ -11,6 +11,8 @@ use App\Models\FeedbackGroup;
 use App\Models\UserFeedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +48,7 @@ class FeedbackController extends Controller
 
     /**
      * Handles submitted forms
+     * @throws ValidationException
      */
     public function submit(Request $request)
     {
@@ -68,6 +71,14 @@ class FeedbackController extends Controller
             // Add the relevant data to the request, user_id, answer etc
             $feedbackData = [];
             foreach ($content as $question => $answer) {
+
+                // Create a custom validator (limit each answer to 600 characters)
+                Validator::make(
+                    [$question => $answer],
+                    [$question => 'max:600'],
+                    [$question => "Your answer is too long (max 600 characters)"]
+                )->validate();
+
                 // If there was no answer, don't save to database
                 if ($answer) {
                     $feedbackData[] = [
@@ -80,7 +91,6 @@ class FeedbackController extends Controller
             }
 
             // Only insert if we have at least one bit of valid data
-
             if (count($feedbackData) > 0){
                 // Save all to the user-feedback table
                 UserFeedback::insert($feedbackData);

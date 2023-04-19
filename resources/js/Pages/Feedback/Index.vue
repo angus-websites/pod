@@ -8,7 +8,7 @@
                     <p class="mt-1 sm:mt-2 text-sm text-gray-700">Here you can submit feedback about the application (all questions are optional)</p>
                     <hr class="my-5">
                 </div>
-
+                
                 <div v-if="canReviewFeedback">
                     <SecondaryButton :isLink="true" :href="route('feedback.review')">Review Feedback</SecondaryButton>
                 </div>
@@ -47,7 +47,7 @@
 
                                             <template v-if="question.type == 'text'">
                                                 <div class="mt-2">
-                                                    <textarea v-model="feedback.answers[question.id]"   rows="4" name="comment" id="comment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                                    <textarea v-model="feedback.answers[question.id]" rows="4" name="comment" id="comment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                                                 </div>
                                             </template>
 
@@ -59,11 +59,15 @@
                                                                 <label :for="`side-${option.id}`" class="select-none font-medium text-gray-900">{{ option.label }}</label>
                                                             </div>
                                                             <div class="ml-3 flex h-6 items-center">
-                                                                <input v-model="feedback.answers[question.id]" :value="option.id" :id="`side-${option.id}`" :name="question.name" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                                                <input v-model="feedback.answers[question.id]" :value="option.id" :id="`side-${option.id}`" :name="question.name" type="radio" class="h-4 w-4 border-gray-300 text-primary focus:ring-indigo-600" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </fieldset>
+                                            </template>
+
+                                            <template v-if="$page.props.errors">
+                                                <p v-if="$page.props.errors[question.id]" class="mt-2 text-sm text-red-600">{{ $page.props.errors[question.id] }}</p>
                                             </template>
                                         </div>
                                     </div>
@@ -127,14 +131,6 @@ function submit()
     form.post(route('feedback.submit'), {
         onSuccess: () => setupForm(),
     })
-}
-
-function shouldWeShowGroup(group)
-{
-    /**
-     * Should this group be displayed?
-     */
-    return
 }
 
 function setupForm(){

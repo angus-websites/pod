@@ -9,5 +9,15 @@ class UserFeedback extends Model
 {
     protected $connection = 'mongodb';
     protected $collection = "feedback_user";
+    protected $guarded = ['id'];
     use HasFactory;
+
+    /**
+     * Fetch the user
+     * that this Entry belongs
+     * to
+     */
+    public function user(){
+        return $this->belongsTo(User::class)->firstOrFail();
+    }
 }

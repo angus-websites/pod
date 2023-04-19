@@ -23,9 +23,9 @@ class Template extends Model
     /**
      * Get the validator object
      * based on the schema of this template
-     * @return Validator
      */
-    public function getValidator($request_data){
+    public function getValidator($request_data)
+    {
         $rules = [];
         foreach ($this->fields as $field) {
           $id = $field['id'];
