@@ -72,11 +72,11 @@ class FeedbackController extends Controller
             $feedbackData = [];
             foreach ($content as $question => $answer) {
 
-                // Create a custom validator (limit each answer to 700 characters)
+                // Create a custom validator (limit each answer to 600 characters)
                 Validator::make(
                     [$question => $answer],
-                    [$question => 'max:10'],
-                    [$question => "Your answer is too long (max 10 characters)"]
+                    [$question => 'max:600'],
+                    [$question => "Your answer is too long (max 600 characters)"]
                 )->validate();
 
                 // If there was no answer, don't save to database

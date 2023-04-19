@@ -1,5 +1,5 @@
 <template>
-    <div v-if="answers.length > 0" class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
+    <div v-if="answers.length > 0" class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg overflow-auto">
         <table class="table table-fixed min-w-full divide-y divide-gray-300">
             <thead>
                 <tr>
@@ -13,8 +13,8 @@
                     <td class="py-3.5 pl-4 pr-3 text-left text-sm text-gray-900 sm:pl-6">
                         {{ a }}
                     </td>
-                    <td class="px-3 py-3.5 text-left text-sm text-gray-900 lg:table-cell">
-                        <p class="line-clamp-5">{{ answer.answer }}</p>
+                    <td class="px-3 py-3.5 text-left text-sm text-gray-900">
+                        <p class="line-clamp-6">{{ answer.answer }}</p>
                     </td>
                 </tr>
             </tbody>
