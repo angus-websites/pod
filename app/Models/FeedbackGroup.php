@@ -23,13 +23,12 @@ class FeedbackGroup extends Model
         return $this->hasMany(FeedbackQuestion::class);
     }
 
-    public function userQuestions()
+    public function userQuestions($user)
     {
         /**
          * Fetch only the questions the user
          * should see
          */
-        $user = Auth::user();
         $features = $user->allFeatures()->pluck("id");
 
         // Only select the feeedback we have access to
