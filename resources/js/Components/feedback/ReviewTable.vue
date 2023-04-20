@@ -35,6 +35,9 @@ const props = defineProps({
 })
 
 function uniqueAnswers(){
+    /**
+     * Group the feedback into counts
+     */
     const counts = {};
     for (const answer of props.answers) {
         counts[answer.answer] = counts[answer.answer] ? counts[answer.answer] + 1 : 1;
