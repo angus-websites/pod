@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Feedback;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class FeedbackGroupResource extends JsonResource
 {
@@ -20,7 +21,7 @@ class FeedbackGroupResource extends JsonResource
             'caption' => $this->caption,
             'position' => $this->position,
             'questions' => FeedbackQuestionResource::collection(
-                $this->userQuestions())
+                $this->userQuestions(Auth::user()))
         ];
     }
 }
