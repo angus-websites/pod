@@ -44,6 +44,7 @@ class TemplateSeeder extends Seeder
             [
                 'id' => 'content',
                 'label' => 'Entry content',
+                'encrypted' => true,
                 'type' => 'raw',
                 'required' => true,
                 'validation' => ['required', 'max:3000'],
@@ -76,6 +77,7 @@ class TemplateSeeder extends Seeder
                 'label' => 'What did you learn?',
                 'type' => 'raw',
                 'required' => true,
+                'encrypted' => true,
                 'validation' => ['required', 'max:5000'],
             ],
 
@@ -107,6 +109,7 @@ class TemplateSeeder extends Seeder
                 'label' => 'How did you learn this skill?',
                 'type' => 'raw',
                 'required' => true,
+                'encrypted' => true,
                 'validation' => ['required', 'max:5000'],
             ],
 
@@ -135,6 +138,7 @@ class TemplateSeeder extends Seeder
                     'id' => 'the_feedback',
                     'label' => 'What was the feedback?',
                     'type' => 'raw',
+                    'encrypted' => true,
                     'required' => true,
                     'validation' => ['required', 'max:5000'],
                 ],
@@ -142,6 +146,7 @@ class TemplateSeeder extends Seeder
                     'id' => 'improvement',
                     'label' => 'What is your plan to act on the feedback?',
                     'type' => 'raw',
+                    'encrypted' => true,
                     'validation' => ['max:5000'],
                 ],
 

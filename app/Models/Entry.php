@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * The Entry is a very flexible
@@ -18,6 +19,7 @@ class Entry extends Model
     protected $connection = 'mongodb';
     protected $fillable = ['title','data'];
 
+
     /**
      * Fetch the user
      * that this Entry belongs
@@ -25,6 +27,40 @@ class Entry extends Model
      */
     public function user(){
         return $this->belongsTo(User::class)->firstOrFail();
+    }
+
+    /**
+     * Override the set data attribute
+     * so we can control encryption
+     */
+    public function setDataAttribute($value)
+    {
+
+        foreach ($value as $key => $v) {
+            $field = $this->getTemplateField($key);
+            $shouldEncrypt = $field->encrypted ?? false;
+            if ($shouldEncrypt) {
+                $value[$key] = Crypt::encryptString($v);
+            }
+        }
+
+        $this->attributes['data'] = $value;
+
+    }
+
+    /**
+     * Get the template field associated
+     * with this key
+     */
+    private function getTemplateField($fieldid)
+    {
+        $template = $this->template();
+        foreach ($template->fields as $field){
+            if ($field['id'] == $fieldid){
+                return $field;
+            }
+        }
+        return null;
     }
 
     /**
@@ -39,7 +75,7 @@ class Entry extends Model
     /**
      * Stringify all the data about this entry
      */
-    public function stringify(){
+    public function strinÏsgify(){
         $content = "";
         foreach ($this->template()->fields as $field) {
             $label = $field["label"];
