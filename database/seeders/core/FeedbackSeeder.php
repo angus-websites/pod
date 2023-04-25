@@ -39,15 +39,20 @@ class FeedbackSeeder extends Seeder
             ["label" => "No", "id" => "no"],
         ];
 
+        $yesNoDontKnow = [
+            ["label" => "Yes", "id" => "yes"],
+            ["label" => "No", "id" => "no"],
+            ["label" => "Don't know", "id" => "dontknow"],
+        ];
+
         // Reusable features
         $leaderboardId = Feature::where("name", "=", "leaderboard")->firstOrFail()->id;
         $streaksId = Feature::where("name", "=", "streaks")->firstOrFail()->id;
         $totalWordCountId = Feature::where("name", "=", "total word count")->firstOrFail()->id;
         $rankedId = Feature::where("name", "=", "ranked")->firstOrFail()->id;
-        $cvId = Feature::where("name", "=", "cv builder")->firstOrFail()->id;
 
 
-        // ----- Groups -----
+        // ========== Groups ======
 
         $general = FeedbackGroup::create([
             "name" => "General questions",
@@ -68,7 +73,7 @@ class FeedbackSeeder extends Seeder
             "position" => 3,
         ]);
 
-        // ------ Questions -----
+        // ========== Questions ======
 
 
         // --- General ---
@@ -96,7 +101,9 @@ class FeedbackSeeder extends Seeder
             "question_type" => "text",
         ]);
 
-        // --- Using ---
+
+        // ========== Using the application ======
+
         FeedbackQuestion::create([
             "name" => "How satisfied were you with the general ease of use of the website?",
             "caption" => "Eg. Navigating the site and performing tasks",
@@ -127,85 +134,156 @@ class FeedbackSeeder extends Seeder
             ]
         ]);
 
-        // --- Targeted questions ---
+        // ========== Using the application (TARGETED) ======
 
-        // -- Leaderboard --
+        // ----- Leaderboard -------
 
         FeedbackQuestion::create([
-            "name" => "Did the leaderboard encourage you to use the website more?",
+            "name" => "How would you rate your experience with the leaderboard?",
+            "caption" => "On the dashboard you can see a leaderboard where you can see your rank compared to other users, How was your experience using this feature?",
             "feedback_group_id" => $using->id,
             "question_type" => "radio",
             "targeted" => true,
             "data" => [
-                "options" => $yesNo,
+                "options" => $satsifactionOptions,
                 "feature_id" => [$leaderboardId]
             ]
         ]);
 
-        // -- Streaks --
         FeedbackQuestion::create([
-            "name" => "Did the ability to see your entry streak encourage you to use the website more?",
-            "caption" => "On the dashboard you can see how many consecutive days you have written in your diary, did this encourage you to use the website more?",
+            "name" => "Did the leaderboard encourage you to use the website more?",
+            "caption" => "On the dashboard you can see a leaderboard where you can see your rank compared to other users, did having this feature encourage you to use the application more?",
             "feedback_group_id" => $using->id,
             "question_type" => "radio",
             "targeted" => true,
             "data" => [
-                "options" => $yesNo,
+                "options" => $yesNoDontKnow,
+                "feature_id" => [$leaderboardId]
+            ]
+        ]);
+
+        FeedbackQuestion::create([
+            "name" => "Do you have any comments about the leaderboard feature?",
+            "feedback_group_id" => $using->id,
+            "question_type" => "text",
+            "targeted" => true,
+            "data" => [
+                "feature_id" => [$leaderboardId]
+            ]
+        ]);
+
+
+        // ----- Streaks -------
+
+        FeedbackQuestion::create([
+            "name" => "How would you rate your experience with streaks?",
+            "caption" => "On the dashboard you can see how many consecutive days you have written in your diary, How was your experience using this feature?",
+            "feedback_group_id" => $using->id,
+            "question_type" => "radio",
+            "targeted" => true,
+            "data" => [
+                "options" => $satsifactionOptions,
                 "feature_id" => [$streaksId]
             ]
         ]);
 
-        // -- Ranked --
         FeedbackQuestion::create([
-            "name" => "Did the ability to see your ranking compared to other users encourage you to use the website more?",
+            "name" => "Did the ability to see your entry streak encourage you to use the website more?",
+            "caption" => "On the dashboard you can see how many consecutive days you have written in your diary, did seeing this feature encourage you to use the website more?",
             "feedback_group_id" => $using->id,
             "question_type" => "radio",
             "targeted" => true,
             "data" => [
-                "options" => $yesNo,
+                "options" => $yesNoDontKnow,
+                "feature_id" => [$streaksId]
+            ]
+        ]);
+
+        FeedbackQuestion::create([
+            "name" => "Do you have any comments about the streaks feature?",
+            "feedback_group_id" => $using->id,
+            "question_type" => "text",
+            "targeted" => true,
+            "data" => [
+                "feature_id" => [$streaksId]
+            ]
+        ]);
+
+        // ----- Ranked -------
+
+        FeedbackQuestion::create([
+            "name" => "How would you rate your experience with the ranked feature?",
+            "caption" => "On the dashboard you can see what your rank for certain statistics compared to other users in the application , how would you rate this feature?",
+            "feedback_group_id" => $using->id,
+            "question_type" => "radio",
+            "targeted" => true,
+            "data" => [
+                "options" => $satsifactionOptions,
                 "feature_id" => [$rankedId]
             ]
         ]);
 
-        // -- Total word count --
+        FeedbackQuestion::create([
+            "name" => "Did the ability to see your ranking compared to other users encourage you to use the website more?",
+            "caption" => "On the dashboard you can see what your rank for certain statistics compared to other users in the application , did seeing this feature encourage you to use the website more?",
+            "feedback_group_id" => $using->id,
+            "question_type" => "radio",
+            "targeted" => true,
+            "data" => [
+                "options" => $yesNoDontKnow,
+                "feature_id" => [$rankedId]
+            ]
+        ]);
+
+        FeedbackQuestion::create([
+            "name" => "Do you have any comments about the ranked feature?",
+            "feedback_group_id" => $using->id,
+            "question_type" => "text",
+            "targeted" => true,
+            "data" => [
+                "feature_id" => [$rankedId]
+            ]
+        ]);
+
+        // ----- Total word count -------
+
+        FeedbackQuestion::create([
+            "name" => "How would you rate your experience being able to see your total word count?",
+            "caption" => "On the dashboard you can see the total number of words you entered in all your diary entries, how would you rate this feature?",
+            "feedback_group_id" => $using->id,
+            "question_type" => "radio",
+            "targeted" => true,
+            "data" => [
+                "options" => $satsifactionOptions,
+                "feature_id" => [$totalWordCountId]
+            ]
+        ]);
+
         FeedbackQuestion::create([
             "name" => "Did the ability to see the total word count for your entries encourage you to use the website more?",
             "feedback_group_id" => $using->id,
             "question_type" => "radio",
             "targeted" => true,
             "data" => [
-                "options" => $yesNo,
+                "options" => $yesNoDontKnow,
                 "feature_id" => [$totalWordCountId]
             ]
         ]);
 
-        // -- CV builder --
         FeedbackQuestion::create([
-            "name" => "Did you have a chance to use the CV builder?",
+            "name" => "Do you have any comments about the total word count feature",
             "feedback_group_id" => $using->id,
-            "question_type" => "radio",
+            "question_type" => "text",
             "targeted" => true,
             "data" => [
-                "options" => $yesNo,
-                "feature_id" => [$cvId]
+                "feature_id" => [$totalWordCountId]
             ]
         ]);
 
-        FeedbackQuestion::create([
-            "name" => "If you used the CV builder how satisfied were you with it's result?",
-            "feedback_group_id" => $using->id,
-            "question_type" => "radio",
-            "targeted" => true,
-            "data" => [
-                "options" => array_merge($satsifactionOptions, array(["label" => "NA", "id" => "na"])),
-                "feature_id" => [$cvId]
-            ]
-        ]);
-
-        // -- Multi targeted questions
+        // ----- Multi targeted questions -------
 
         FeedbackQuestion::create([
-            "name" => "Which of the following features encouraged you to use the application more",
+            "name" => "Which of the following features did you enjoy using more?",
             "feedback_group_id" => $using->id,
             "question_type" => "radio",
             "targeted" => true,
