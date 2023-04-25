@@ -140,7 +140,7 @@ class FeedbackSeeder extends Seeder
 
         FeedbackQuestion::create([
             "name" => "How would you rate your experience with the leaderboard?",
-            "caption" => "On the dashboard you can see a leaderboard where you can see your rank compared to other users, How was your experience using this feature?",
+            "caption" => "On the dashboard you can see a leaderboard where you can see your rank compared to other users, how was your experience using this feature?",
             "feedback_group_id" => $using->id,
             "question_type" => "radio",
             "targeted" => true,
@@ -177,7 +177,7 @@ class FeedbackSeeder extends Seeder
 
         FeedbackQuestion::create([
             "name" => "How would you rate your experience with streaks?",
-            "caption" => "On the dashboard you can see how many consecutive days you have written in your diary, How was your experience using this feature?",
+            "caption" => "On the dashboard you can see how many consecutive days you have written in your diary, how was your experience using this feature?",
             "feedback_group_id" => $using->id,
             "question_type" => "radio",
             "targeted" => true,
