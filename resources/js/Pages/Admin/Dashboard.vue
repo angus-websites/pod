@@ -4,7 +4,7 @@
         <Heading1>Admin Dashboard</Heading1>
         <FeaturesExplained :features="features.data" class="my-10"/>
         <FeatureMatrix :featureGroups="featureGroups.data" :features="features.data" class="my-10"  />
-        <FeatureGroupsExplained :featureGroups="featureGroups.data" :numberOfUsers="users.data.length" class="my-10" />
+        <FeatureGroupsExplained :featureGroups="featureGroups.data" :numberOfUsers="userCount" class="my-10" />
         <UserTable :users="users" :userCount="userCount" class="my-10" />
     </DashboardLayout>
 </template>
