@@ -32,7 +32,7 @@
                     <p>{{ group.userCount}}</p>
                 </td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                  <p>{{ (group.userCount / numberOfUsers) * 100 }}%</p>
+                  <p>{{ percentage(group.userCount) }}%</p>
                 </td>
               </tr>
             </tbody>
@@ -56,5 +56,12 @@
     if (group.active === true){
       return true
     }
+  }
+
+  function percentage(userCount){
+      if (parseInt(userCount) === 0){
+          return 0
+      }
+      return Math.round((parseInt(userCount) / parseInt(props.numberOfUsers) ) * 100)
   }
 </script>
