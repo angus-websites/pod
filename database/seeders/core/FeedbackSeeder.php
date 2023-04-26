@@ -290,7 +290,7 @@ class FeedbackSeeder extends Seeder
             "data" => [
                 "options" => [
                     ["label" => "Viewing your total word count", "id" => "totalWordCount"],
-                    ["label" => "Being able to see my current entry streak", "id" => "streak"],
+                    ["label" => "Being able to see your current entry streak", "id" => "streak"],
                 ],
                 "operator" => "all",
                 "feature_id" => [$totalWordCountId, $streaksId]
@@ -335,6 +335,12 @@ class FeedbackSeeder extends Seeder
 
 
         // --- Last thoughts ----
+
+        FeedbackQuestion::create([
+            "name" => "Do you have positive comments about this application?",
+            "feedback_group_id" => $last->id,
+            "question_type" => "text",
+        ]);
 
         FeedbackQuestion::create([
             "name" => "Do you have any thoughts about how to improve this application?",
