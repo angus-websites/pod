@@ -18,17 +18,8 @@ class TempSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(10)->create()->each(function ($u){
-
-            // Assign a random group to this user
-            $random_group_name = FeatureGroup::all()->where("active", "1")->random()->name;
-            $u->addToGroup($random_group_name);
-
-            // Random number of entries
-            $n = rand(5,20);
-
-            Entry::factory()->count($n)->create(['user_id' => $u->id]);
-        });
+        // Seed initial feedback data
+        $this->call(FeedbackSeeder::class);
 
     }
 }
