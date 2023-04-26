@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
 class FeatureGroupResource extends JsonResource
@@ -23,6 +24,7 @@ class FeatureGroupResource extends JsonResource
             'description' => $this->description,
             'features' => FeatureResource::collection($this->belongsToMany(Feature::class)->get()),
             'active' => $this->active,
+            'userCount' => DB::table('feature_group_user')->where("feature_group_id", "=", $this->id)->count()
         ];
     }
 }
