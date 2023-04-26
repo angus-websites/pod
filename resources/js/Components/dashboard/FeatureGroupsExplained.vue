@@ -32,7 +32,7 @@
                     <p>{{ group.userCount}}</p>
                 </td>
                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                  <p>{{ (group.userCount / numberOfUsers) * 100 }} %</p>
+                  <p>{{ (group.userCount / numberOfUsers) * 100 }}%</p>
                 </td>
               </tr>
             </tbody>
