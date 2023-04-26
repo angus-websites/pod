@@ -12,6 +12,9 @@
               <tr>
                 <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Name</th>
                 <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Active?</th>
+                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Number of users</th>
+                <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">%</th>
+
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
@@ -24,6 +27,12 @@
                     <CheckIcon class="h-5 w-5" aria-hidden="true" />
                   </span>
                   <span v-else class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800"><XMarkIcon class="h-5 w-5" aria-hidden="true"/></span>
+                </td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                    <p>{{ group.userCount}}</p>
+                </td>
+                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                  <p>{{ (group.userCount / numberOfUsers) * 100 }}%</p>
                 </td>
               </tr>
             </tbody>
@@ -39,7 +48,8 @@
   import { XMarkIcon } from '@heroicons/vue/20/solid'
 
   const props = defineProps({
-      featureGroups: Object
+      featureGroups: Object,
+      numberOfUsers: Number
   })
 
   function isGroupActive(group){
