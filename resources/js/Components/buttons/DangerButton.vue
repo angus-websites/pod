@@ -25,6 +25,8 @@ export default {
             switch (this.size){
                 case "l":
                     return "px-8 py-3 md:py-4 md:px-10 md:text-lg"
+                case "s":
+                    return "px-2 py-1 text-sm"
                 default:
                     return "px-4 py-2"
             }
