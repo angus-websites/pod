@@ -113,7 +113,7 @@ import {Inertia} from "@inertiajs/inertia";
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
-import DangerButton from "@/components/buttons/DangerButton.vue";
+import DangerButton from "@/Components/buttons/DangerButton.vue";
 
 // Fetch user
 const user = computed(() => usePage().props.value.auth.user)
