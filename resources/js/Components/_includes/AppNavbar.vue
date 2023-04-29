@@ -81,6 +81,11 @@
                     <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" :href="item.href" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">{{ item.name }}</DisclosureButton>
                 </div>
             </div>
+            <form @submit.prevent="logout">
+                <div class="my-3 px-5">
+                    <DangerButton size="s" class="mx-auto">Sign out</DangerButton>
+                </div>
+            </form>
         </DisclosurePanel>
     </Disclosure>
     <div v-if="$page.props.isSuperAdmin" class="flex justify-center bg-blue-600 py-2.5 px-6 sm:px-3.5">
@@ -108,6 +113,7 @@ import {Inertia} from "@inertiajs/inertia";
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
+import DangerButton from "@/components/buttons/DangerButton.vue";
 
 // Fetch user
 const user = computed(() => usePage().props.value.auth.user)
