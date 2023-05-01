@@ -6,21 +6,21 @@ use App\Models\Entry;
 use App\Models\User;
 use Illuminate\Console\Command;
 
-class CleanupEntries extends Command
+class UpdateEntriesDate extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cleanup:entries';
+    protected $signature = 'update:entries';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Remove all the orphaned entries from the database, i.e the ones that no longer have a user';
+    protected $description = 'Command description';
 
     /**
      * Execute the console command.
@@ -31,17 +31,15 @@ class CleanupEntries extends Command
     {
         // Fetch all entries
         $entries = Entry::all();
-        $counter = 0;
 
         // Go through and delete orphan entries
         foreach ($entries as $entry){
-            $uid = $entry->user_id;
-            if (User::where('id', '=', $uid)->doesntExist()) {
-                $counter+=1;
-                $entry->delete();
-            }
+            $d = $entry->data["date"];
+            $entry->created_at = $d;
+            $entry->updated_at = $d;
+            $entry->save();
         }
-        echo "Deleted $counter entries\n";
+
         return Command::SUCCESS;
     }
 }
