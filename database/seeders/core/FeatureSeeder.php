@@ -55,7 +55,8 @@ class FeatureSeeder extends Seeder
 
         $cvBuilder =  Feature::create([
             'name' => 'CV Builder',
-            'description' => "Users can generate CV's from their entry content"
+            'description' => "Users can generate CV's from their entry content",
+            'active' => 0
         ]);
 
 
