@@ -37,14 +37,12 @@ class EntryController extends Controller
                 return $query->where('template_id', '=', $template);
             })->when($request->input('sortBy'), function($query, $sortBy){
                 switch ($sortBy) {
-                    case 'newest':
-                        return $query->orderBy("data.date", "desc");
                     case 'oldest':
-                        return $query->orderBy("data.date", "asc");
+                        return $query->orderBy("data.date", "desc");
                     case 'title':
                         return $query->orderBy("data.title", "asc");
                     default:
-                        return $query->orderBy("created_at", "asc");
+                        return $query->sortBy("data.date", "asc");
                 }
             })->orderBy("created_at", "desc")->paginate(15)->withQueryString()
         );

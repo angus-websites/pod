@@ -81,6 +81,13 @@ class DevSeeder extends Seeder
 
     private function answerQuestion(FeedbackQuestion $question, Generator $faker){
 
+        $optionalFeedback = [
+            "Overall good experience, could be improved a little",
+            "Loved it, the best thing i've ever used",
+            "Some bits need refinement, but overall a pleasant experience",
+            "The most wonderful thing ive had the joy of using"
+        ];
+
         switch($question->question_type){
 
             case "radio":
@@ -88,7 +95,7 @@ class DevSeeder extends Seeder
                 return $options[array_rand($options)]["id"];
                 break;
             default:
-                return $faker->text();
+                return $optionalFeedback[array_rand($optionalFeedback)];
         }
 
 

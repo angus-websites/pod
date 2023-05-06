@@ -31,7 +31,7 @@
                         <label for="sortBy" class="block text-sm font-medium text-gray-700">Sort by</label>
                         <div class="mt-1">
                           <select v-model="form.sortBy" id="sortBy" name="sortBy" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                            <option :value="null">Created at</option>
+                            <option :value="null">Newest</option>
                             <option value="oldest">Oldest</option>
                             <option value="title">Title</option>
                           </select>
